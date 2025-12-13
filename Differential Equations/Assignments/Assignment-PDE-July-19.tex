@@ -1,0 +1,1251 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\title{Partial Differential Equations - Assignment- July 19}
+\author{Tek Raj Pant}
+\date{\today}
+\begin{document}
+	\maketitle
+	\section{Part-1}
+		\paragraph{Find the general integrals of the linear partial differential equations}
+		\subsection{$z(xp\,-\,yq)\,=\,y^2\,-\,x^2$}
+			\text{Here given Partial Differential Equation is}
+			\begin{equation}
+				z(xp - yq) = y^2 - x^2 \label{eq:11} \\
+			\end{equation}
+			\[
+			xp - yq = \frac{y^2 - x^2}{z}
+			\]
+			\text{This is a first-order semi-linear PDE of the form \textbf{$Pp+Qq=R$} where}\\
+			\begin{align*}
+				P\quad{}&=\quad{}x\\
+				Q\quad{}&=\quad{}-y\\
+				R\quad{}&=\quad{}\frac{(y^2-x^2)}{z}\\
+			\end{align*}
+			\textbf{The auxiliary equation is given by}\\
+			\begin{align*}
+				\frac{dx}{x}\quad{}=\quad{} -\frac{dy}{y}\quad{}=\quad{} \frac{dz}{\frac{(y^2-x^2)}{z}}
+			\end{align*}
+			\textbf{On Solving first two terms we get}\\
+			\begin{align}
+				&\frac{dx}{x}\quad{}=\quad{}-\frac{dy}{y} \notag \\
+				&\text{Separating variables and integrating on both sides} \notag \\
+				&\ln(x) \quad{}= -\ln(y) \quad{}+\quad{} C_1\text{ , where $C_1$ is an arbitrary constant} \notag \\
+				&\ln(xy)= C_1 \notag \\
+				&\text{Exponentiating both sides we get} \notag \\
+				&xy\quad=e^{C_1} \notag \\
+				& xy = C_2 \quad{}\text{ where } C_2 = e^{C_1} \label{eq:2}\\
+				&\text{Now lets solve the first and last term} \notag\\
+				&\frac{dx}{x}\,=\,\frac{dz}{\frac{y^2-x^2}{z}}\notag\\
+				&\frac{dx}{x}\,=\,\frac{zdz}{y^2-x^2}\notag\\
+				&\text{From equation (2) we have $y = \frac{C_2}{x}$, so using this in above equation} \notag\\
+				&\frac{dx}{x}\,=\,\frac{zdz}{\Big(\frac{C_2^2}{x^2} \Big)-x^2}\notag\\
+				&\frac{dx}{x}\,=\,\frac{x^2zdz}{C_2^2-x^4}\notag\\
+				&\frac{C_2^2-x^4}{x^3} dx = z\,dz \notag\\
+				&\text{Integrating  both sides}\notag\\
+				&\int \Big(\frac{C_2^2-x^4}{x^3}\Big) dx  = \int zdz + C_3  \text{ Where $C_3$ is an arbitrary constant}\notag\\
+				&\int \Big(\frac{C_2^2}{x^3} - x\Big) dx  = \frac{z^2}{2} + C_3 \notag\\
+				&  -\frac{C_2^2}{2x^2} -\frac{x^2}{2} = \frac{z^2}{2} + C_3 \notag\\
+				& \text{From (2) $C_2=xy$ so} \notag\\
+				& -\frac{x^2y^2}{2x^2} -\frac{x^2}{2} = \frac{z^2}{2} + C_3 \notag\\
+			\end{align}
+			\begin{align*}
+				&-x^2-y^2-z^2 = 2 C_3\\
+				&x^2+y^2+z^2 = C_4\quad{}\text{where $C_4=-2C2$}\\
+			\end{align*}
+			\text{The two first integrals are}\\
+			\begin{align*}
+				&C2 = xy\\
+				&C4 = x^2+y^2+z^2 \\
+			\end{align*}
+			\text{Hence, the general solution is an arbitrary relation between them}\\
+			\\
+			$\boxed{G(xy, z^2+x^2+y^2) = 0}$
+		
+		%==============2================================%
+		\subsection{$px(z-2y^2)\quad{}=(z-qy)(z-y^2-2x^3)$}
+			\setcounter{equation}{0}
+			\text{Here given Partial Differential Equation is}
+			\begin{equation}
+				px(z-2y^2)\quad{}=(z-qy)(z-y^2-2x^3) \label{eq:21} \\
+			\end{equation}
+			\begin{align*}
+				&x(z - 2y^2)p   = z(z - y^2 - 2x^3) - qy(z - y^2 - 2x^3) \\
+				&x(z - 2y^2)p = z(z - y^2 - 2x^3) - qy(z - y^2 - 2x^3) \\
+				&x(z - 2y^2)p + y(z - y^2 - 2x^3)q = z(z - y^2 - 2x^3) \\
+			\end{align*}
+			\text{This is quasi-linear PDE of first order of the form $Pp+Qq=R$ where}\\
+			\[
+			P = x(z - 2y^2), \quad Q = y(z - y^2 - 2x^3), \quad R = z(z - y^2 - 2x^3)
+			\]\\
+			\text{The characteristic equation is given by}\\
+			\[
+			\frac{dx}{x(z - 2y^2)} = \frac{dy}{y(z - y^2 - 2x^3)} = \frac{dz}{z(z - y^2 - 2x^3)}
+			\]
+			
+			\textbf{On Solving last two terms we get}
+			\begin{align*}
+				\quad
+				&\frac{dy}{y(z - y^2 - 2x^3)} = \frac{dz}{z(z - y^2 - 2x^3)}\\
+				&\frac{dz}{z} = \frac{dy}{y}\\
+				&\text{Integrating both sides}\\
+				& \ln(z) = ln(y) + C_1\quad{}\text{Where $C_1$ is an arbitrary constant}\\
+				& ln(z/y) = C_1\\
+				&\text{Exponentiating on both sides}\\
+				& \frac{z}{y} = e^{C_1}
+			\end{align*}
+			\begin{align}
+				\frac{z}{y}  = C_2\quad{}\text{ Where $C_2=e^{C_1}$ }\label{eq:22}
+			\end{align}
+			\textbf{On Solving first two terms we get}
+			\begin{align*}
+				\quad
+				&\frac{dx}{x(z - 2y^2)} = \frac{dy}{y(z - y^2 - 2x^3)}\\
+				&\text{From equation (2) $z=yC_2$, hence}\\
+				&\frac{dx}{x(yC_2-2y^2)} \quad{} = \frac{dy}{y(yC_2-y^2-2x^3)}\\
+				&\frac{dx}{x(C_2-2y)} \quad{} = \frac{dy}{y(C_2-y)-2x^3}\\
+				&\Big[ y(C_2-y)-2x^3\Big] dx - x(C_2-2y)dy = 0\\
+				&\text{Here $M=y(C_2-y)-2x^3\quad{}\quad{} N = - x(C_2-2y)$}\\
+				&\frac{\partial M}{\partial y} = C_2-2y\\
+				&\frac{\partial N}{\partial x} = -C_2+-2y\\
+				&\text{Its not exact so lets find its integrating factor}\\
+				&\text{Here}\\
+				&\frac{\frac{\partial M}{\partial y} - \frac{\partial N}{\partial x} }{N} = \frac{C_2-2y-C_2-2y}{-x(C_2-2y)}  =\frac{2}{x}\\
+				&\text{So}\\
+				&\mu(x) = e^{\int\frac{-2}{x}dx} = x^2
+			\end{align*}
+			\begin{align*}
+				&\text{Multiplying by $x^2$ we get}\\
+				&\Big[\frac{y(C_2-y)}{x^2} - 2x\Big] dx - \frac{C_2-2y}{x} dy = 0\\
+				&\text{Lets  find a function F(x,y) such that}\\
+				& dF(x,y) = \Big[\frac{y(C_2-y)}{x^2} - 2x\Big] dx - \frac{C_2-2y}{x} dy\\
+				&\text{i.e.} \frac{\partial M}{\partial x}=M = \frac{y(C_2-y)}{x^2} - 2x\\
+				&\frac{\partial N}{\partial y}=N = \frac{-(C_2-2y)}{x}\\
+				&\text{Integration $N$ wrt $x$}\\
+				&F(x,y) = \int\Big(\frac{y(C_2-y)}{x^2} - 2x  \Big) + h(y)\quad{}\text{where h(y) is an arbitrary function of y}\\
+				&F(x,y) = -\frac{y(C_2-y)}{x} -x^2+h(y)\\
+				& -\frac{C_2-2y}{x} = -\frac{C_2-2y}{x} +h'(y)\\
+				& h'(y) = 0
+			\end{align*}
+			\begin{align*}
+				&\text{Integrating we get}\\
+				&h(y)=C_3\quad{}\text{where $C_3$ is an arbitrary constant}\\
+				&\text{Therefore}\\
+				&\frac{y(C_2-y)}{x}+x^2 = C_3\\
+				&\text{But we have $C_2= \frac{z}{y}$}\quad\text{ So}\\
+				&\frac{y(\frac{z}{y}-y)}{x} +x^2 = C_3\\
+				&\frac{z-y^2}{x} + x^2 = C_3\\
+				&\text{Hence the two integrals are}\\
+				&C_2 = \frac{z}{x}\\
+				& C_3 = \frac{z-y^2}{x}+x^2\\
+				&\text{The general arbitrary solution is}\\
+				& G\big(\frac{z}{y},\frac{z-y^2}{x}+x^2\big) =0
+			\end{align*}
+		
+		%==============3================================%
+		\subsection{$px(x+y)\quad{}=qy(x+y) - (x-y)(2x+2y+z)$}
+			\setcounter{equation}{0}
+			\text{Here given Partial Differential Equation is}
+			\begin{equation}
+				px(x+y)\quad{}=qy(x+y) - (x-y)(2x+2y+z) \label{eq:31} \\
+			\end{equation}
+			\begin{align*}
+				&x(x+y)p-y(x+y)q = -(x-y)(2x+2y+z)\\
+				&\text{This is semi-linear first order PDE, of the form $Pp+Qq=R$ where}\\
+				&\text{$P=x(x+y)\quad{}$, $Q=-y(x+y)\quad{}$ and $R=-(x-y)(2x+2y+z)$}\\
+				&\text{The characteristic equation is }\\
+				&\frac{dx}{x(x+y)} \quad{} =\quad{}-\frac{dy}{y(x+y)}\quad{} =\quad{}-\frac{dz}{(x-y)(2x+2y+z)} \\
+				&\text{From first two ratios}\\
+				&\frac{dx}{x(x+y)} \quad{} =\quad{}-\frac{dy}{y(x+y)}\\
+				&\frac{dx}{x} =-\frac{dy}{y}\\
+				&\text{Integration on both sides}\\
+				&\ln(x) = -\ln(y)+C_1\quad{}\text{where $C_1$ is an arbitrary constant}\\
+				&ln(xy) = C_1\\
+				&\text{Exponentiating on both sides}\\
+				&xy= e^{C_1}
+			\end{align*}
+			\begin{equation}
+				xy = C_2\quad{}\text{where $C_2=e^{C_1}$}\label{eq:32}
+			\end{equation}
+			\begin{align*}
+					&\text{From last two terms}\\
+				&\frac{dy}{y(x+y)} \quad{} =\quad{}\frac{dz}{(x-y)(2x+2y+z)}\\
+				&\text{Let us introduce a new paramter $t$ such that}\\
+				&\frac{dx}{x(x+y)} \quad{} =\quad{}-\frac{dy}{y(x+y)}\quad{} =\quad{}-\frac{dz}{(x-y)(2x+2y+z)} = dt \\
+				&\text{Let $v=x+y$ then}\\
+				&\frac{dv}{dt} = \frac{d (x+y)}{dt} = \frac{dx}{dt} +\frac{dy}{dt} =  x(x+y) -y(x+y)\\
+			\end{align*}
+			\begin{align*}
+				&\frac{dv}{dt} = (x+y)(x-y)\\
+				&\frac{dv}{dt} = (x-y) v\\
+				&\text{Also,} \frac{dz}{dt} = -(x-y)(2v+z)\\
+				&\text{And}\quad{} \frac{dz}{dv} = \frac{\frac{dz}{dt}}{\frac{dv}{dt}}\\
+				&\frac{dz}{dv} = -\frac{ (x-y)(2v+z)}{(x-y)v}\\
+				&\frac{dz}{dv} = - \frac{2v+z}{v}\\
+				&\frac{dz}{dv} +\frac{1}{v} z = -2\\
+				&\text{This is in standard form of the first-order linear ODE, so the solution is}\\
+				&z(v) = \frac{1}{\mu(v)} \left( \int \mu(v)\, Q(v)\, dv + C \right), \quad \text{where } \mu(v) = e^{\int P(v)\, dv},\\
+				&P(v) = \frac{1}{v} \quad{}\text{ and } Q(v) = -2 \quad{}\text{ and hence }\quad{} \mu(v) = e^{\int\frac{1}{v}dv} = v\\ 
+				&\text{Therefore }\quad{}z = \frac{1}{v} \big(\int v (-2)dv + C_3\big) \text{ where $C_3$ is an arbitrary constant}\\
+				&z =  -\frac{v^2}{v} +\frac{C_3}{v}\\
+				&v(z+v) =  C_3\\
+				&\text{But }\quad{}v=x+y \quad{}\text{hence}\\
+				& C_3 = (x+y)(x+y+z))\\
+			\end{align*}
+			\text{Hence the two integrals are }\\
+			\begin{align*}
+				&C_2 = xy\\
+				&C_3 = (x+y)(x+y+z)\\
+				& \text{Hence}\\
+				&F(xy,(x+y)(x+y+z)) = 0, \quad{}\text{ is the required arbitrary general solution}
+			\end{align*}
+		
+		
+		%==============4================================%
+		\subsection{$y^2p-xyq = x(z-2y)$}
+			\setcounter{equation}{0}
+			\text{Here given Partial Differential Equation is}
+			\begin{equation}
+				y^2p-xyq = x(z-2y) \label{eq:41} \\
+			\end{equation}
+			\text{This is semi linear PDE of the form $Pq+Qq=R$}\\
+			\text{where $P=y^2\quad{}Q=-xy\quad{}R=x(z-2y)$}\\
+			\text{The characteristic equation can be written as}
+			\begin{align*}
+				&\frac{dx}{y^2}\quad{}=\quad{}-\frac{dy}{xy}\quad{}=\quad\frac{dz}{x(z-2y)}\\
+				&\text{From first two ratios we get}\\
+				&\frac{dx}{y^2}\quad{}=\quad{}-\frac{dy}{xy}\\
+				&\frac{dx}{y^2}+\frac{dy}{xy}=0\\
+				& \frac{xdx+ydy}{y^2} = 0\\
+				& d(x^2+y^2) =0\\
+				&\text{Integrating both sides}\\
+			\end{align*}
+			\begin{equation}
+				x^2+y^2=C_1\quad{}\text{ where } C_1 \text{ is an arbitrary constant} \label{eq:42}\\
+			\end{equation}
+			\text{From last two terms we get}\\
+			\begin{align*}
+				&-\frac{dy}{xy}\quad{}=\quad\frac{dz}{x(z-2y)}\\
+				&\frac{dz}{dy}=\frac{x(z-2y)}{-2x}\\
+				&\frac{dz}{dy}=-\frac{z-2y}{y}\\
+				&\frac{dz}{dy}+\frac{1}{y}z= 2\\
+			\end{align*}
+			\text{This is standard first order ODE and the solution is given by}\\
+			\begin{align*}
+					&z(y) = \frac{1}{\mu(y)} \left( \int \mu(y)\, Q(y)\, dy + C \right), \quad \text{where } \mu(y) = e^{\int P(y)\, dy},\\
+					&P(y) = \frac{1}{y} \quad{}\text{ and } Q(y) = 2 \quad{}\text{ and hence }\quad{} \mu(y) = e^{\int\frac{1}{y}dy} = y\\ 
+					&\text{Multiplying above ODE by $y$}\\
+					& y\frac{dz}{dy} + z = 2y\\
+					& \frac{d}{dy}(yz) = 2y\\
+					&\text{Integrating both sides}\\
+					&yz = y^2 + C_2	\quad{}\text{ where $C_2$ is an arbitrary constant}\\
+					& yz-y^2 = C_2		
+			\end{align*}
+			\text{Hence the General solution is}
+			\[
+				\boxed{G(x^2+y^2,y(z-y)) =0}
+			\]
+			\\text{where G is an arbitrary function}
+		
+		
+		%==============5================================%
+		\subsection{$(y+zx)p-(x+yz)q=x^2-y^2$}
+			\setcounter{equation}{0}
+			\text{Here given Partial Differential Equation is}
+			\begin{equation}
+				(y+zx)p-(x+yz)q=x^2-y^2 \label{eq:51} \\
+			\end{equation}
+			\text{This is quasi linear PDE of the form $Pq+Qq=R$}\\
+			\text{where $P=	(y+zx)\quad{}Q=-(x+yz)\quad{}R=x^2-y^2$}\\
+			\text{The characteristic equation can be written as}
+			\begin{align*}
+				&\frac{dx}{y+zx}\quad{}=\quad{}\frac{dy}{-(x+yz)}\quad{}=\quad\frac{dz}{x^2-y^2}\\
+				&\text{From first two ratios we get}\\
+				&\frac{dx}{y+zx}\quad{}=\quad{}-\frac{dy}{(x+yz)}\\
+				& (x+yz) dx + (y+zx) dy = 0\\
+				& xdx + yz dx + ydy + zxdy = 0\\
+				& (xdx+ydy) + z(ydx+xdy) = 0\\
+				&\text{Since } \quad{}d(x^2+y^2) = 2(xdx+ydy)\\
+				&\text{And}\quad{} d(xy) = xdy + ydx\\
+				&\text{Hence}\\
+				&\frac{d(x^2+y^2)}{2} + z d(xy) =0\\
+				& d(x^2+y^2) +2zd(xy) =0\\
+				&\text{Integrating both sides}
+			\end{align*}
+			\begin{equation}
+				 x^2+y^2 + 2xyz = C_1 \quad{}\text{where $C_1$ is an arbitrary constant}\label{eq:52}\\
+			\end{equation}
+			\\
+			\text{From last first and last terms, we have}
+			\begin{align*}
+				&\frac{dx}{y+zx} = \frac{dz}{x^2-y^2}\\
+				& \frac{dz}{dx} = = \frac{x^2-y^2}{y+zx}\\
+				&\text{From equation (2), }\\
+				&  x^2+y^2 + 2xyz = C_1\\
+				& z = \frac{C_1-x^2-y^2}{2xy}\\
+				&\text{Substituting the value of z we get}\\
+				&\frac{dz}{dx} = \frac{x^2-y^2}{y+x\big(\frac{C_1-x^2-y^2}{2xy}\big)}\\
+				&\frac{dz}{dx} = \frac{x^2-y^2}{\big(\frac{C_1+y^2-x^2}{2y}\big)}\\
+				& dz = -2y \big(\frac{y^2-x^2}{C_1+y^2+x^2}\big)dx
+			\end{align*}
+			\begin{align*}
+				& \text{Let $A=C_1+y^2$, then}\\
+				& dz = -2y \big(-\frac{x^2-y^2}{A-x^2}\big) dy\\
+				& dz = -2y \big(-1+\frac{A-y^2}{A-x^2}\big) dy\\
+				& dz = -2y \big(-1+\frac{C_1}{A-x^2}\big) dy\\
+				&\text{Integrating both sides}\\
+				& \int dz = -2y \big(\int -1 dx + C_1\int \frac{1}{A-x^2} dx \big) + C_2 \quad{}\text{ where $C_2$ is an arbitrary constant}\\
+				& z = -2y(-x + C_1 \frac{1}{2\sqrt{A}} \ln(\frac{\sqrt{A}+x}{\sqrt{A}-x}))+C_2\\
+				& C_2 = z-2xy + \frac{2yC_1}{2\sqrt{C_1+y^2}}  \ln(\frac{\sqrt{C_1+y^2}+x}{\sqrt{C_1+y^2}-x}))
+			\end{align*}
+			\text{Hence the General Solution is}
+			\begin{align*}
+				\boxed{G\big( x^2+y^2 + 2xy,z-2xy + \frac{2yC_1}{2\sqrt{C_1+y^2}}  \ln(\frac{\sqrt{C_1+y^2}+x}{\sqrt{C_1+y^2}-x}) \big) =0}
+			\end{align*}
+			\text{Where G is an arbitrary function}
+		
+		
+		%==============6================================%
+		\subsection{$x(x^2+3y^2)p - y(3x^2+y^2)q = 2z(y^2-x^2)$}
+			\setcounter{equation}{0}
+			\text{Here given Partial Differential Equation is}
+			\begin{equation}
+				x(x^2+3y^2)p - y(3x^2+y^2)q = 2z(y^2-x^2) \label{eq:61} \\
+			\end{equation}
+			\text{This is semi linear PDE of the form $Pq+Qq=R$}\\
+			\text{where $P=	x(x^2+3y^2)\quad{}Q=- y(3x^2+y^2)\quad{}R=2z(y^2-x^2)$}\\
+			\text{The characteristic equation can be written as}
+			\begin{align*}
+				&\frac{dx}{	x(x^2+3y^2)}\quad{}=\quad{}\frac{dy}{- y(3x^2+y^2)}\quad{}=\quad\frac{dz}{2z(y^2-x^2)}\\
+				&\text{From first two terms}\\
+				&\frac{dx}{	x(x^2+3y^2)}\quad{}=\quad{}\frac{dy}{- y(3x^2+y^2)}\\
+				&\frac{dy}{dx} = \frac{- y(3x^2+y^2)}{x(x^2+3y^2)}\\
+				\\
+				& \text{Let} \quad{} v = \frac{y}{x}\quad{}\text{Then}\\
+				& y = vx \quad{}\text{and}\quad{} \frac{dy}{dx} = x\frac{dv}{dx}+v\quad{}\text{similarly } y^2 = v^2x^2\\
+				\\
+				& v +x\frac{dv}{dx} = -\frac{vx(3x^2+v^2x^2)}{x(x^2+3v^2x^2)}\\
+				& v +x\frac{dv}{dx} = -\frac{v(3+v^2)}{1+3v^2}\\
+				&x\frac{dv}{dx} = -\frac{v(3+v^2)}{1+3v^2} -v\\
+				& x\frac{dv}{dx} = -v\frac{4(1+v^2)}{1+3v^2}\\
+				&\frac{1+3v^2}{v(1+v^2)} dv = -\frac{4}{x}dx\\
+				&\text{Integrating both sides}\\
+				&\int \frac{1+3v^2}{v(1+v^2)} dv =\int -\frac{4}{x}dx + C_1\quad{}\text{where $C_1$ is an arbitrary constant}\\
+				&\text{Using Partial Fraction}\\
+				& \frac{1+3v^2}{v(1+v^2)} = \frac{1}{v} + \frac{2v}{1+v^2}\quad{}\text{,hence}\\
+				&\int\big(\frac{1}{v} + \frac{2v}{1+v^2}\big)dv = -4 \ln(x)+C_1\\
+				&\ln(v)+\ln(1+v^2) = - 4 \ln(x) + C_1\\
+				& \ln(v(1+v^2)) = \ln(\frac{1}{x^4})+C_1\\
+				&\text{Exponentiating both sides}\\
+				& v(1+v^2) =   \frac{e^{C_1}}{x^4}\\
+			\end{align*}
+			\begin{align*}
+				& v(1+v^2) = \frac{C_2}{x^4}\quad{}\text{ where $C_2=e^{C_1}$}\\
+				&\text{Substituting back }\quad{}v=\frac{y}{x}\\
+				&\frac{y}{x} \big(1+\big(\frac{y}{x}\big)^2\big) = \frac{C_2}{x^4}
+			\end{align*}
+			\begin{equation}
+				xy(x^2+y^2) = C_2 \label{eq:62}
+			\end{equation}
+			\text{From first and last terms, we have}
+			\begin{align*}
+				&\frac{dx}{	x(x^2+3y^2)}\quad{}=\quad\frac{dz}{2z(y^2-x^2)}\\
+				&\frac{dz}{z} = \frac{2(y^2-x^2)}{x(x^2+3y^2)}dx\\
+				\\
+				& \text{Let} \quad{} v = \frac{y}{x}\quad{}\text{Then}\\
+				& y = vx \quad{}\text{and}\quad{} \frac{dy}{dx} = x\frac{dv}{dx}+v\quad{}\text{similarly } y^2 = v^2x^2\quad{}\text{so,}\\
+				\\
+				&\frac{dz}{z}= 2\frac{x^2(v^2-1)}{x^3(1+3v^2)} dx\\
+				&\frac{dz}{z}= 2\frac{(v^2-1)}{(1+3v^2)} \frac{dx}{x}\\
+				&\text{From the first characteristic} v(1+v^2)x^4 = C_2\quad{}\text{Differentitiating wrt to x we get}\\
+				& \frac{dx}{x} = - \frac{1+3v^2}{4v(1+v^2)} dv\\
+				& \text{Substitute into above equation}\\
+				&\frac{dz}{z} = 2\frac{(v^2-1)}{(1+3v^2)} \big( - \frac{1+3v^2}{4v(1+v^2)}\big) dv\\
+					&\frac{dz}{z} = -\frac{v^2-1}{2v(1+v^2)}dv \\
+				&\text{Integrating on both sides}\\
+				&\int \frac{dz}{z} = \int -\frac{v^2-1}{2v(1+v^2)}dv + C_3\quad{}\text{ where $C_3$ is an arbitrary constant} \\
+			\end{align*}
+			\begin{align*}	
+				&\text{Using partial Fraction}\\
+				& \frac{v^2-1}{ v(1+v^2)} = \frac{v}{1+v^2} - \frac{1}{v}\\
+				&\text{So}\\
+				&\int \frac{dz}{z} = \int \big(-\frac{v}{1+v^2} + \frac{1}{v}\big)dv + C_3\\
+				& \ln(z) = -\frac{1}{4} \ln(1+v^2) + \frac{1}{2} \ln(v) + C_3\\
+				& \text{Exponentiating both sides}\\
+				& z = C_4 v^{\frac{1}{2}} (1+v^2)^{-\frac{1}{4}}\quad{}\text{ where $C_4 = e^{C_3}$}\\
+				&\text{Back substituting } v = \frac{y}{x}\\
+				& z = C_4\frac{\sqrt{\frac{y}{x}}}{\big(1+\big(\frac{y}{x}\big)^2\big)^{\frac{1}{4}}}\\
+				& C_4 = z \frac{\big(1+\big(\frac{y}{x}\big)^2\big)^{\frac{1}{4}}}{\sqrt{\frac{y}{x}}}
+			\end{align*}
+			\text{Hence the General solution is given by}
+			\begin{align*}
+				&\boxed{F\big(xy(x^2+y^2),\quad{}z \frac{\big(1+\big(\frac{y}{x}\big)^2\big)^{\frac{1}{4}}}{\sqrt{\frac{y}{x}}}\big) = 0}\\
+				&\text{Where F is an arbitrary function}
+			\end{align*}
+
+	
+	\section{Part-2-Integral Surfaces Passing through a given curve}
+		\subsection{Find the equation for the integral surface of the differential equation $2y(z-3)p+(2x-z)q = y(2x-3)$ which passes through the circle $z = 0,\quad{} x^2+y^2 = 2x$}
+		\setcounter{equation}{0}
+		\
+		\\
+		\text{Here the given differential equation is }
+		\begin{equation}
+			2y(z-3)p+(2x-z)q = y(2x-3)\label{eq:211}
+		\end{equation}
+		\text{And the characteristic equation is}
+		\begin{align*}
+			&\frac{dx}{2y(z-3)} =\frac{dy}{(2x-z)} =\frac{dz}{y(2x-3)}\\
+		\end{align*}
+		\text{From first and third terms, we have}
+		\begin{align*}
+			&\frac{dx}{2y(z-3)}  =\frac{dz}{y(2x-3)}\\
+			& (2x-3)dx = 2(z-3) dz\\
+		\end{align*}
+		\text{Integrating both sides, we get}
+		\begin{align*}
+			&\int(2x-3)dx =\int 2(z-3) dz +C_1 \quad{}\text{ where $C_1$ is an arbitrary constant}\\
+			& x^2 - 3x = (z^2 - 6z) +C_1
+		\end{align*}
+		\begin{equation}
+				C_1 = x^2-z^2-3x+6z\label{eq:612}
+		\end{equation}
+		\text{From first and second terms we have}
+		\begin{align*}
+				&\frac{dx}{2y(z-3)} =\frac{dy}{(2x-z)}\\
+				&\frac{dy}{dx}= \frac{2x-z}{2y(z-3)}\\
+				& 2y dy = \frac{2x-z}{(z-3)} dx\\
+				& 2y dy = \frac{2x-z-3+3}{z-3} dx \\
+				& 2ydy  = \frac{(2x-3)-(z-3)}{z-3} dx\\
+				& 2ydy  = \big(\frac{(2x-3)}{z-3} - 1\big) dx\\
+				&\text{From first integral we have $(2x-3) dx = 2(z-3)dz$ hence, }\\
+				& 2ydy = 2dz - dx\\
+				&\text{Integrating both sides we get}\\
+				& y^2 = 2z-x +C_2 \quad{}\text{ where $C_2$ is an arbitrary constant}\\
+		\end{align*} 
+		\begin{equation}
+				C_2 = x+y^2-2z \label{eq:213}
+		\end{equation}
+		\textbf{Hence the general integral surface of the PDE is}
+		\begin{equation}
+			\boxed{x+y^2-2z \quad{}=\quad{}\phi(x^2-z^2-3x+6z)}\quad{}\text{for an arbitrary function $\phi$}\label{eq:214}
+		\end{equation}
+		\text{To find the perticular solution that passes through the circle}
+		\[
+		z = 0,\quad{} x^2+y^2 = 2x
+		\]
+		\text{We restrict to z =0. On that curve}
+		\begin{align*}
+			&C_1 = x^2-3x\\
+			&C_2=x+y^2\\
+			&\text{But} x^2+y^2 = 2x\quad{}\implies\quad{} y^2 = 2x-x^2\quad{}\text{so}\\
+			& C_2 = x+(2x-x^2)\\
+			& C_2 = 3x-x^2\\
+			& C_2 = -(x^2-3x)\\
+			& C_2 = -C_1
+		\end{align*}
+		\text{Thus along the initial circle $C_2 = -C_1$, so}\\
+		\begin{align*}
+			&\phi(s) = -s\\
+		\end{align*}
+		\textbf{Therefore the integral surface is}
+		\begin{align*}
+			&y^2+x-2z = -(x^2-3x-z^2+6z)\\
+			&y^2+x-2z + x^2-3x-z^2+6z =0\\
+			& \boxed{x^2+y^2-z^2-2x+4z =0}
+		\end{align*}
+		%==============2.2==============%
+		\subsection{Find the general integral of the partial differential equation $(2xy-1)p+(z-2x^2)q = 2(x-yz)$ }
+		\setcounter{equation}{0}
+		\
+		\\
+		\text{Here the given differential equation is }
+		\begin{equation}
+			(2xy-1)p+(z-2x^2)q = 2(x-yz)\label{eq:221}
+		\end{equation}
+		\text{And the characteristic equation is}
+		\begin{align*}
+			&\frac{dx}{2xy-1} =\frac{dy}{z-2x^2} =\frac{dz}{2(x-yz)}\\
+		\end{align*}
+		\text{From first and last terms}
+		\begin{align*}
+			&\frac{dx}{2xy-1}  =\frac{dz}{2(x-yz)}\\
+			& (2xy-1)dz - 2(x-yz)dx = 0\\
+			& \text{Lets us find a function F(x,y,z) such that }\\
+			& dF = Mdx + Ndz \quad{}\text{where $M = -2(x-yz),\,N=(2xy-1)$}\\
+			&\text{Integratin M wrt x}\\
+			& F = \int -2(x-yz) dx + h(z) = -x^2+2yzx + h(z) \\
+			&\text{where $h(z)$ is an arbitrary function of z}\\
+			&\text{Again}\\
+			& \frac{\partial N}{\partial z} = N\\
+			& \frac{\partial}{\partial z}\big( -x^2+2yxz+h(z)\big)\\
+			&\text{Hence}\\
+			& 2yx+h'(z) = 2xy-1\\
+			& h'(z) = 1\\
+			&\text{Integrating both sides}\\
+			& h(z) = -z+C_1\quad{}\text{where $C_1$ is an arbitrary constant}\\
+		\end{align*}
+		\text{Therefore the solution of above DE becomes}
+		\begin{equation}
+			-x^2+2yzx -z =C_1\label{eq:222}
+		\end{equation}
+		\textbf{Using the multiplier z,1,x}
+		\begin{align*}
+			&\frac{zdx+dy+xdz}{2xyz-z+z-zx^2+zx^2-2xyz} =0\\
+			& zdx+dy+xdz = 0\\
+			&d(xz) + dy = 0\\
+			&\text{Integrating both sides we get}\\
+			&xz+y =C_2
+		\end{align*}
+		\textbf{There the required general solution is}
+		\begin{align*}
+			&\boxed{F\big(-x^2+2yzx -z,xz+y\big)} =0\\
+			&\text{Where F is an arbitrary Function}
+		\end{align*}
+		
+		%==============2.3=============%
+		\subsection{Find the integral surface of the equation $\\(x-y)y^2p + (y-x)x^2q = (x^2+y^2)z\\$ through the curve $xz = a^3,\, y = 0$ }
+		\setcounter{equation}{0}
+		\text{Here the given differential equation is }\\
+		\begin{equation}
+			(x-y)y^2p + (y-x)x^2q = (x^2+y^2)z\label{eq:231}
+		\end{equation}
+		\text{And the characteristic equation is}
+		\begin{align*}
+			&\frac{dx}{(x-y)y} =\frac{dy}{(y-x)x^2} =\frac{dz}{(x^2+y^2)z}\\
+		\end{align*}
+		\text{From first two terms we get}
+		\begin{align*}
+			&\frac{dy}{dx} = \frac{(y-x)x^2}{(x-y)y^2}\\
+			&\frac{dy}{dx} = \frac{x^2}{y^2}\\
+			&\text{Seperating variables and integrating we get}\\
+			&\int y^2 dy = -\int x^2 dx +C_1 \quad{}\text{Where $C_1$ is an arbitrary constant}\\
+			& y^3+x^3 = 3C_1
+		\end{align*}
+		\begin{equation}
+				x^3 + y^3 = C_2 \quad{}\text{ where $C_2 = 3 c_1$}\label{eq:232}
+		\end{equation}
+		\text{From first and last terms of characteristic equation we get}
+		\begin{align*}
+			&\frac{dz}{z}  = \frac{x^2+y^2}{y^2(x-y)} dx\\
+			&\frac{dz}{z} = \frac{x^2+y^2}{y^2} \frac{1}{x-y} dx\\
+			&\frac{dz}{z} = \frac{1+(\frac{y}{x})^2}{(\frac{y}{x})^2} \frac{1}{x-y} dx\\
+			&\text{Lets use} \quad{} v = \frac{y}{x} \quad{} \text{then}\\
+			&\frac{dz}{z} = \frac{1+v^2}{xv^2(1-v)} dx\\
+			&\text{We have}\quad{} x^3+y^3 = C_2\\
+			&\text{differentiatin keeping in mind $y = vx$}\\
+			& x^2 dx + y^2 dy = 0\\
+			&\text{and}\quad{} dy = vdx + xdv\\
+			&\text{so}\\
+			&x^2dx + v^2x^2(vdx+xdv) = 0\\
+			&x^2 dx + v^3x^2dx+v^2x^3dv = 0\\	
+			&(1+v^3)x^2dx + v^2x^3 dv =0\\
+			& dx = -\frac{v^2x}{1+v^3} dv	\\
+			&\text{Therefore}\\
+			&\frac{dz}{z} = \frac{1+v^2}{v^2(1-v)} \big(-\frac{v^2}{1+v^3}dv\big)\\
+			&\frac{dz}{z} = \frac{1+v^2}{(v-1)(1+v^3)} dv\\
+			&\frac{dz}{z} = \big(\frac{1}{(v-1)} - \frac{v^2}{(1+v^3)}\big) dv\\
+			&\text{Integrating both sides}\\
+			&\int \frac{dz}{z} = \int \big(\frac{1}{v-1}\big) dv -\int\big(\frac{v^2}{1+v^3}\big)dv + C_3\\
+		\end{align*}
+		\begin{align*}
+			&\text{For }\quad{} \int\big(\frac{v^2}{1+v^3}\big)dv \quad{} \text{set}\, t = 1+v^3\\
+			&\text{so} \quad{} dt = 3v^2dv \quad{}\text{hence}\\
+			& \int\big(\frac{v^2}{1+v^3}\big)dv = \frac{1}{3} \int \frac{dt}{t} = \frac{1}{3} \ln(1+v^3)\\
+			&\text{Putting all together}\\
+			& \ln(z) = \ln(v-1) - \frac{1}{3} \ln(1+v^3) + C_3\\
+			& \ln(z) -\ln(v-1)+\frac{1}{3}\ln(1+v^3) = C_3\\
+			&\ln(z\frac{(1+v^3)^{1/3}}{v-1}) = C_3\\
+			&\text{Exponentiating both sides}\\
+			& C_4 = z\frac{(1+v^3)^{1/3}}{v-1}\quad{}\text{where $C_4= e^{C_3}$}\\
+			&\text{Substituting back $v=\frac{y}{x}$}\\
+			&C_4 = z\frac{(1+(\frac{y}{x})^3)^{1/3}}{\frac{y}{x}-1}\\
+			&C_4 = \frac{z(x^3+y^3)^{\frac{1}{3}}}{y-x}\\
+		\end{align*}
+		\textbf{Hence the general solution is given by}
+		\begin{align*}
+			&F(x^3+y^3, \frac{z(x^3+y^3)^{\frac{1}{3}}}{y-x}) = 0\\
+			&\text{ where } F \text{ is an arbitrary function.}
+		\end{align*}
+		
+		\textbf{Particular integral which passes through the curve $xz = a^3,\ y = 0$}
+		
+		\begin{align*}
+			&\text{Along the given curve, we have } y = 0,\ z = \frac{a^3}{x}. \\
+			&\text{So } x^3 + y^3 = x^3,\quad (x^3 + y^3)^{1/3} = x,\quad y - x = -x. \\
+			&\text{Substituting into the second invariant:} \\
+			&\hspace{1cm} \frac{z(x^3 + y^3)^{1/3}}{y - x} = \frac{\frac{a^3}{x} \cdot x}{-x} = -\frac{a^3}{x}. \\
+			&\text{Thus, the second invariant becomes } \frac{z(x^3 + y^3)^{1/3}}{y - x} = -\frac{a^3}{(x^3 + y^3)^{1/3}}. \\
+			&\text{Solving this for } z \text{ gives the particular solution:}
+		\end{align*}
+		
+		\begin{align*}
+			\boxed{
+				z(x, y) = -\frac{a^3(y - x)}{(x^3 + y^3)^{1/3}}
+			}
+		\end{align*}
+		
+		\text{This surface passes through the curve } $xz = a^3,\ y = 0$.
+		
+		\textbf{Therefore, the required particular solution is}
+		
+		\begin{align*}
+			\boxed{
+				F(x^3 + y^3,\ \frac{z(x^3 + y^3)^{1/3}}{y - x}) = \frac{z(x^3 + y^3)^{1/3}}{y - x} + \frac{a^3}{(x^3 + y^3)^{1/3}} = 0
+			}
+		\end{align*}
+		
+	
+		
+
+		%==============2.4=============%
+		\subsection{Find the general solution of the equation $\\2x(y+z^2)p+y(2y+z^2)q = z^3\\$ and deduce that 
+		$yz(z^2+yz-2y)=x^2$ }
+		\setcounter{equation}{0}
+		\text{Here the given differential equation is }\\
+		\begin{equation}
+			2x(y+z^2)p+y(2y+z^2)q = z^3\label{eq:241}
+		\end{equation}
+		\text{And the characteristic equation is}
+		\begin{align*}
+			&\frac{dx}{	2x(y+z^2)} =\frac{dy}{y(2y+z^2)} =\frac{dz}{z^3}\\
+		\end{align*}
+		\text{From second and third term of characteristic equation we have}
+		\begin{align*}
+			\frac{dy}{dz} &= \frac{y\,(2y+z^2)}{z^3}, \\[6pt]
+			\text{Substitute }v=\frac1y,\quad &\implies\quad y=\frac1v,\quad dy=-\frac{1}{v^2}\,dv,\\[6pt]
+			\text{Then }
+			\frac{dy}{dz}
+			&= -\frac{1}{v^2}\,\frac{dv}{dz}, \\[6pt]
+			\text{and}
+			\quad
+			\frac{y\,(2y+z^2)}{z^3}
+			&= \frac{\frac1v\bigl(2\frac1v+z^2\bigr)}{z^3}
+			= \frac{2/v^2 + z^2/v}{z^3}
+			= \frac{2}{v^2\,z^3}+\frac{1}{v\,z}.
+		\end{align*}
+		
+		\begin{align*}
+			\text{Equateting we get}\quad
+			-\frac{1}{v^2}\,\frac{dv}{dz}
+			&= \frac{2}{v^2\,z^3} + \frac{1}{v\,z}, \\[6pt]
+			\frac{dv}{dz}
+			&= -v^2\Bigl(\tfrac{2}{v^2\,z^3}+\tfrac{1}{v\,z}\Bigr)
+			= -\frac{2}{z^3} - \frac{v}{z}, \\[6pt]
+			\frac{dv}{dz} + \frac{1}{z}\,v &= -\frac{2}{z^3}.
+		\end{align*}
+		
+		\begin{align*}
+			\text{Integrating factor is given by }\mu(z)&=e^{\int \frac1z\,dz}=z,\\
+			\text{Multiply both sides by IF }z\,\frac{dv}{dz} + v &= -\frac{2}{z^2},\\
+			\frac{d}{dz}(z\,v)&=-\frac{2}{z^2}.
+		\end{align*}
+		
+		\begin{align*}
+			\int \frac{d}{dz}(z\,v)\,dz &= \int -\frac{2}{z^2}\,dz 
+			&\Longrightarrow&
+			z\,v = 2\,z^{-1} + C_1,\\
+			v &= \frac{2}{z^2} + \frac{C_1}{z}.
+		\end{align*}
+		
+		\begin{align*}
+			&\text{Back‑substitute }v=\frac1y\\
+			&\frac{1}{y}= \frac{C_1}{z} + \frac{2}{z^2},
+		\end{align*}
+		\begin{equation}
+			C_1 = \frac{z^2 - 2y}{y\,z} \label{eq:242}
+		\end{equation}
+		
+		\text{From first and last term of characteristic equation we have}
+		\begin{align*}
+			&\frac{dx}{dz} = \frac{2x\,(y+z^2)}{z^3}, \\
+			&\text{and from equation (2)}\\
+			&\frac{1}{y} = \frac{C_1}{z} + \frac{2}{z^2}\\
+			&y = \frac{z^2}{C_1\,z + 2}\\
+		\end{align*}
+		
+		\begin{align*}
+			&\text{Substitute } \quad{}y=\frac{z^2}{C_1\,z+2}\\
+			\\
+			&\frac{dx}{dz} = \frac{2x\Bigl(\frac{z^2}{C_1\,z+2}+z^2\Bigr)}{z^3}\\
+			&= \frac{2x\,\bigl(z^2 + z^2(C_1\,z+2)\bigr)}{(C_1\,z+2)\,z^3}\\
+			&= \frac{2x\,z^2(C_1\,z+3)}{(C_1\,z+2)\,z^3}\\
+			&= 2x\,\frac{C_1\,z+3}{(C_1\,z+2)\,z}.
+		\end{align*}
+		
+		\begin{align*}
+			&\text{Separate variables}\\
+			&\frac{1}{x}\frac{dx}{dz}= 2\,\frac{C_1\,z+3}{z\,(C_1\,z+2)},\\
+			&\int \frac{1}{x}\,dx = 2\int \frac{C_1\,z+3}{z\,(C_1\,z+2)}\,dz\\
+			&\text{Using Partial fractions}\\
+			&\frac{C_1\,z+3}{z\,(C_1\,z+2)}= \frac{A}{z} + \frac{B}{C_1\,z+2},\\
+			&C_1\,z+3 = A(C_1\,z+2) + Bz= (A\,C_1+B)\,z + 2A,\\
+			&2A = 3,\quad A\,C_1 + B = C_1\\
+			&A = \tfrac32,\;B = -\tfrac{C_1}{2}.
+		\end{align*}
+		
+		\begin{align*}
+			&\int \frac{1}{x}\,dx= 2\int\!\Bigl(\tfrac{3}{2z}-\tfrac{C_1/2}{C_1\,z+2}\Bigr)\,dz	= 3\ln|z| - \ln|C_1\,z+2| + C_2',\\
+			&\ln\!\Bigl(\frac{z^3}{C_1\,z+2}\Bigr)= \ln|x| + C_2'\\
+			&x = C_2\,\frac{z^3}{C_1\,z+2}\\
+			&\text{But from first invarient we have}\\
+			&y = \frac{z^2}{C_1 z + 2}\\
+			&\text{Hence}\\
+			&C_2 = \frac{x}{y\,z}
+		\end{align*}
+		
+		\begin{align*}
+			&\text{Thus the second invariant is}
+			\quad
+			C_2 = \frac{x}{y\,z}
+		\end{align*}
+		
+		\textbf{Hence the general soltution is given by}
+		\begin{align*}
+			\boxed{F\big( \frac{z^2 - 2y}{y\,z}, \frac{x}{y\,z}\big)=0}
+		\end{align*}
+		\textbf{Deduction of $yz(z^2+yz-2y)=x^2$}
+		\begin{align*}
+			&\text{Lets choose}\\
+			&C_1 = C_2^2-1\\
+			&\text{i.e}\quad{} \frac{z^2 - 2y}{y\,z} = \big( \frac{x}{y\,z}\big)^2 -1\\
+			& \frac{z^2 - 2y}{y\,z} = \frac{x^2-y^2z^2}{y^2z^2}\\
+			& (z^2-2y)(yz) = x^2-y^2z^2\\
+			& (z^2-2y)(yz)+y^2z^2 = x^2\\
+			& yz(z^2+yz-2y) = x^2
+		\end{align*}
+		\textbf{Thus this special choice of the arbitrary function is $\phi(t)= \sqrt{t+1}$}
+	
+		%==============2.5=============%
+		\subsection{Find the integral of the equation $\\(x-y)p+(y-x-z)q=z\\$ and the perticular solution through the circle $z = 1, x^2+y^2 = 1$. }
+		\setcounter{equation}{0}
+		\text{Here the given differential equation is }\\
+		\begin{equation}
+			(x-y)p+(y-x-z)q=z\label{eq:251}
+		\end{equation}
+		\text{And the characteristic equation is}
+		\begin{align*}
+			&\frac{dx}{	(x-y)} =\frac{dy}{(y-x-z)} =\frac{dz}{z}\\
+		\end{align*}
+		\text{Let us introduce new paramter $t$ such that}
+		\begin{align*}
+			\frac{dx}{x - y} &= dt, 
+			&\frac{dy}{y - x - z} &= dt, 
+			&\frac{dz}{z} &= dt,\\
+			\frac{d}{dt}(x+y+z) 
+			&= \frac{dx}{dt} + \frac{dy}{dt} + \frac{dz}{dt}\\
+			&= (x - y) + (y - x - z) + z\\
+			&= 0,\\
+			&x + y + z = C_1.
+		\end{align*}
+		
+		\text{Again, let $u = x-y$, then}
+		\begin{align*}
+			&\frac{du}{dt} = \frac{dx}{dt} - \frac{dy}{dt}\\
+			&\frac{du}{dt} = (x-y)-(y-x-z) = 2(x-y+z)=2u+z\\
+			& z = \frac{du}{dt} -2u\\
+		\end{align*}
+		\text{Also from $\frac{dz}{dt}=z$}
+		\begin{align*}
+			&z = Ae^t \quad{}\text{ for some A}\\
+			&\text{using this value of $z$ in above equation}\\
+			& \frac{du}{dt}- 2u = Ae^t\\
+			&\text{ This is linear first order ODE, so the integrating factor is }\quad 
+			\mu(t)=e^{\int -2\,dt}=e^{-2t}\\
+			&\text{ Multiply the ODE by }\mu(t)\\
+			&e^{-2t}\,\frac{du}{dt} \;-\;2\,e^{-2t}\,u \;=\;A\,e^t\,e^{-2t}
+			\quad\Longrightarrow\quad
+			e^{-2t}\,\frac{du}{dt}-2e^{-2t}u = A e^{-t}.\\[6pt]
+			&\frac{d}{dt}\bigl(e^{-2t}\,u\bigr) = e^{-2t}\,\frac{du}{dt}-2e^{-2t}u.\\[6pt]
+			&\text{ Integrate both sides}\\
+			&\int \frac{d}{dt}\bigl(e^{-2t}u\bigr)\,dt +C_2 = \int A e^{-t}\,dt +C_2
+			\quad\Longrightarrow\quad
+			e^{-2t}\,u = -A e^{-t} + C_2,\\
+			&u = e^{2t}\bigl(-A e^{-t} + C_2\bigr)
+			= -A e^{t} + C_2 e^{2t}\\
+			&\text{But } u = x - y, \text{ so:} \\
+			&x - y = -A e^t + C_2 e^{2t}, \\[6pt]
+			&\text{Recall } z = A e^t \Rightarrow e^t = \frac{z}{A}, \quad e^{2t} = \frac{z^2}{A^2}, \\[6pt]
+			&\text{Substitute back:} \\
+			&x - y = -z + C_2 \cdot \frac{z^2}{A^2}, \\[6pt]
+			&x - y + z = C_2 \cdot \frac{z^2}{A^2}, \\[6pt]
+			&\Rightarrow \boxed{C_3 = \frac{(x - y + z)}{z^2}}\quad{}\text{where $C_3=C_2/A^2$  }
+		\end{align*}
+			\textbf{Hence the general soltution is given by}
+		\begin{align*}
+			\boxed{F\big(x + y + z,  \frac{(x - y + z)}{z^2}\big) =0} 
+		\end{align*}
+		\textbf{Perticular Integral through $z = 1, x^2+y^2=1$}
+		\begin{align*}
+			&\text{On the circle } z = 1,\quad x^2 + y^2 = 1, \text{ we have:} \\
+			&C_1 = x + y + 1,\quad C_2 = \frac{x - y + 1}{1^2} = x - y + 1. \\[6pt]
+			&\text{Now, for any } (x, y) \text{ on the unit circle, we know:} \\
+			&(x + y)^2 + (x - y)^2 = 2(x^2 + y^2) = 2. \\[6pt]
+			&\text{So, substituting in terms of } C_1 \text{ and } C_2: \\
+			&(C_1 - 1)^2 + (C_2 - 1)^2 = 2. \\[6pt]
+			&\text{Hence, the unique function } F(C_1, C_2) \text{ vanishing on the circle is:} \\
+			&F(C_1, C_2) = (C_1 - 1)^2 + (C_2 - 1)^2 - 2 = 0. \\[6pt]
+			&\text{Substituting back } C_1 = x + y + z, \quad C_2 = \frac{x - y + z}{z^2}, \text{ we obtain:} \\
+			&\boxed{\left(x + y + z - 1\right)^2 + \left( \frac{x - y + z}{z^2} - 1 \right)^2 = }
+		\end{align*}
+		\textbf{is the particular integral surface through $z = 1, x^2+y^2 = 1$ }
+		
+		%==============2.6=============%
+		\subsection{Find the general solution of the differential equation $\\x(z+2a)p+(xz+2yz+2ay)q = z(z+a)\\$ 
+		Find also the integral surfaces which pass through the curves:\\
+		(a) $y=0\quad{} z^2=4ax\\$ (b) $y=0\quad{} z^3+x(z+a)^2 = 0$ }
+		\setcounter{equation}{0}
+		\text{Here the given differential equation is }\\
+		\begin{equation}
+			x(z+2a)p+(xz+2yz+2ay)q = z(z+a){eq:261}
+		\end{equation}
+		\text{And the characteristic equation is}
+		\begin{align*}
+			&\frac{dx}{	x(z+2a)} =\frac{dy}{(xz+2yz+2ay)} =\frac{dz}{z(z+a)}\\
+		\end{align*}
+		\text{From first and last terms we get}
+		\begin{align*}
+			&\frac{dx}{x} = \frac{z+2a}{z(z+a)}dz = \big(\frac{2}{z} - \frac{1}{z+a}\big) dz\\
+			&\text{Integrating both sides we get}\\
+			& \ln(x) = 2\ln(z)-\ln(z+a) + C_1\\
+			& C_1 = \frac{x(z+a)}{z^2}
+		\end{align*}
+		\text{Next use second and third ratios we have }
+		\begin{align*}
+			&\frac{dy}{(xz+2yz+2ay)} = \frac{dz}{z(z+a)}\\
+			&\text{Substitute the value of $x$ from the first integral: } x = \frac{C_1 z^2}{z+a}\\
+			&\text{So, the denominator becomes: } xz + 2yz + 2ay 
+			= \frac{C_1 z^3}{z+a} + 2yz + 2ay\\
+			&\Rightarrow \frac{dy}{\frac{C_1 z^3}{z+a} + 2yz + 2ay} 
+			= \frac{dz}{z(z+a)}\\
+			&\Rightarrow \frac{dy}{dz} = \frac{C_1 z^2}{(z+a)^2} + \frac{2y(z+a)}{z(z+a)} 
+			= \frac{C_1 z^2}{(z+a)^2} + \frac{2y}{z}\\
+			&\Rightarrow \frac{dy}{dz} - \frac{2}{z} y = \frac{C_1 z^2}{(z+a)^2}\\
+			&\text{This is a linear first-order ODE with integrating factor: } 
+			\mu(z) = e^{\int -\frac{2}{z} dz} = z^{-2}\\
+			&\text{Multiply the ODE by } z^{-2}:\\
+			&z^{-2} \frac{dy}{dz} - \frac{2}{z^3} y = \frac{C_1}{(z+a)^2}\\
+			&\Rightarrow \frac{d}{dz}(z^{-2} y) = \frac{C_1}{(z+a)^2}\\
+			&\text{Integrating both sides: } 
+			\int \frac{d}{dz}(z^{-2} y) \, dz = \int \frac{C_1}{(z+a)^2} \, dz\\
+			&z^{-2} y = -\frac{C_1}{z+a} + C_2\\
+			&\Rightarrow y = -\frac{C_1 z^2}{z+a} + C_2 z^2\\			
+		\end{align*}
+		\text{Substituting back $  C_1= \frac{x(z+a)}{z^2}$}
+		\begin{align*}
+			&y = -\frac{z^2}{z+a}\cdot \frac{x((z+a))}{z^2} + C_2z^2\\
+			&y = -x + C_2z^2\\
+			&C_2 = \frac{y+x}{z^2}
+		\end{align*}
+		\textbf{Hence the General Solution is }
+		\begin{align*}
+			\boxed{
+				F\big(  \frac{x(z+a)}{z^2},\quad{} \frac{y+x}{z^2} \big) 
+			}
+		\end{align*}
+		\text{Where F is an arbitrary function}\\
+		\\
+		\textbf{Particular integral surface (a):}
+		
+		Initial curve (a): $y = 0$, $z^2 = 4a x$. So, $x = \dfrac{z^2}{4a}$.
+		
+		Hence
+		\begin{align*}
+			C_1 &= \frac{x(z+a)}{z^2} = \frac{(z^2/(4a))(z+a)}{z^2} = \frac{z+a}{4a}, \\
+			C_2 &= \frac{x+y}{z^2} = \frac{z^2/(4a)}{z^2} = \frac{1}{4a}
+		\end{align*}
+		
+		Since \( C_2 = \dfrac{1}{4a} \) is constant along the curve, the integral surface satisfies:
+		\begin{align*}
+			\frac{x+y}{z^2} &= \frac{1}{4a} \\
+			\Rightarrow \quad x + y &= \frac{z^2}{4a}
+		\end{align*}
+		
+		\textbf{Therefore, the particular integral surface is:}
+		\begin{align*}
+			z^2 &= 4a(x + y)
+		\end{align*}
+		
+		\vspace{1em}
+		\textbf{Particular integral surface (b):}
+		
+		Initial curve (b): $y = 0$, $z^3 + x(z+a)^2 = 0 \Rightarrow x = -\dfrac{z^3}{(z+a)^2}$
+		
+		Compute the invariants:
+		\begin{align*}
+			C_1 &= \frac{x(z+a)}{z^2} = -\frac{z^3}{(z+a)^2} \cdot \frac{z+a}{z^2} = -\frac{z}{z+a}, \\
+			C_2 &= \frac{x+y}{z^2} = \frac{-z^3/(z+a)^2}{z^2} = -\frac{z}{(z+a)^2}
+		\end{align*}
+		
+		From \( C_1 = -\frac{z}{z+a} \), solve for \( z \):
+		\begin{align*}
+			C_1(z+a) &= -z \\
+			\Rightarrow \quad z(C_1 + 1) &= -C_1 a \\
+			\Rightarrow \quad z &= -\frac{C_1 a}{C_1 + 1}
+		\end{align*}
+		
+		Then:
+		\begin{align*}
+			z+a &= \frac{a}{C_1 + 1} \\
+			\Rightarrow \quad
+			C_2 &= -\frac{z}{(z+a)^2}
+			= \frac{C_1 a}{C_1 + 1} \cdot \frac{1}{\left(\dfrac{a}{C_1 + 1}\right)^2}
+			= \frac{C_1(C_1 + 1)}{a}
+		\end{align*}
+		
+		So:
+		\begin{align*}
+			C_2 &= \frac{C_1(C_1 + 1)}{a}
+			\quad \Rightarrow \quad
+			C_1^2 + C_1 - a C_2 = 0
+		\end{align*}
+		
+		Substitute back \( C_1 = \dfrac{x(z+a)}{z^2} \), \( C_2 = \dfrac{x+y}{z^2} \):
+		\begin{align*}
+			\left( \frac{x(z+a)}{z^2} \right)^2 + \frac{x(z+a)}{z^2} - a \cdot \frac{x+y}{z^2} &= 0
+		\end{align*}
+		
+		Multiply both sides by \( z^2 \):
+		\begin{align*}
+			\frac{x^2(z+a)^2}{z^2} + x(z+a) - a(x+y) &= 0
+		\end{align*}
+		
+		Multiply through by \( z^2 \) to clear denominators:
+		\begin{align*}
+			x^2(z+a)^2 + x(z+a)z^2 - a(x+y)z^2 &= 0
+		\end{align*}
+		
+		\textbf{Thus, the particular integral surface through curve (b) is:}
+		\begin{align*}
+			x^2(z+a)^2 + x(z+a)z^2 - a(x+y)z^2 &= 0
+		\end{align*}
+		
+		\section{Part-3 Surfaces Orthogonal to a Given System of Surfaces}
+		\subsection{Find the surface which is orthogonal to the one-parameter system $z=cxy(x^2+y^2)$ and which passes through the hyperbola $x^2-y^2 = a^2, z = 0$}
+		\setcounter{equation}{0}
+		\text{Here the ginve family of is $z = z=cxy(x^2+y^2)$}\\
+		\text{Rewrite this as}
+		\begin{equation}
+			F(x,y,z) \,= \,\frac{z}{xy(x^2+y^2)} \,= \, c\label{eq:311}
+		\end{equation}
+		\text{For a surface $\phi(x,y,z) = k$ where k is constant to be orthogonal the given family, }\\
+		\text{their normal vectors must be perpendicular at every point of intersection. For this}
+		\begin{align*}
+			&\nabla F \cdot \nabla\phi = 0\\
+			& \frac{\partial F}{\partial x} \frac{\partial \phi}{\partial x} + 
+			\frac{\partial F}{\partial y} \frac{\partial \phi}{\partial y} + 
+			\frac{\partial F}{\partial z} \frac{\partial \phi}{\partial z} = 0\\	
+			&\text{Let}\quad{} u = xy(x^2+y^2),\quad{} \text{ then},\\
+			&  \frac{\partial F}{\partial x} =  \frac{\partial (\frac{z}{u})}{\partial x} = - u^{-2} \frac{\partial u}{\partial x} = -z \frac{3x^2y+y^3}{\big[xy(x^2+y^2)\big]^2}\\
+			&  \frac{\partial F}{\partial y} =  \frac{\partial (\frac{z}{u})}{\partial y} = - u^{-2} \frac{\partial u}{\partial y} = -z \frac{x^3y+3xy^2}{\big[xy(x^2+y^2)\big]^2}\\
+			&  \frac{\partial F}{\partial z} =  \frac{\partial (\frac{1}{u})}{\partial z} =  \frac{1}{\big[xy(x^2+y^2)\big]^2}\\
+			&\text{Hence,}\\
+			&\nabla F \cdot \nabla\phi = \left[ -z \frac{3x^2 y + y^3}{\left( xy(x^2 + y^2) \right)^2} \right] \frac{\partial x}{\partial \phi} +
+			\left[ -z  \frac{x^3 + 3x y^2}{\left( xy(x^2 + y^2) \right)^2} \right] \frac{\partial y}{\partial \phi} +
+			\left[ \frac{1}{xy(x^2 + y^2)} \right] \frac{\partial z}{\partial \phi} = 0\\
+			& -2zy(3x^2 + y^2)\, \frac{\partial x}{\partial \phi}
+			- 2zx(x^2 + 3y^2)\, \frac{\partial y}{\partial \phi}
+			+ 2xy(x^2 + y^2)\, \frac{\partial z}{\partial \phi} = 0\\		
+			&\text{The characteristic equation is given by}\\
+			&\frac{dx}{-zy(3x^2 + y^2)} = \frac{dy}{-zx(x^2 + 3y^2)} = \frac{dz}{xy(x^2 + y^2)}\\
+		\end{align*}
+		\begin{align*}
+			&\text{From the ratio }\quad
+			\frac{dy}{dx}
+			=\frac{x\,(x^2+3y^2)}{y\,(3x^2+y^2)},\\[6pt]
+			&\text{Set }u=\frac{y}{x},\quad y=u\,x,\quad dy = u\,dx + x\,du,\\[6pt]
+			&\text{Substitute:}\\
+			&\quad u + x\frac{du}{dx}
+			=\frac{x\bigl(x^2+3(u\,x)^2\bigr)}{u\,x\bigl(3x^2+(u\,x)^2\bigr)}
+			=\frac{1+3u^2}{u(3+u^2)},\\[6pt]
+			&\text{Hence}\\
+			&\quad x\frac{du}{dx}
+			=\frac{1+3u^2}{u(3+u^2)}-u
+			=\frac{2u(1-u^2)}{1+3u^2},\\[6pt]
+			&\text{Separate variables:}\\
+			&\quad \int \frac{1+3u^2}{u(1-u^2)}\,du
+			=\int \frac{2\,dx}{x}\,,\\[6pt]
+			&\text{Use partial fractions:}\\
+			&\quad \frac{1+3u^2}{u(1-u^2)}
+			=\frac{1}{u}+\frac{2}{1-u}-\frac{2}{1+u},\\[6pt]
+			&\text{Integrate both sides:}\\
+			&\quad \int\Bigl(\frac{1}{u}+\frac{2}{1-u}-\frac{2}{1+u}\Bigr)\,du
+			=2\int\frac{dx}{x}\\
+			&\ln|u|-2\ln|1-u|-2\ln|1+u|=2\ln|x|+\ln K,\\[6pt]\\
+			&\quad \ln\!\Bigl(\frac{u}{(1-u^2)^2}\Bigr)
+			=\ln(K\,x^2)
+			\;\Longrightarrow\;
+			\frac{u}{(1-u^2)^2}=K\,x^2,\\[6pt]
+			&\text{Back‐substitute }u=\frac{y}{x}:\\
+			&\quad \frac{\tfrac{y}{x}}{\bigl(1-(y/x)^2\bigr)^2}
+			=K\,x^2
+			\;\Longrightarrow\;
+			\frac{y/x}{\bigl(\frac{x^2-y^2}{x^2}\bigr)^2}
+			=K\,x^2\\
+			&\quad\Longrightarrow\;
+			\frac{y/x}{(x^2-y^2)^2/x^4}
+			=K\,x^2
+			\;\Longrightarrow\;
+			\frac{x^3\,y}{(x^2-y^2)^2}
+			=K\,x^2
+			\;\Longrightarrow\;
+			\frac{x\,y}{(x^2-y^2)^2}=K,
+		\end{align*}
+		so the first integral is
+		\[
+		\boxed{I_1=\frac{x\,y}{(x^2-y^2)^2}= \text{constant}.}
+		\]
+		\begin{align*}
+			&\textbf{Second integral via a parameter }t:\\
+			&\text{Introduce }t\text{ so that each ratio equals }dt:\\
+			&\frac{dx}{-z\,y\,(3x^2+y^2)}
+			=\frac{dy}{-z\,x\,(x^2+3y^2)}
+			=\frac{dz}{x\,y\,(x^2+y^2)}=dt.\\[6pt]
+			&\text{Define }r^2=x^2+y^2,\quad dr^2=2x\,dx+2y\,dy\\[4pt]
+			&\text{From the characteristic equations,}\\
+			&dx=-z\,y\,(3x^2+y^2)\,dt,
+			\quad
+			dy=-z\,x\,(x^2+3y^2)\,dt,\\[4pt]
+			&\text{so}
+			\quad
+			dr^2
+			=2x\bigl(-z\,y\,(3x^2+y^2)\bigr)\,dt
+			+2y\bigl(-z\,x\,(x^2+3y^2)\bigr)\,dt\\
+			&\quad
+			=-2z\bigl[x\,y\,(3x^2+y^2)+x\,y\,(x^2+3y^2)\bigr]\,dt
+			=-2z\cdot4xy\,(x^2+y^2)\,dt\\
+			&\quad
+			=-8z\bigl(xy\,(x^2+y^2)\bigr)\,dt\\[6pt]
+			&\text{From }dz=x\,y\,(x^2+y^2)\,dt, 
+			\text{ we have }xy\,(x^2+y^2)\,dt=dz\\[4pt]
+			&\text{Hence}\\
+			&dr^2=-8z\,dz\\
+			&\text{Integration both sides}\\
+			&\int dr^2=-8\int z\,dz + C\\
+			&r^2=-4z^2+C,\\[4pt]\\
+			&\text{so the second first integral is}
+			\quad
+			\boxed{I_2 = x^2+y^2+4z^2=\text{constant}.}
+		\end{align*}
+		\\
+		\textbf{Hence the general solution is $F(\frac{x\,y}{(x^2-y^2)^2},x^2+y^2+4z^2)$}\\
+		\text{Where F is an arbitrary function}\\
+		\\			
+		\textbf{Condition: Passes through the hyperbola}\\
+		
+		The surface must pass through the hyperbola:
+		\[
+		x^2 - y^2 = a^2,\quad z = 0
+		\]
+		On this curve:
+		\[
+		(x^2 - y^2)^2 = a^4, \quad \Rightarrow \quad I_1 = \frac{xy}{a^4}, \quad I_2 = x^2 + y^2
+		\]
+		\textbf{Parametrize the hyperbola}\\
+		Use the parametrization:
+		\[
+		x = a \cosh t,\quad y = a \sinh t
+		\]
+		Then:
+		\[
+		xy = a^2 \cosh t \sinh t = \frac{a^2}{2} \sinh 2t,
+		\]
+		\[
+		x^2 + y^2 = a^2(\cosh^2 t + \sinh^2 t) = a^2 \cosh 2t
+		\]
+		
+		Thus, the integrals become:
+		\[
+		I_1 = \frac{xy}{a^4} = \frac{\sinh 2t}{2a^2}, \qquad I_2 = a^2 \cosh 2t
+		\]
+		\text{Since}\\
+		\[
+		\cosh^2(2t) - \sinh^2(2t) = 1
+		\]
+		
+		So,
+		\[
+		\left(\frac{I_2}{a^2}\right)^2 - \left(2a^2 I_1\right)^2 = 1
+		\]
+		\[
+		\frac{I_2^2}{a^4} - 4a^4 I_1^2 = 1 \quad \Rightarrow \quad I_2^2 - 4a^8 I_1^2 = a^4
+		\]
+		
+		\textbf{Back-substitute $I_1$, $I_2$:}
+		\[
+		\boxed{\left(x^2 + y^2 + 4z^2\right)^2 - 4a^8\left(\frac{xy}{(x^2 - y^2)^2}\right)^2 = a^4}
+		\]
+			
+		
+		\subsection{Find the equation of the system of surfaces which cut orthogonally the cones of the system  $x^2+y^2+z^2 = cxy$}
+		\setcounter{equation}{0}
+		\text{Here the given system of cones is $x^2+y^2+z^2 = cxy$}\\
+		\begin{equation}
+			F(x,y,z,c) \,= \,{x^2+y^2+z^2}-cxy \,= 0\label{eq:321}
+		\end{equation}
+		\text{For a surface $\phi(x,y,z) = k$ where k is constant to be orthogonal the given family, }\\
+		\text{their normal vectors must be perpendicular at every point of intersection. For this}
+		\begin{align*}
+			&\nabla F \cdot \nabla\phi = 0\\
+			& \frac{\partial F}{\partial x} \frac{\partial \phi}{\partial x} + 
+			\frac{\partial F}{\partial y} \frac{\partial \phi}{\partial y} + 
+			\frac{\partial F}{\partial z} \frac{\partial \phi}{\partial z} = 0\\	
+			\end{align*}
+			\begin{align*}
+			&\text{Here}\\
+			& \frac{\partial F}{\partial x} = 2x-cy\\
+			& \frac{\partial F}{\partial y} = 2y-cx\\
+			&\frac{\partial F}{\partial z} = 2z\\
+			&\text{Substituting } \quad{} c =\frac{x^2+y^2+z^2}{xy}\\
+			& \frac{\partial F}{\partial x} = 2x-y\frac{x^2+y^2+z^2}{xy}\\
+			& \frac{\partial F}{\partial y} = 2y-x\frac{x^2+y^2+z^2}{xy}\\
+			&\frac{\partial F}{\partial z} = 2z\\
+			&\text{Hence}\\
+			& 2x-y\frac{x^2+y^2+z^2}{xy} \frac{\partial \phi}{\partial x} + 
+			 2y-x\frac{x^2+y^2+z^2}{xy} \frac{\partial \phi}{\partial y} + 
+			2z \frac{\partial \phi}{\partial z} = 0\\	
+			%%
+			& \frac{x^2-y^2-z^2}{x} \frac{\partial \phi}{\partial x} + 
+			\frac{y^2-z^2-x^2}{y} \frac{\partial \phi}{\partial y} + 
+			2z \frac{\partial \phi}{\partial z} = 0\\	
+			&\text{Therefore the characteristic equation is}\\
+			& \frac{dx}{\frac{x^2-y^2-z^2}{x}} =\frac{dy}{\frac{y^2-z^2-x^2}{y}} =\frac{dz}{2z}\\
+			&\text{Let us introduce new paramter t such that}\\
+			& \frac{dx}{\frac{x^2-y^2-z^2}{x}} =\frac{dy}{\frac{y^2-z^2-x^2}{y}} =\frac{dz}{2z}=dt\\
+			& \text{Then}\\
+			& \frac{d}{dt} (x^2+y^2+z^2) = 2x \frac{dx}{dt} + 2y \frac{dy}{dt} + 2z \frac{dz}{dt}\\
+			&\text{Substituting the value of } \quad{} \frac{dx}{dt},\frac{dy}{dt},\frac{dz}{dt} \quad{}\text{we get}\\
+			&  \frac{d}{dt} (x^2+y^2+z^2) = 2x \frac{x^2-y^2-z^2}{x} + 2y \frac{y^2-z^2-x^2}{y} + 2z(2z)\\
+			&  \frac{d}{dt} (x^2+y^2+z^2) =  2x^2-2y^2-2z^2 + 2y^2-z2^2-2x^2 + 4z^2\\
+			&\frac{d}{dt} (x^2+y^2+z^2) = 0\\
+		\end{align*}
+		\begin{align*}
+			&\text{Integrating both sides we get}\\
+			&x^2+y^2+z^2 = C_1
+		\end{align*}
+		\text{Again}
+		\begin{align*}
+			&\frac{d}{ds }(x^2-y^2) = 4(x^2-y^2), \quad{}\frac{d}{ds}(z^2) = 4z^2\\
+			&\text{Now}\\
+			&\frac{d}{ds}\big(\frac{x^2-y^2}{z^2}\big) = \frac{z^2\cdot 4(x^2-y^2) - (x^2-y^2).4z^2}{z^4} =0\\
+			&\text{Thus, on integrating both sides we get}\\
+			&\frac{x^2-y^2}{z^2} = C_2\\
+		\end{align*}
+		\textbf{Therefore the general solution is}\\
+		\[\boxed{
+			F(x^2+y^2+z^2,\frac{x^2-y^2}{z^2}) =0
+		}\]
+		\text{Where F is an arbitrary function}
+		
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\subsection{Find the general equation of surfaces orthogonal to the family given by}
+		\subsubsection{$x(x^2+y^2+z^2)=c_1y^2$}
+		\setcounter{equation}{0}
+		\text{Here the given family is}\\
+		\begin{equation}
+			F(x,y,z,c) \,= x(x^2+y^2+z^2)-c_1y^2 \,= 0\label{eq:33a1}
+		\end{equation}
+		\text{For a surface $\phi(x,y,z,c) = k$ where k is constant to be orthogonal the given family, }\\
+		\text{their normal vectors must be perpendicular at every point of intersection. For this}
+		\begin{align*}
+			&\nabla F \cdot \nabla\phi = 0\\
+			& \frac{\partial F}{\partial x} \frac{\partial \phi}{\partial x} + 
+			\frac{\partial F}{\partial y} \frac{\partial \phi}{\partial y} + 
+			\frac{\partial F}{\partial z} \frac{\partial \phi}{\partial z} = 0\\	
+		\end{align*}
+		\begin{align*}
+			&\text{Here}\\
+			& \frac{\partial F}{\partial x} = 3x^2+y^2+z^2\\
+			& \frac{\partial F}{\partial y} = 2y(x-c_1)\\
+			&\text{Replacing the value of $c_1$ from the given equation}\\
+			& \frac{\partial F}{\partial y} = -2x\frac{x^2+z^2}{y}\\
+			&\frac{\partial F}{\partial z} = 2xz\\	
+			& \text{ Therefore }\\
+			& (3x^2+y^2+z^2) \frac{\partial \phi}{\partial x} -\big( 2x\frac{(x^2+z^2)}{y}\big)  \frac{\partial \phi}{\partial y} + (2xz)  \frac{\partial \phi}{\partial z}\\
+			&\text{Hence the characteristic equation is}\\
+			&\frac{dx}{3x^2+y^2+z^2} = \frac{dy}{ -2x\frac{(x^2+z^2)}{y}} = \frac{dz}{2xz}\\
+			&\text{Let us introduce new variable s such that}\\
+			&\frac{dx}{3x^2+y^2+z^2} = \frac{dy}{ -2x\frac{(x^2+z^2)}{y}} = \frac{dz}{2xz} = ds\\
+			&\text{Now}\\
+			& \frac{d}{ds} (x^2+y^2) = 2x \frac{dx}{ds} + 2y \frac{dy}{ds}\\
+			&\frac{d}{ds} (x^2+y^2) = 2x \frac{3x^2+y^2+z^2}{2xz}dz+2y\big(- \frac{x^2+z^2}{z}\big) dz\\
+			& \frac{d}{ds} (x^2+y^2) = \frac{3x^2+y^2+z^2}{z} dz - \frac{2y(x^2+z^2)}{z} dz\\
+			&\frac{d}{ds} (x^2+y^2)= \frac{x^2+y^2+z^2}{z}dz\\
+			&\text{Again}\\
+			& d\big(\frac{x^2+y^2}{z}\big) = \frac{z \cdot d(x^2 + y^2) - (x^2 + y^2)\,dz}{z^2}
+			= \frac{z \cdot (x^2 + y^2 - z^2) - (x^2 + y^2)}{z^2} \,dz\\
+		 	&d\big(\frac{x^2+y^2}{z}\big)	= -\,dz\\
+		 	&\text{Hence}\\
+	 		&d\big(\frac{x^2+y^2}{z}\big)+\,dz=0\\
+		\end{align*}
+		\begin{align*}
+				&\text{Integrating both sides}\\
+			&\frac{x^2+y^2}{z} + z = C_1\\
+			& \frac{x^2+y^2+z^2}{z} = C_1
+		\end{align*}
+	\begin{align*}
+		&\text{From Second and last terms of characteristic equation}\\
+		& ydy =  -\frac{x^2+z^2}{z} dz\\
+		&\text{But we have} \quad{} C_1 z = x^2 + y^2 + z^2 \\
+		&x^2 + z^2 = C_1 z - y^2 \\
+		&y\,dy = -\frac{x^2 + z^2}{z}\,dz \\
+		&y\,dy= -\frac{C_1 z - y^2}{z}\,dz \\
+		&y\,dy= -C_1\,dz + \frac{y^2}{z}\,dz \\
+		&\frac{d(y^2)}{dz} - \frac{2y^2}{z} = -2C_1 \\
+		&\text{Multiplying both sides by}\quad{}  z^{-2} \\
+		&z^{-2} \cdot \left( \frac{d(y^2)}{dz} - \frac{2y^2}{z} \right) = -2C_1 z^{-2} \\
+		&\frac{d}{dz} \left( \frac{y^2}{z^2} \right) = -2C_1 z^{-2} \\
+		&\text{Integrating both sides}\\
+		&\frac{y^2}{z^2} = 2C_1 z^{-1} + C_2 \\
+		&y^2 = 2C_1 z + C_2 z^2 \\
+		&x^2 + z^2 = C_1 z - y^2 \\
+		&= C_1 z - (2C_1 z + C_2 z^2) = -C_1 z - C_2 z^2 \\
+		&\text{Substituting the value of $C_1$ }\\
+		& 2x^2 + y^2 + 2z^2 = C_2 z^2 \\
+		& C_2 = \frac{2x^2 + y^2 + 2z^2}{z^2}
+	\end{align*}
+	\begin{align*}
+		&\textbf{Hence the General Solution is}\\
+		&\boxed{F\big(\frac{x^2+y^2+z^2}{z}, \frac{2x^2 + y^2 + 2z^2}{z^2}\big)}\quad{}\text{Where F is an arbitrary function}
+	\end{align*}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\subsubsection{$x^2+y^2+z^2 = c_2z$}
+	\textbf{If a family exists, orthogonal to both (3.3.1) and (3.3.2), show that it must satisfy $2x(x^2-z^2)dx+y(3x^2+y^2-z^2)dy+2z(2x^2+y^2)dz = 0$. Show that such a family in fact exists, and find its equation}\\
+	\setcounter{equation}{0}
+	\text{Here the given family is}\\
+	\begin{equation}
+		F(x,y,z) \,= \frac{x^2+y^2+z^2}{z} = c_2\label{eq:33b1}
+	\end{equation}
+	\text{For a surface $\phi(x,y,z,c) = k$ where k is constant to be orthogonal the given family, }\\
+	\text{their normal vectors must be perpendicular at every point of intersection. For this}
+	\begin{align*}
+		&\nabla F \cdot \nabla\phi = 0\\
+		& \frac{\partial F}{\partial x} \frac{\partial \phi}{\partial x} + 
+		\frac{\partial F}{\partial y} \frac{\partial \phi}{\partial y} + 
+		\frac{\partial F}{\partial z} \frac{\partial \phi}{\partial z} = 0\\	
+		&\text{Here}\\
+		& \frac{\partial F}{\partial x} =\frac{2x}{z}\\
+		& \frac{\partial F}{\partial y} = \frac{2y}{z}\\
+		&\frac{\partial F}{\partial z} = \frac{z^2-x^2-y^2}{z^2}\\	
+		& \text{ Therefore }\\
+		& \frac{2x}{z} \frac{\partial \phi}{\partial x} + \frac{2y}{z}  \frac{\partial \phi}{\partial y} + \big(\frac{z^2-x^2-y^2}{z^2}\big) \frac{\partial \phi}{\partial z} = 0\\
+		&\text{Hence the characteristic equation is}\\
+		&\frac{dx}{\frac{2x}{z}} = \frac{dy}{\frac{2y}{z}} = \frac{dz}{\frac{z^2-x^2-y^2}{z^2}}\\
+		&\text{From first two terms we get}\\
+		&\frac{dx}{x} = \frac{dy}{y}\\
+	\end{align*}
+	\begin{align*}
+		&\text{Integrating both sides we get}\\
+		&\ln(y) = \ln(x)+\ln(C_1)\\
+		&\text{Exponentiating both sides and rearraging, we get }\\
+		& \frac{y}{x} = C_1\\ 
+	\end{align*}
+	\begin{align*}
+		&\text{Using first and last terms for characteristic equation we have}\\
+		&\frac{dx}{\frac{2x}{z}} = \frac{dz}{\frac{z^2-x^2-y^2}{z^2}}\\
+		&\frac{dx}{2x} = \frac{z}{z^2-x^2-y^2}dz
+	\end{align*}
+	
+
+\end{document}=
