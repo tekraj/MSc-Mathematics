@@ -1,0 +1,262 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\title{Pfaffian Differential Equations Assignment - Page 26}
+\author{Tek Raj Pant}
+\date{\today}
+
+\begin{document}
+	
+	\maketitle
+	\section{Part 1 Page 26}
+	\paragraph{Determine which of the following equations are integrable, and find the solution of those which one}
+	\subsection{$y\,dx + x\, dy + 2z\,dz = 0$}
+		We are given the differential equations
+		\begin{equation}
+			y\,dx + x\,dy + 2z\,dz = 0
+			\label{eq:exact1}
+		\end{equation}
+		Let's define the vector field $\vec{X} = (P\,,Q\, ,R\,)$, where ${P\,=\,y}, {Q\,=x,\, R = 2z}$
+		so ${\vec{X}=(y,x,2z)}$
+		To check the integrability, lets calculate the ${\vec{X} \cdot (\nabla \times \vec{X})}$
+		
+		\begin{equation}
+			\begin{split}
+				\vec{X} \cdot (\nabla \times \vec{X}) &= 
+				\begin{vmatrix}
+					P & Q & R \\
+					\frac{\partial}{\partial x} &  \frac{\partial}{\partial y} &  \frac{\partial}{\partial z} \\
+					P & Q & R \\
+				\end{vmatrix} \\
+				%
+					\vec{X} \cdot (\nabla \times \vec{X}) &= 
+				\begin{vmatrix}
+					y & x & 2z \\
+					\frac{\partial}{\partial x} &  \frac{\partial}{\partial y} &  \frac{\partial}{\partial z} \\
+					y & x & 2z \\
+				\end{vmatrix} \\
+				%
+					\vec{X} \cdot (\nabla \times \vec{X}) &=\,y(0-0)\,-\,x(0-0)+\,2z(1-1) \\
+				\vec{X} \cdot (\nabla \times \vec{X})	&=0 \\
+			\end{split}
+		\end{equation}
+		\paragraph{Since $\vec{X} \cdot \operatorname{curl} \vec{X} = 0$, the given Pfaffian Differential Equation~\eqref{eq:exact1} is integrable.}
+		\paragraph{So lets find a function ${F\,(x,\,y,\,z)}$, such that}
+		$ dF = y\,dx + x\,dy + 2z\,dz $ \\
+		i.e. $\frac{\partial F}{\partial x} = y$, $\frac{\partial F}{\partial y} = x$ and $\frac{\partial F}{\partial z}  = 2z$
+		Treat y and z as constants and integrate $\frac{\partial F} {\partial x} = y$ wrt x we get,\\
+		\begin{equation}
+	 F(x,y,z) = x\,y\,+\,h(y,z)
+				\label{eq:exact3}
+		\end{equation}, here $h(y,z)$ is an unknown function of y and z only.
+		
+		Differentiate equation~\eqref{eq:exact3} wrt y, we get
+		$\frac{\partial F}{\partial y} = x + \frac{\partial h}{\partial y}$\\
+		Since, we have $\frac{\partial F}{\partial y} = x$, so equation both
+		\begin{equation}
+			x+ \frac{\partial h}{\partial y}  = x \\
+			=> \frac{\partial h}{\partial y} = 0
+		\end{equation}\\
+		
+		Integrating above equation wrt y we get
+		$h(y,z) = g(z)$, where g(z) is unknown function of z\\
+		Now  equation~\eqref{eq:exact3} becomes\\
+		$F(x,y,z) = xy + g(z)$\\
+		Differentiation wrt z we get\\
+		$\frac{\partial F}{\partial z} =  \frac{dg}{dz}$\\
+		Again we also have $\frac{\partial F}{\partial z} = 2z$\\
+		Hence $\frac{dg}{dz} = 2z$\\
+		Integration both sides wrt z, we get\\
+		$g(z) = \int 2z dz +C$ where C is an arbitrary constant\\
+		$g(z) = z^2+C$\\
+		Using this value of g(z), we get\\
+		$F(x,y,z) = xy + z^2 + C $\\
+		This is the required general solution fo given PfDE
+		
+		
+		
+	% ===========  2 =================%
+	\subsection{$z(z+y)dx+z(z+x)dy-2xydz = 0$}
+		\setcounter{equation}{0}
+		Given Pfaffian Differential equation is \\
+		\begin{equation}
+			z(z+y)dx+z(z+x)dy-2xydz = 0
+			\label{eq:exact21}
+		\end{equation}
+		Lets define a vector $\vec{X} = (P,Q,R)$, where\\
+		$P = z(z+y)$\\
+		$Q=z(z+x)$\\
+		$R = -2xy$\\
+		Hence $\vec{X} = (z(z+y), z(z+x),-2xy)$ \\
+		Now lets compute  $\vec{X} \cdot (\nabla \times \vec{X})$
+		\begin{align*}
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				P & Q & R\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+				P & Q & R\\
+			\end{vmatrix} \\
+			%
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				z(z+y) & z(z+x) & -2xy\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+				z(z+y) & z(z+x) & -2xy\\
+			\end{vmatrix} \\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= z(-3x(z+y) - 2z(z+y)) + 3yz(z+x) + 2z^2(z+x)\\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= -3xz(z+y)-2z^2(z+y) + 3yz(z+x) + 2z^2(z+x)\\
+		\end{align*}
+		Here the  $	\vec{X} \cdot (\nabla \times \vec{X})$ is $\neq 0$, so the given PfDE is not integrable.		
+		
+		% ===========  3 =================%
+		
+		
+		\subsection{$yzd x + 2xz dy - 3xy dz = 0$}
+		\setcounter{equation}{0}
+		Given Pfaffian Differential equation is \\
+		\begin{equation}
+			yzd x + 2xz dy - 3xy dz = 0
+			\label{eq:exact31}
+		\end{equation}
+		Lets define a vector $\vec{X} = (P,Q,R)$, where\\
+		$P = yz$\\
+		$Q = 2xz$\\
+		$R = -3xy$\\
+		Hence $\vec{X} = (yz, 2xz,-3xy)$ \\
+		Now lets compute  $\vec{X} \cdot (\nabla \times \vec{X})$
+		\begin{align*}
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				P & Q & R\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+				P & Q & R\\
+			\end{vmatrix} \\
+			%
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				yz & 2xz & -3xy\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+					yz & 2xz & -3xy\\
+			\end{vmatrix} \\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= yz(-5x) + (2xz)(4y) -3xyz\\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= -5xyz + 8xyz - 3xyz\\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= 0\\
+		\end{align*}
+		Since $\vec{X} \cdot (\nabla \times \vec{X}) = 0$, hence given PfDE ~\eqref{eq:exact31} is integrable.\\
+		Now lets check if its exact or not\\
+		We have $P = yz, Q = 2xz, R = -3xy $ \\
+		Now 
+		\begin{align*}
+		\frac{\partial P}{\partial y}  &= z \\
+		\frac{\partial Q}{\partial x} & = 2z
+		\end{align*}
+		Here $\frac{\partial P}{\partial y} \neq \frac{\partial Q}{\partial x}$, hence the given PfDE is not exact. \\
+		Let $\mu(xyz)$ be the integrating factor, and since all terms involves the product of xyz, so lets try\\
+		$\mu(x,y,z) = \frac{1}{xyz}$\\
+		Multiplying ~\eqref{eq:exact31} by $\mu$ on both sides we get \\
+		\begin{align*}
+			\frac{1}{xyz} ( yz dx + 2xzdy - 3xy dz) &=0\\
+			\frac{1}{x} dx + \frac{2}{y} dy - \frac{3}{z} dz &= 0
+		\end{align*} \\
+		Integrating both sides we get
+		\begin{align*}
+			\int \frac{1}{x} dx + \int \frac{2}{y} dy - \int \frac{3}{z} dz &=0 \\
+			\ln(x) + 2\ln(y) - 3\ln(z) = C
+		\end{align*}, where C is an arbitrary constant.\\
+		
+		$\ln(\frac{xy^2}{z^3}) = C$\\
+		Exponentiating on both sides we get\\
+		$\frac{xy^2}{z^3} = e^C$\\
+		$\frac{xy^2}{z^3} = C_1$, where $C_1 = e^C$\\
+		is the required General Solution
+		
+		%======= 4 =====================%
+		\subsection{$2xzdx + zdy - dz = 0$}
+		\setcounter{equation}{0}
+		Given Pfaffian Differential equation is \\
+		\begin{equation}
+			2xzdx + zdy - dz
+			\label{eq:exact41}
+		\end{equation}
+		Lets define a vector $\vec{X} = (P,Q,R)$, where\\
+		$P = 2xz$\\
+		$Q= z$\\
+		$R = -1$\\
+		Hence $\vec{X} = (2xz,z,-1)$ \\
+		Now lets compute  $\vec{X} \cdot (\nabla \times \vec{X})$
+		\begin{align*}
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				P & Q & R\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+				P & Q & R\\
+			\end{vmatrix} \\
+			%
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				2xz & z & -1\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+				2xz & z & -1\\
+			\end{vmatrix} \\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= 2xz(-1) + z(2x) + 0\\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= -2xz + 2xz\\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= 0\\
+		\end{align*}
+		Here the  $	\vec{X} \cdot (\nabla \times \vec{X})= 0$, so the given PfDE is  integrable.\\
+		Now check if the equation is exact or not.\\
+		\begin{align*}
+			\frac{\partial P}{\partial y} = 0,
+			\frac{\partial Q}{\partial x} = 0 \\
+			\frac{\partial Q}{\partial z} = 1 ,
+			\frac{\partial R}{\partial y} = 0 \\
+			\implies \frac{\partial Q}{\partial z} \neq \frac{\partial R}{\partial y}
+		\end{align*}\\
+		Since the given PfDE is not exact, so lets say $\mu$ is the integrating factor.\\
+		Since all terms of the ~\eqref{eq:exact41} contains z so  lets try $\mu(x) = \frac{1}{z}$ \\
+		Multiplying ~\eqref{eq:exact41} by $\mu$ we get
+		\begin{align*}
+			\frac{1}{z} (2xzdx + zdy - dz) &= 0 \\
+			2xdx + dy - \frac{1}{z} dz &= 0 \\
+		\end{align*}\\
+		Integrating both sides \\
+		$x^2 + y - \ln(z) = C$, where C is arbitrary constant\\
+		This is the required general solution of the given PfDE.
+		
+		
+		%======= 5 =====================%
+		
+		\subsection{$(y^2+xz)dx + (x^2+y^2) dy + 3z^2 dz = 0$}
+		\setcounter{equation}{0}
+		Given Pfaffian Differential equation is \\
+		\begin{equation}
+		(y^2+xz)dx + (x^2+y^2) dy + 3z^2 dz = 0
+			\label{eq:exact51}
+		\end{equation}
+		Lets define a vector $\vec{X} = (P,Q,R)$, where\\
+		$P = y^2+xz$\\
+		$Q= x^2+y^2$\\
+		$R = 3z^2$\\
+		Hence $\vec{X} = ((y^2+xz),(x^2+y^2), 3z^2)$ \\
+		Now lets compute  $\vec{X} \cdot (\nabla \times \vec{X})$
+		\begin{align*}
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				P & Q & R\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+				P & Q & R\\
+			\end{vmatrix} \\
+			%
+			\vec{X} \cdot (\nabla \times \vec{X}) &=
+			\begin{vmatrix}
+				(y^2+xz) & (x^2+yz) & 3z^2\\
+				\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+					(y^2+xz) & (x^2+yz) & 3z^2\\
+			\end{vmatrix} \\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= (y^2+xz)(-y) + (x^2+yz)(x) + 3z^2 (2x - 2y)\\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= -y^3 - xyz + x^3 + xyz + 6xz^2 - 6yz^2\\
+			\vec{X} \cdot (\nabla \times \vec{X}) &= x^3-y^3 + 6xz^2 - 6yz^2 \\
+		\end{align*}\\
+		Since $\vec{X} \cdot (\nabla \times \vec{X}) \neq 0$, for all values of x,y and z i.e. is not identically zero, hence the given PfDE is not integrable.
+		
+		
+\end{document}                      
