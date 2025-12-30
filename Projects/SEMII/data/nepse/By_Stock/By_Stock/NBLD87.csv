@@ -1,0 +1,4 @@
+Date,No. Of Transaction,Max Price,Min Price,Closing Price,Traded Shares,Amount,Previous Closing,Difference Rs.
+2022-04-24,1.0,1000.0,1000.0,1000.0,10.0,10000.0,0.0,0.0
+2022-04-25,1.0,1000.0,1000.0,1000.0,12500.0,10625000.0,1000.0,0.0
+2022-06-01,1.0,1020.0,1020.0,1020.0,50.0,51000.0,1000.0,20.0
