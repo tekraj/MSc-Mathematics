@@ -5,3 +5,5 @@ statsmodels
 seaborn
 nolds
 fenics
+ipykernel
+scipy
