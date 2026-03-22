@@ -1,0 +1,100 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# GGPlot Basics
+
+### Load Iris Data
+
+create a scatter plot to see if there is a relationship between the length of a flower's sepal and its petal, color-coded by which species it belongs to.
+
+```{r}
+library(ggplot2)
+data(iris)
+
+irisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species))+ geom_point()
+print(irisPlot)
+print(irisPlot+labs(y="Petal Length(cm)",x="Sepal Length(cm)")) + ggtitle("Petal and sepal length of iris")
+# annotate
+irisPlot + annotate("text", x=6, y=5, label="text")
+# highlight an area
+irisPlot+annotate("rect",xmin = 5, xmax = 7, ymin=4, ymax=6, alpha=0.5)
+
+# segment 
+irisPlot + annotate("segment", x=5, xend=7, y = 4, yend=5, color="black")
+```
+
+```{r}
+df <- data.frame(x = c(1, 2, 3, 4, 5), 
+                 y = c(10, 14, 18, 24, 30))
+
+ggplot(data = df, aes(x = x, y = y,color=x)) + 
+  geom_point()
+
+```
+
+## Common "Geoms" for two variables
+
+Once we have the first line set up, you can swap out `geom_point()` for other types of charts:
+
+|                  |                  |
+|------------------|------------------|
+| **Goal**         | **Layer to add** |
+| **Scatter Plot** | `+ geom_point()` |
+| **Line Graph**   | `+ geom_line()`  |
+| **Bar Chart**    | `+ geom_col()`   |
+| **Area Chart**   | `+ geom_area()`  |
+
+# Plant Growth Data
+
+```{r}
+data(PlantGrowth)
+head(PlantGrowth)
+bp <- ggplot(PlantGrowth, aes(x=group, y = weight))+geom_point()
+print(bp)
+
+# swipe x and y as per our requirements
+
+bp <- ggplot(PlantGrowth, aes(x=weight, y = group)) + geom_point()
+print(bp)
+```
+
+# Multi Panel Plots
+
+```{r}
+library(tidyverse)
+data(airquality)
+head(airquality)
+temperature <- airquality$Temp
+ozone <- airquality$Ozone
+par(mflow=c(2,2))
+hist(temperature)
+boxplot(temperature,horizonal=TRUE)
+hist(ozone)
+```
+
+# Ggplot 2- Marginal Plots
+
+``` {r}
+ library(ggplot2)
+ library(ggExtra)
+ data("mpg")
+ head(mpg)
+ g <- ggplot(mpg,aes(cty,hwy))+geom_count() + geom_smooth(method="lm",se=F)
+ print(g)
+ ggMarginal(g, type="boxplot", fill="transparent")
+ ggMarginal(g,type="histogram",fill="transparent")
+ 
+```
+
+## Multiple Plots
+
+```{r}
+
+p <- ggplot(mpg,aes(cty)) + geom_density(aes(fill=factor(cyl)),alpha=0.8)
+print(p)
+
+p+ labs(title="Density Plot", subtitle="City Mileage Grouped by Number of Cylinders"
+        ,caption = "Source: mpg", x="City Mileage", fill="#Cylinders")
+```
