@@ -4,7 +4,7 @@ library(ggplot2)
 library(dplyr)
 library(lubridate)
 
-banking_data <- read_csv("/home/tekraj/MSc-Mathematics-Github/Stastistics/data/nepsealpha_export_price_BANKING_2021-01-16_2026-01-16_unadjusted.csv")
+banking_data <- read_csv("/home/tek/projects/MSc-Mathematics/Stastistics/data/nepsealpha_export_price_BANKING_2021-01-16_2026-01-16_unadjusted.csv")
 
 # drop turn over column
 banking_data <- banking_data[,-9]
@@ -66,4 +66,3 @@ options(vsc.plot = TRUE)
 print(one_month_plot)
 
 # Just typing the object name in VS Code triggers the Plot Viewer
-ggsave("/mnt/c/Users/tekra/OneDrive/Desktop/nepse_candle_chart.png", plot = one_month_plot, width = 10, height = 6)
