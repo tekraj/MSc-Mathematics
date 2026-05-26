@@ -1,0 +1,175 @@
+---
+title: "Data Manipulation Mastery with Dplyr"
+author: "Analysis Notebook"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# 1. Introduction to the Dataset
+
+We begin by loading the built-in `diamonds` dataset and inspecting its structure. This dataset contains the prices and other attributes of almost 54,000 diamonds.
+
+```{r exploration}
+data(diamonds)
+
+# Quick look at the first few rows
+head(diamonds)
+
+# Check the data types (Structure)
+str(diamonds)
+```
+
+------------------------------------------------------------------------
+
+# 2. Selecting and Dropping Columns
+
+The `select()` function allows us to focus on specific variables or remove those we don't need.
+
+### Selecting by Name or Range
+
+```{r selection}
+# Select specific columns and ranges
+subset_diamonds <- select(diamonds, carat, color:clarity)
+
+# Select columns using helper functions
+diamondC <- select(diamonds, starts_with("C"))
+diamondR <- select(diamonds, ends_with("R"))
+```
+
+### Dropping Columns
+
+```{r dropping}
+# Remove table and price by name
+diamondDrop <- select(diamonds, -c(table, price))
+
+# Remove by index (Column 1 and 5)
+diamondDrop_idx <- select(diamonds, -c(1, 5))
+```
+
+------------------------------------------------------------------------
+
+# 3. Filtering and Sorting
+
+Filtering allows us to zoom in on specific rows based on logical conditions.
+
+```{r filtering}
+# Filter for large diamonds (>1 carat)
+diamond1 <- filter(diamonds, carat > 1)
+
+# Filter for Premium cut diamonds
+diamondPremium <- filter(diamonds, cut == "Premium")
+
+# Complex filtering (Carat and Color)
+diamondsHigh <- filter(diamonds, carat > 0.75 & color == "D")
+```
+
+### Sorting Data
+
+Use `arrange()` to order your data. By default, it sorts in ascending order.
+
+```{r sorting}
+diamondSort <- arrange(diamonds, price)
+# View cheapest and most expensive
+head(diamondSort, 3)
+tail(diamondSort, 3)
+```
+
+------------------------------------------------------------------------
+
+# 4. Mutating and Renaming
+
+Adding new information or cleaning up column names.
+
+```{r transformation}
+# Rename 'cut' to 'Quality'
+diamondRN <- rename(diamonds, Quality = cut)
+
+# Calculate how far each diamond is from the average price
+diamondDiff <- mutate(diamonds, PRICEdiff = price - mean(price, na.rm = TRUE))
+
+# Get a random sample to check results
+sample_n(diamondDiff, size = 4)
+```
+
+------------------------------------------------------------------------
+
+# 5. Grouping and Summarization
+
+This is the "Split-Apply-Combine" strategy for data analysis.
+
+```{r summary}
+# Group by clarity and calculate statistics
+CLARITY_summary <- diamonds %>%
+  group_by(clarity) %>%
+  summarize(
+    PRICE.Average = mean(price, na.rm = TRUE), 
+    PRICE.Max = max(price, na.rm = TRUE), # Fixed from min to max for logic
+    PRICE.Median = median(price, na.rm = TRUE)
+  )
+
+print(CLARITY_summary)
+```
+
+------------------------------------------------------------------------
+
+# 6. Categorization (Binning)
+
+Using `cut()` to turn continuous numbers into discrete categories.
+
+```{r binning}
+# Create custom weight categories for carats
+diamonds$category3 <- cut(diamonds$carat, 
+                          breaks = c(0, 0.25, 0.5, 0.75, 1, 100),
+                          labels = c("Very Small", "Small", "Medium", "Large", "Huge"))
+
+# Analyze average price by these new categories
+category_summary <- diamonds %>%
+  group_by(category3) %>%
+  summarize(PRICE.Average = mean(price, na.rm = TRUE))
+
+print(category_summary)
+```
+
+------------------------------------------------------------------------
+
+# 7. Joining Data
+
+When working with multiple files, we use joins to merge them based on a common ID.
+
+> **Note:** The following code assumes the files exist at the specified path.
+
+```{r joins, eval=FALSE}
+test1 <- read_csv("/home/tekraj/MSc-Mathematics-Github/test1.csv")
+test2 <- read_csv("/home/tekraj/MSc-Mathematics-Github/test2.csv")
+
+# Combine datasets using an inner join
+combined_data <- inner_join(test1, test2, by = "id")
+```
+
+------------------------------------------------------------------------
+
+# 8. Visualizing the Results
+
+Finally, let's look at the relationship between Carat and Price using `ggplot2`.
+
+```{r plot}
+ggplot(diamonds, aes(x = carat, y = price, colour = cut)) +
+  geom_point(alpha = 0.3) +
+  theme_minimal() +
+  labs(title = "Diamond Price vs Carat",
+       subtitle = "Colored by Cut Quality",
+       x = "Weight (Carat)",
+       y = "Price ($)")
+```
