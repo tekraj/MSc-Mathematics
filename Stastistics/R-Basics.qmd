@@ -1,0 +1,225 @@
+---
+title: "R-Basics"
+format: html
+---
+
+## R Data Types
+
+-   Numeric (float)
+
+-   Integer
+
+-   Character(String)
+
+-   Logical(Boolean)
+
+-   Complex
+
+```{r}
+a <- 5.25 # numeric (float)
+print(class(a))
+b <- 5L # integer
+print(class(b))
+
+
+comp <- 1+3i # complex
+print(class(comp))
+
+name <- "Ram" # character
+print(class(name))
+
+pass = FALSE # logical
+print(class(pass))
+
+
+```
+
+### Utility Commands to Know related to Data Types
+
+-   **`class(x)`**: Tells us the data type of the variable.
+
+<!-- -->
+
+-   **`typeof(x)`**: Reveals the internal, low-level storage type in R (e.g., `typeof(42)` will return `"double"` instead of `"numeric"`).
+
+-   **`is.*` functions**: Used to check if a variable matches a specific type, returning `TRUE` or `FALSE`.
+
+-   as.data type: Used to cast data types
+
+```{r}
+a <- 5
+print(class(a))
+print(typeof(a))
+print(is.numeric(a)) # true if a is numeric
+print(is.integer(a))
+print(as.character(a)) # converts to character
+
+```
+
+## R Basic Arithematics
+
+-   **+** : Addition
+
+<!-- -->
+
+-   **-** : Subtraction
+
+-   \* : Multiplication
+
+-   **/** : Division
+
+-   **\^ or** : Exponentiation (Power)
+
+-   **%%** : Modulo (Remainder)
+
+-   **%/%** : Integer Division
+
+```{r}
+a <- 5
+b <-7
+
+print("SUM")
+sum <- a+b
+print(sum)
+
+print("Subtraction")
+sub <- a-b
+print(a-b)
+
+print("Multiply")
+prod <- a*b
+print(prod)
+
+print("divide")
+div <- a/b
+print(div)
+
+print("power")
+power <- a^b
+pw <- a**b
+print(power)
+print(pw)
+
+print("Reminder")
+rem <- a%%b
+print(rem)
+
+
+print("Int Division")
+int_div <- a%/%b
+print(int_div)
+```
+
+## Built-in Mathematical Functions
+
+### Rounding & Absolute Values
+
+-   **`abs(x)`**: Absolute value (converts negative numbers to positive).
+
+-   **`sign(x)`**: Returns `-1` for negative numbers, `0` for zero, and `1` for positive numbers.
+
+-   **`sqrt(x)`**: Square root ($\sqrt{x}$).
+
+-   **`round(x, digits = n)`**: Rounds a number to `n` decimal places.
+
+-   **`ceiling(x)`**: Rounds *up* to the nearest integer (e.g., `ceiling(3.1)` returns `4`).
+
+-   **`floor(x)`**: Rounds *down* to the nearest integer (e.g., `floor(3.9)` returns `3`).
+
+-   **`trunc(x)`**: Truncates the decimal part entirely, leaving just the integer (behaves like `floor` for positive numbers and `ceiling` for negative numbers).
+
+    ```{r}
+    a <- 100
+    b<- -10.46
+    print("abs")
+    print(abs(b))
+
+    print("sqrt")
+    print(sqrt(a))
+
+    print("round")
+    print(round(b,1))
+
+
+    print("ceiling")
+    ceiling(b)
+
+
+    print('floor')
+    floor(b)
+
+    print('truncate')
+    trunc(b)
+
+    ```
+
+### Logarithms & Exponentials
+
+-   **`exp(x)`**: Exponential function ($e^x$).
+
+-   **`log(x)`**: Natural logarithm ($\ln(x)$ with base $e$).
+
+-   **`log10(x)`**: Base-10 logarithm ($\log_{10}(x)$).
+
+-   **`log2(x)`**: Base-2 logarithm ($\log_2(x)$).
+
+-   **`log(x, base = b)`**: Logarithm with a custom base $b$.
+
+    ```{r}
+    a <- 100
+
+    print('exp')
+    print(exp(a))
+
+    print("log base e")
+    print(log(a))
+
+    print('log10')
+    print(log10(a))
+
+    print(log(a,base=2))
+    ```
+
+## Trigonometric Functions
+
+R expects all angles for trigonometric functions to be in **radians**, not degrees.
+
+-   **`sin(x)` / `cos(x)` / `tan(x)`**: Sine, cosine, and tangent.
+
+-   **`asin(x)` / `acos(x)` / `atan(x)`**: Inverse trig functions (arcsine, arccosine, arctangent).
+
+-   **`sinh(x)` / `cosh(x)` / `tanh(x)`**: Hyperbolic functions.
+
+```{r}
+angle <-45
+rad <- angle * (pi/ 180)
+
+print(tan(rad))
+
+
+```
+
+## Built in constants
+
+-   **`pi`** : The mathematical constant $\pi$ (3.141593...)
+
+-   **`letters`** : The 26 lowercase English alphabet letters ("a" to "z")
+
+-   **`LETTERS`** : The 26 uppercase English alphabet letters ("A" to "Z")
+
+-   **`month.name`** : The full names of the 12 months ("January" to "December")
+
+-   **`month.abb`** : The 3-letter abbreviations for the 12 months ("Jan" to "Dec")
+
+-   **`NA`** : Represents missing data ("Not Available")
+
+-   **`NaN`** : Represents undefined numerical results ("Not a Number")
+
+-   **`Inf`** : Positive infinity
+
+-   **`-Inf`** : Negative infinity
+
+```{r}
+month.name
+letters
+```
