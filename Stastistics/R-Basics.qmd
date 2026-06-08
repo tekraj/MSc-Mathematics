@@ -223,3 +223,16 @@ print(tan(rad))
 month.name
 letters
 ```
+
+## R Secondary Data Types
+
+###  Vector (Atomic Vector)
+
+The most basic structure in R. It is a **1-dimensional** array that holds elements of the **exact same data type** (homogeneous). If you mix types, R will automatically convert them to the most flexible type (coercion).
+
+```{r}
+numbers <- c(1,2,3,4)
+
+chars <- c ('a','b','c')
+
+```

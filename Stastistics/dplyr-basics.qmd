@@ -1,0 +1,201 @@
+---
+title: "dplyr-basics"
+format: html
+---
+
+## SELECT
+
+## FILTER
+
+## MUTATE
+
+## JOIN (inner, left,right)
+
+# Diamond Data Set
+
+```{r}
+library(dplyr)
+library(ggplot2)
+data(diamonds)
+
+head(diamonds)
+
+# selct by name
+
+sub_set <- select(diamonds,c("carat","cut"))
+sub_set <- select(diamonds,carat,cut)
+sub_set <- select(diamonds,carat:cut)
+sub_set <- select(diamonds,-c(1,4)) # exclude
+head(sub_set)
+
+```
+
+```{r}
+# Load dplyr to use the data
+library(dplyr)
+
+# 1. The Primary Dataset (Used for the 5 basic verbs)
+df <- data.frame(
+  ID = 1:10,
+  Name = c("Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Heidi", "Ivan", "Judy"),
+  Age = c(28, 35, 32, 45, 29, 50, 31, 41, 27, 38),
+  Department = c("IT", "Sales", "IT", "HR", "Marketing", "IT", "Sales", "HR", "IT", "Marketing"),
+  Salary = c(75000, 60000, 82000, 90000, 65000, 105000, 72000, 85000, 88000, 74000)
+)
+
+
+```
+
+```{r}
+
+clean_df <- select(df,ID,Age,Department) # select column
+filter_df <- filter(df,(Salary>=105000 & Department=='IT') | Name=='Charlie')
+
+mutate_df <- mutate(df,Bonus=Salary*0.10)
+
+aranged_df <- arrange(df,desc(Salary),Department)
+aranged_df
+# alternate way
+clean_df <- df |> select(ID,Age,Department)
+
+dept_summary <- 
+  group_by(df,Department) |> 
+  summarize(
+    Total_Payroll = sum(Salary, na.rm = TRUE),
+    Average_Age = mean(Age, na.rm = TRUE)
+  )
+
+
+```
+
+```{r}
+# 2. Table A for Joins (Employees)
+employees <- data.frame(
+  emp_id = c(1, 2, 3, 4),
+  name = c("Alice", "Bob", "Charlie", "David"),
+  dept_id = c("D1", "D2", "D1", "D99")
+)
+
+# 3. Table B for Joins (Departments)
+departments <- data.frame(
+  dept_id = c("D1", "D2", "D3"),
+  dept_name = c("Engineering", "Sales", "HR")
+)
+
+joined <- inner_join(employees,departments,by="dept_id")
+joined
+left_joined <- left_join(employees,departments,by=c("dept_id"="dept_id"))
+left_joined
+```
+
+```{r}
+library(dplyr)
+
+# Global Engineering Infrastructure Log
+set.seed(42)
+infra_pipeline_df <- data.frame(
+  log_id = 101:120,
+  timestamp = seq(from = as.POSIXct("2026-05-27 00:00:00"), by = "30 mins", length.out = 20),
+  node_cluster = c("Cluster_Alpha", "Cluster_Beta", "Cluster_Alpha", "Cluster_Gamma", "Cluster_Beta", 
+                   "Cluster_Alpha", "Cluster_Gamma", "Cluster_Beta", "Cluster_Alpha", "Cluster_Alpha",
+                   "Cluster_Beta", "Cluster_Beta", "Cluster_Alpha", "Cluster_Gamma", "Cluster_Gamma",
+                   "Cluster_Alpha", "Cluster_Beta", "Cluster_Gamma", "Cluster_Alpha", "Cluster_Beta"),
+  aws_service = c("Glue", "Kinesis", "S3", "Redshift", "SageMaker", "Glue", "S3", "Kinesis", "Redshift", "Glue",
+                  "SageMaker", "S3", "Glue", "Redshift", "Kinesis", "SageMaker", "Glue", "S3", "Redshift", "Kinesis"),
+  payload_size_kb = c(1420, 2800, 50, 9400, 15200, 1100, 45, 3100, NA, 1950, 
+                      21000, 120, 850, 11500, 4100, 18400, NA, 85, 13200, 3900),
+  execution_time_sec = c("0.45", "1.20", "0.05", "5.40", "12.80", "0.38", "0.04", "1.45", "7.20", "0.52",
+                         "18.10", "0.11", "TIMEOUT", "6.10", "1.95", "14.20", "0.55", "0.08", "8.95", "1.60"),
+  status_code = c(200, 200, 200, 500, 200, 200, 200, 200, 502, 200, 
+                  500, 200, 504, 200, 200, 200, 200, 404, 200, 200),
+  is_retry = c(FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE,
+               TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE),
+  stringsAsFactors = FALSE
+)
+
+head(infra_pipeline_df)
+```
+
+### Question 1: The Outlier Network Scan
+
+Filter the dataset down to rows belonging to **Cluster_Alpha** or **Cluster_Gamma** where the `payload_size_kb` is strictly *above* the global median payload size of the entire dataset. However, your filter must safely handle missing values: if a payload size is `NA`, it must be preserved and included in the final output *only* if the `is_retry` flag is `TRUE`.
+
+```{r}
+filtered_data <- infra_pipeline_df |> 
+  filter(
+    # 1. Lock down the targeted clusters
+    node_cluster %in% c("Cluster_Alpha", "Cluster_Gamma"),
+    
+    # 2. Apply the conditional payload logic safely handling NAs
+    (payload_size_kb > median(payload_size_kb, na.rm = TRUE)) | (is.na(payload_size_kb) & is_retry == TRUE)
+  )
+
+filtered_data
+
+```
+
+### Question 2: The Multi-Step Relational Intersect
+
+Without modifying the original data frame, isolate all records belonging to any `aws_service` whose *average* payload size (calculated across the whole dataset, ignoring `NA`s) is strictly greater than $3,000\text{ KB}$.
+
+```{r}
+average_payload <- mean(infra_pipeline_df$payload_size_kb)
+aws_services <- c('Glue','Kinesis','Redshift')
+aws_data <- infra_pipeline_df |> filter(payload_size_kb>300 & aws_service %in% aws_services & timestamp> as.POSIXct("2026-05-27"))
+aws_data
+```
+
+```{r}
+imputed_df <- infra_pipeline_df |> mutate(payload_size_kb,coalesce(payload_size_kb,0))
+imputed_df
+
+```
+
+```{r}
+library(dplyr)
+
+cluster_nodes <- data.frame(
+  node_id = c("N_101", "N_102", "N_103", "N_104"),
+  cluster_name = c("Alpha", "Alpha", "Beta", "Gamma"),
+  region = c("us-east-1", "us-east-1", "us-west-2", "eu-central-1")
+)
+
+pod_metrics <- data.frame(
+  pod_id =  c("P_01", "P_02", "P_03", "P_04", "P_05", "P_06"),
+  node_id = c("N_101", "N_101", "N_102", "N_103", "N_103", "N_999"), # N_999 is an orphaned pod
+  cpu_utilization = c(85.5, 92.1, 45.0, 78.2, 88.9, 12.0),
+  memory_gb = c(16, 32, 8, 16, 64, 4)
+)
+```
+
+### Quesion 1: Convert this SQL to equivalent dplyr
+
+```{sql connection=}
+SELECT 
+    n.region,
+    SUM(p.memory_gb) AS total_memory_allocated,
+    COUNT(p.pod_id) AS total_active_pods
+FROM pod_metrics p
+INNER JOIN cluster_nodes n ON p.node_id = n.node_id
+WHERE p.cpu_utilization > 50.0 
+  AND n.region != 'eu-central-1'
+GROUP BY n.region
+HAVING COUNT(p.pod_id) >= 1
+ORDER BY total_memory_allocated DESC
+LIMIT 2 OFFSET 1;
+```
+
+```{r}
+data <- inner_join(pod_metrics, cluster_nodes, by = "node_id") |> 
+  filter(cpu_utilization > 50 & region != 'eu-central-1') |> 
+  group_by(region) |>
+  summarize(
+    total_memory_allocated = sum(memory_gb),
+    total_active_pods = n()  # Changed to n()
+  ) |> 
+  arrange(desc(total_memory_allocated)) |> # Fixed typo to desc()
+  slice(2:3)                                # Added to handle LIMIT & OFFSET
+
+data
+
+```
