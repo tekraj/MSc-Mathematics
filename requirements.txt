@@ -7,3 +7,8 @@ nolds
 fenics
 ipykernel
 scipy
+numba
+jupyter
+notebook
+jupyterlab
+MFDFA
