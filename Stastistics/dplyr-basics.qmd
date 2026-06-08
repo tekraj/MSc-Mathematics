@@ -9,7 +9,7 @@ format: html
 
 ## MUTATE
 
-## JOIN (inner, left,right)
+## JOIN (inner, left,right,anti)
 
 # Diamond Data Set
 
@@ -27,6 +27,41 @@ sub_set <- select(diamonds,carat,cut)
 sub_set <- select(diamonds,carat:cut)
 sub_set <- select(diamonds,-c(1,4)) # exclude
 head(sub_set)
+
+# select column using helper functions
+
+diamondC <- select(diamonds, starts_with("C"))
+head(diamondC)
+diamondR <- select(diamonds, ends_with("R"))
+head(diamondR)
+
+diamonds <- rename(diamonds, Quality = cut)
+head(diamonds)
+
+sample_n(diamonds,20)
+
+
+# create dataframe
+df <- data.frame(player=c('A','B','C','D','E','F','G','H','I'),
+    points=c(4,7,8,12,14,16,20,26,36)
+)
+
+
+df$category <- cut(df$points,breaks=4)
+
+df$category <- cut(df$points,breaks=c(0,10,15,20,40))
+df$category <- cut(df$points,breaks=c(0,10,15,20,40),
+labels=c('Bad','OK','Good','Great')
+)
+
+# find the mean price for each of the following weight categories:
+# 0,0.25,0.5,0.75,1,100
+diamonds$category3 <- cut(diamonds$carat,breaks=c(0,0.25,0.5,0.75,1,100))
+# create frequency table
+freq_table <- table(diamonds$category3)
+print(freq_table)
+
+hist(freq_table)
 
 ```
 
@@ -46,6 +81,8 @@ df <- data.frame(
 
 ```
 
+## Select, filter, arrange,summary
+
 ```{r}
 
 clean_df <- select(df,ID,Age,Department) # select column
@@ -56,7 +93,7 @@ mutate_df <- mutate(df,Bonus=Salary*0.10)
 aranged_df <- arrange(df,desc(Salary),Department)
 aranged_df
 # alternate way
-clean_df <- df |> select(ID,Age,Department)
+clean_df <- df %>% select(ID,Age,Department)
 
 dept_summary <- 
   group_by(df,Department) |> 
