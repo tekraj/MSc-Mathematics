@@ -8,3 +8,7 @@ fenics
 ipykernel
 scipy
 MFDFA
+numba
+jupyter
+notebook
+jupyterlab
