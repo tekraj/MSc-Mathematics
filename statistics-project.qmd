@@ -1,0 +1,516 @@
+---
+title: "NEPSE-EDA"
+format: html
+editor: visual
+---
+
+# Banking Sector Data
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+nepse_data <- read.csv("Stastistics/data/nepse.csv")
+# sort data in ascending order by Date
+nepse_data <- nepse_data |>
+  mutate(Date = as.Date(Date)) |>
+  arrange(Date,)
+
+head(nepse_data,5)
+```
+
+## Exploratory Data Analysis
+
+### Box Plot
+
+```{r}
+
+# box plots
+ggplot(nepse_data, aes(x = Symbol, y = Close, fill = Symbol)) +
+  geom_boxplot() +
+  labs(title = "Box Plot of Close Price by Symbol", 
+       x = "Symbol", 
+       y = "Close Price") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Histogram
+
+```{r}
+ggplot(nepse_data, aes(x = Close, fill = Symbol)) +
+  geom_histogram(bins = 30, color = "white") +
+  facet_wrap(~Symbol, scales = "free") + # 'scales = "free"' allows different axes per category
+  labs(title = "Histogram of Close Price by Symbol", 
+       x = "Close Price", 
+       y = "Frequency") +
+  theme_minimal()
+```
+
+### Q-Q Plot
+
+```{r}
+library(ggplot2)
+
+ggplot(nepse_data, aes(sample = Open, color = Symbol)) +
+  stat_qq() +
+  stat_qq_line() +
+  facet_wrap(~Symbol, scales = "free") +
+  labs(title = "Q-Q Plot of Open Price by Symbol",
+       x = "Theoretical Quantiles",
+       y = "Sample Quantiles") +
+  theme_minimal()
+```
+
+## Probability Distribution or Return
+
+```{r}
+library(moments)
+# Calculate daily percentage returns
+sector_returns <- nepse_data |>
+  group_by(Symbol) |>
+  arrange(Date) |>
+  mutate(Return = (Open - lag(Open)) / lag(Open)) |>
+  filter(!is.na(Return)) # Remove the first row which becomes NA
+
+# Summarize distribution metrics
+distribution_stats <- sector_returns |>
+  summarise(
+    Mean = mean(Return),
+    SD = sd(Return),
+    Skewness = skewness(Return),
+    Kurtosis = kurtosis(Return)
+  )
+
+print(distribution_stats)
+```
+
+### Normality Testing Using Shapiro-Wilk Test
+
+```{r}
+normality_sw <- sector_returns %>%
+  group_by(Symbol) %>%
+  summarise(p_value = shapiro.test(Return)$p.value)
+
+print(normality_sw)
+```
+
+## Mathematical Modeling
+
+### Simple Linear Regression
+
+For simple linear trends (time-based) and non-linear patterns (using polynomials), we can fit these models:
+
+```{r}
+# Simple Linear: Return ~ Date
+linear_model <- lm(Return ~ as.numeric(Date), data = sector_returns)
+
+# Non-linear (Quadratic): Return ~ Date + Date^2
+nonlinear_model <- lm(Return ~ poly(as.numeric(Date), 2), data = sector_returns)
+
+summary(linear_model)
+```
+
+### Multiple Linear Regression
+
+We will predict the `Return` of a specific sector using its own `lag(Return)` and the `Market_Index` (if you have one; here I demonstrate using `lagged` returns as an autoregressive model).
+
+```{r}
+# Prepare lagged data for regression
+model_data <- sector_returns %>%
+  group_by(Symbol) %>%
+  mutate(Lag_Return = lag(Return)) %>%
+  filter(!is.na(Lag_Return))
+
+# Regression: Return vs Lagged Return
+multi_reg <- lm(Return ~ Lag_Return + Symbol, data = model_data)
+summary(multi_reg)
+```
+
+### Chi-Square Test
+
+To study the dependence between return direction (Gain/Loss) and the Month:
+
+```{r}
+library(lubridate)
+
+chi_data <- sector_returns %>%
+  mutate(Direction = ifelse(Return > 0, "Gain", "Loss"),
+         Month = month(Date, label = TRUE))
+
+# Create Contingency Table
+ctable <- table(chi_data$Month, chi_data$Direction)
+
+# Perform Chi-Square Test
+chisq_test <- chisq.test(ctable)
+print(chisq_test)
+```
+
+### Analysis of Variance (ANOVA)
+
+ANOVA tests if the mean returns differ significantly across months or sectors.
+
+```{r}
+# ANOVA: Return by Month
+anova_month <- aov(Return ~ factor(month(Date)), data = sector_returns)
+summary(anova_month)
+
+# ANOVA: Return by Sector
+anova_sector <- aov(Return ~ Symbol, data = sector_returns)
+summary(anova_sector)
+```
+
+### Non-Parametric Tests
+
+If your normality tests (from the previous step) failed, use these robust alternatives:
+
+```{r}
+# Kruskal-Wallis (Comparing Returns across Symbols)
+kw_test <- kruskal.test(Return ~ Symbol, data = sector_returns)
+print(kw_test)
+
+# Mann-Whitney (Comparing two specific sectors, e.g., BANKING vs OTHERS)
+# Subset data for two groups
+subset_data <- sector_returns %>% filter(Symbol %in% c("BANKING", "OTHERS"))
+mw_test <- wilcox.test(Return ~ Symbol, data = subset_data)
+print(mw_test)
+```
+
+```{r}
+# Complete seasonality detection function
+###############################################################################
+# NEPSE Seasonal Trading Strategies - Extended Analysis Code
+# This script contains all analyses NOT found in the original EDA file.
+# Run after loading the cleaned data (sector_returns with columns:
+# Symbol, Date, Return)
+###############################################################################
+
+# ===========================
+# 0. Load required libraries
+# ===========================
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(boot)
+library(WRS2)      # for robust ANOVA (trimmed means)
+library(lmPerm)    # for permutation tests
+library(tidyr)
+library(purrr)
+
+# ===========================
+# 1. Data preparation (if not already done)
+# Assumes you already have 'sector_returns' data frame from the EDA.
+# If not, uncomment and adapt the lines below.
+# ===========================
+# nepse_data <- read.csv("Statistics/data/nepse.csv")
+# nepse_data <- nepse_data %>%
+#   mutate(Date = as.Date(Date)) %>%###############################################################################
+# NEPSE Seasonal Trading Strategies - FULL EXTENDED ANALYSIS
+# Corrected version - no bootstrapping errors
+# Assumes 'sector_returns' exists with columns: Symbol, Date, Return
+###############################################################################
+
+# ===========================
+# 0. Load required libraries
+# ===========================
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(boot)
+library(WRS2)      
+library(lmPerm)    
+library(tidyr)
+library(purrr)
+
+# ===========================
+# 1. Monthly ranking analysis (best/worst months per sector)
+# ===========================
+monthly_returns <- sector_returns %>%
+  mutate(Month = month(Date, label = TRUE)) %>%
+  group_by(Symbol, Month) %>%
+  summarise(
+    Mean_Return   = mean(Return, na.rm = TRUE),
+    Median_Return = median(Return, na.rm = TRUE),
+    Win_Ratio     = sum(Return > 0) / n(),
+    Sharpe        = mean(Return) / sd(Return),
+    .groups       = "drop"
+  ) %>%
+  arrange(Symbol, Month)
+
+best_months <- monthly_returns %>%
+  group_by(Symbol) %>%
+  slice_max(Mean_Return, n = 2) %>%
+  ungroup()
+
+cat("\n===== Best months per sector =====\n")
+print(best_months)
+
+worst_months <- monthly_returns %>%
+  group_by(Symbol) %>%
+  slice_min(Mean_Return, n = 2) %>%
+  ungroup()
+
+cat("\n===== Worst months per sector =====\n")
+print(worst_months)
+
+# ===========================
+# 2. Z-score entry/exit framework (|Z| > 1.5)
+# ===========================
+zscore_analysis <- sector_returns %>%
+  mutate(Month = month(Date, label = TRUE)) %>%
+  group_by(Symbol, Month) %>%
+  mutate(
+    Monthly_Mean = mean(Return, na.rm = TRUE),
+    Monthly_SD   = sd(Return, na.rm = TRUE),
+    Z_Score      = (Return - Monthly_Mean) / Monthly_SD
+  ) %>%
+  ungroup()
+
+signals <- zscore_analysis %>%
+  filter(abs(Z_Score) > 1.5) %>%
+  mutate(Signal = ifelse(Z_Score < -1.5, "ENTRY", "EXIT")) %>%
+  group_by(Symbol, Signal, Month) %>%
+  summarise(
+    Frequency = n(),
+    Avg_Z     = mean(Z_Score),
+    .groups   = "drop"
+  )
+
+cat("\n===== Z-score signals (|Z|>1.5) =====\n")
+print(signals)
+
+# ===========================
+# 3. Cumulative return by day-of-year (optimal exit window)
+# ===========================
+cumulative_pattern <- sector_returns %>%
+  mutate(DayOfYear = yday(Date)) %>%
+  group_by(Symbol, DayOfYear) %>%
+  summarise(Mean_Return = mean(Return, na.rm = TRUE), .groups = "drop") %>%
+  group_by(Symbol) %>%
+  mutate(Cumulative_Mean = cumsum(Mean_Return))
+
+optimal_exit <- cumulative_pattern %>%
+  group_by(Symbol) %>%
+  slice_max(Cumulative_Mean, n = 1, with_ties = FALSE) %>%
+  mutate(Exit_Day = DayOfYear,
+         Exit_Date_approx = as.Date(paste0("2024-", Exit_Day), format = "%Y-%j"))
+
+cat("\n===== Optimal exit day-of-year per sector =====\n")
+print(optimal_exit %>% select(Symbol, Exit_Day, Cumulative_Mean))
+
+# Optional plot
+p_cum <- ggplot(cumulative_pattern, aes(x = DayOfYear, y = Cumulative_Mean, color = Symbol)) +
+  geom_line() +
+  labs(title = "Cumulative mean return by day of year",
+       x = "Day of year", y = "Cumulative return") +
+  theme_minimal()
+print(p_cum)
+
+# ===========================
+# 4. Year-by-year consistency test (≥80% positive years)
+# ===========================
+consistency_test <- sector_returns %>%
+  mutate(Year = year(Date), Month = month(Date, label = TRUE)) %>%
+  group_by(Symbol, Month, Year) %>%
+  summarise(Monthly_Return = sum(Return, na.rm = TRUE), .groups = "drop") %>%
+  group_by(Symbol, Month) %>%
+  summarise(
+    Positive_Years   = sum(Monthly_Return > 0),
+    Total_Years      = n(),
+    Consistency_Rate = Positive_Years / Total_Years,
+    .groups = "drop"
+  ) %>%
+  filter(Total_Years >= 3)
+
+reliable_seasons <- consistency_test %>% filter(Consistency_Rate >= 0.8)
+
+cat("\n===== Reliable seasonal months (≥80% positive years) =====\n")
+print(reliable_seasons)
+
+# ===========================
+# 5. Bootstrap confidence intervals for all sector-month pairs (CORRECTED)
+# ===========================
+# Pre-filter data for each sector-month combination
+sector_months <- sector_returns %>%
+  distinct(Symbol, Month = month(Date)) %>%
+  mutate(Returns_list = map2(Symbol, Month, ~ {
+    sector_returns %>%
+      filter(Symbol == .x, month(Date) == .y) %>%
+      pull(Return)
+  }))
+
+# Bootstrap function for a single vector of returns
+boot_mean <- function(x, indices) {
+  mean(x[indices], na.rm = TRUE)
+}
+
+# Compute bootstrap percentile CIs
+bootstrap_results <- sector_months %>%
+  mutate(
+    Boot = map(Returns_list, ~ {
+      if (length(.x) < 2) return(tibble(CI_lower = NA, CI_upper = NA))
+      set.seed(123)
+      b <- boot(.x, boot_mean, R = 1000)
+      ci <- tryCatch(boot.ci(b, type = "perc")$percent[4:5],
+                     error = function(e) c(NA, NA))
+      tibble(CI_lower = ci[1], CI_upper = ci[2])
+    })
+  ) %>%
+  unnest(Boot) %>%
+  select(-Returns_list)
+
+cat("\n===== Bootstrap percentile CIs for all sector-month pairs =====\n")
+print(head(bootstrap_results, 12))
+
+# Example: BANKING in Kartik (month 8) - explicit check
+banking_kartik_returns <- sector_returns %>%
+  filter(Symbol == "BANKING", month(Date) == 8) %>%
+  pull(Return)
+
+if (length(banking_kartik_returns) >= 2) {
+  set.seed(123)
+  boot_bank_kart <- boot(banking_kartik_returns, boot_mean, R = 5000)
+  ci_bank_kart <- boot.ci(boot_bank_kart, type = "perc")
+  cat("\n===== Specific CI for BANKING in Kartik (month 8) =====\n")
+  print(ci_bank_kart)
+}
+
+# ===========================
+# 6. Robust ANOVA (trimmed means) and permutation test
+# ===========================
+# 6a. Robust ANOVA using WRS2 (20% trimmed means)
+robust_anova_month <- t1way(Return ~ factor(month(Date)), data = sector_returns, tr = 0.2)
+cat("\n===== Robust ANOVA (20% trimmed means) – Month effect =====\n")
+print(robust_anova_month)
+
+# 6b. Permutation test for month effect (slower, but robust)
+set.seed(123)
+perm_anova_month <- aovp(Return ~ factor(month(Date)), data = sector_returns, 
+                         np = 1000)  # 1000 permutations
+cat("\n===== Permutation ANOVA – Month effect =====\n")
+summary(perm_anova_month)
+
+# ===========================
+# 7. Two-way interaction ANOVA: Symbol × Month
+# ===========================
+sector_returns <- sector_returns %>%
+  mutate(MonthFactor = factor(month(Date)))
+
+interaction_anova <- aov(Return ~ Symbol * MonthFactor, data = sector_returns)
+cat("\n===== Two-way ANOVA (Symbol × Month) =====\n")
+summary(interaction_anova)
+
+# ===========================
+# 8. Seasonality dashboard function (all-in-one)
+# ===========================
+seasonality_dashboard <- function(data, sectors = unique(data$Symbol)) {
+  
+  results <- list()
+  
+  # 1. Monthly means + percentile CIs (using quantiles, not bootstrap)
+  results$monthly_means <- data %>%
+    filter(Symbol %in% sectors) %>%
+    mutate(Month = month(Date, label = TRUE)) %>%
+    group_by(Symbol, Month) %>%
+    summarise(
+      Mean      = mean(Return, na.rm = TRUE),
+      CI_Lower  = quantile(Return, 0.025, na.rm = TRUE),
+      CI_Upper  = quantile(Return, 0.975, na.rm = TRUE),
+      Win_Rate  = mean(Return > 0, na.rm = TRUE),
+      .groups   = "drop"
+    )
+  
+  # 2. Z-score signal counts
+  results$z_signals <- data %>%
+    mutate(Month = month(Date, label = TRUE)) %>%
+    group_by(Symbol, Month) %>%
+    mutate(Z = (Return - mean(Return, na.rm = TRUE)) / sd(Return, na.rm = TRUE)) %>%
+    filter(abs(Z) > 1.5) %>%
+    count(Symbol, Month, is_positive = Z > 0, name = "Signal_Count")
+  
+  # 3. Year consistency
+  results$consistency <- data %>%
+    mutate(Year = year(Date), Month = month(Date)) %>%
+    group_by(Symbol, Month, Year) %>%
+    summarise(Ret = sum(Return, na.rm = TRUE), .groups = "drop") %>%
+    group_by(Symbol, Month) %>%
+    summarise(Consistency = mean(Ret > 0, na.rm = TRUE), .groups = "drop")
+  
+  # 4. Optimal exit day (cumulative max)
+  results$optimal_exit <- data %>%
+    mutate(DayOfYear = yday(Date)) %>%
+    group_by(Symbol, DayOfYear) %>%
+    summarise(Mean_Return = mean(Return, na.rm = TRUE), .groups = "drop") %>%
+    group_by(Symbol) %>%
+    mutate(Cumulative = cumsum(Mean_Return)) %>%
+    slice_max(Cumulative, n = 1, with_ties = FALSE) %>%
+    ungroup()
+  
+  return(results)
+}
+
+# Run the dashboard
+dashboard_output <- seasonality_dashboard(sector_returns)
+
+cat("\n===== Seasonality dashboard – monthly means (first 12) =====\n")
+print(head(dashboard_output$monthly_means, 12))
+
+cat("\n===== Seasonality dashboard – Z-signal counts (first 12) =====\n")
+print(head(dashboard_output$z_signals, 12))
+
+cat("\n===== Seasonality dashboard – year consistency (first 12) =====\n")
+print(head(dashboard_output$consistency, 12))
+
+cat("\n===== Seasonality dashboard – optimal exit day =====\n")
+print(dashboard_output$optimal_exit)
+
+# ===========================
+# 9. Heatmap of monthly mean returns (optional)
+# ===========================
+heatmap_data <- monthly_returns %>%
+  select(Symbol, Month, Mean_Return) %>%
+  pivot_wider(names_from = Month, values_from = Mean_Return) %>%
+  as.data.frame()
+
+row.names(heatmap_data) <- heatmap_data$Symbol
+heatmap_data$Symbol <- NULL
+
+if (require(pheatmap, quietly = TRUE)) {
+  pheatmap::pheatmap(heatmap_data,
+                     main = "Mean Return by Sector and Month",
+                     cluster_rows = TRUE, cluster_cols = FALSE,
+                     color = colorRampPalette(c("red", "white", "green"))(50))
+} else {
+  # base R heatmap
+  heatmap(as.matrix(heatmap_data), main = "Mean Return by Sector and Month")
+}
+
+cat("\n===== All analyses completed successfully =====\n")
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+
+# 1. Prepare data: Calculate daily returns and extract day of year
+daily_means <- sector_returns %>%
+  mutate(DayOfYear = yday(Date)) %>%
+  group_by(Symbol, DayOfYear) %>%
+  summarise(DailyMean = mean(Return, na.rm = TRUE), .groups = 'drop') %>%
+  group_by(Symbol) %>%
+  arrange(DayOfYear) %>%
+  # Calculate cumulative mean of the daily returns
+  mutate(CumulativeReturn = cumsum(DailyMean))
+
+# 2. Generate the Plot
+ggplot(daily_means, aes(x = DayOfYear, y = CumulativeReturn, color = Symbol)) +
+  geom_line(linewidth = 0.8) +
+  facet_wrap(~Symbol, scales = "free_y") +
+  labs(title = "Cumulative Mean Returns by Day of Year",
+       subtitle = "Comparing performance trends across NEPSE sectors",
+       x = "Day of Year (1-366)",
+       y = "Cumulative Return") +
+  theme_minimal() +
+  theme(legend.position = "none") # Faceting already labels the sectors
+```
