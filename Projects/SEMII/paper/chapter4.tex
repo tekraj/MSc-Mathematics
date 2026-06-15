@@ -1,0 +1,48 @@
+\chapter{Chaos Diagnostics and Model Validation}
+
+\section{Model‑Implied vs. Empirical Diagnostics}
+Using the estimated parameters, we simulate a long synthetic path ($50\,000$ observations) and recompute the tail index, Hurst exponent, and multifractal width. Table \ref{tab:diag} compares these model‑implied values with the empirical ones (post‑break sample).
+
+\begin{table}[H]
+\centering
+\caption{Empirical vs. model‑implied chaos diagnostics (post‑break sample).}
+\label{tab:diag}
+\begin{tabular}{l c c c}
+\toprule
+\textbf{Diagnostic} & \textbf{Empirical} & \textbf{Model‑implied} & \textbf{Match} \\
+\midrule
+Tail index $\gamma$ (Hill, $|r_t|$) & $2.7805$ & $2.8928$ & Yes \\
+Hurst exponent $H$ (DFA on $|r_t|$) & $0.7751$ & $0.8260$ & Yes \\
+Multifractal width $\Delta\alpha$ & $0.7959$ & $0.8096$ & Yes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The model captures the empirical tail heaviness, long memory, and multifractal structure remarkably well. The slight overestimation of $H$ and $\Delta\alpha$ is within sampling variability.
+
+\section{Conditions for Chaotic Regime}
+Recall the theoretical conditions for the chaotic phase:
+\begin{enumerate}[label=(\roman*)]
+    \item Near‑critical branching: $B \in [0.9,1)$.
+    \item Heavy volatility tails: $\gamma \le 2$.
+    \item Long memory: $H > 0.5$.
+    \item Multifractality: $\Delta\alpha > 0.1$.
+\end{enumerate}
+Our results show:
+\begin{itemize}
+    \item $B = 0.7468$ (not satisfied);
+    \item $\gamma = 2.7805 > 2$ (not satisfied);
+    \item $H = 0.7751 > 0.5$ (satisfied);
+    \item $\Delta\alpha = 0.7959 > 0.1$ (satisfied).
+\end{itemize}
+Thus only two of the four conditions are met. The NEPSE banking sector does not exhibit the full chaotic regime; however, it displays strong long memory and multifractality, which are already sufficient to justify the COGARCH framework for risk management. The branching ratio being below $0.9$ suggests that the self‑exciting feedback is weaker than in mature markets, possibly due to lower liquidity and fewer high‑frequency traders.
+
+\section{Filtered Volatility and Jump Detection}
+Using the GARCH(1,1) approximation of the COGARCH,
+\[
+\omega = \kappa\theta = 1.5567\times10^{-5},\quad
+\alpha_1 = \phi\lambda = 0.0545,\quad
+\beta_1 = 1-\kappa = 0.9271,
+\]
+the persistence is $\alpha_1+\beta_1 = 0.9815$, confirming strong volatility clustering. Applying a $3\sigma$ threshold to the standardised residuals identifies jump days; the time‑varying conditional variance yields a higher detection rate than the simple rolling filter.
+

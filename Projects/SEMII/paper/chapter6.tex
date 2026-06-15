@@ -1,0 +1,25 @@
+\chapter{Discussion}
+
+\section{Interpretation of Results}
+Our empirical validation of the jump‑diffusion COGARCH model on the NEPSE banking sector yields several important insights.
+
+First, the strong rejection of normality and the presence of ARCH effects, long memory, and multifractality confirm that the banking sector returns are governed by nonlinear, non‑equilibrium dynamics. The visual evidence from the density plot (Figure \ref{fig:density}), Q-Q plot (Figure \ref{fig:qq}), volatility clustering (Figure \ref{fig:volcluster}), ACF/PACF (Figure \ref{fig:acfpacf}), and multifractal spectrum (Figure \ref{fig:mf}) all point to the same conclusion. The estimated COGARCH parameters produce synthetic series that closely reproduce the empirical tail index, Hurst exponent, and multifractal width, demonstrating that the model is capable of capturing the essential stylised facts.
+
+Second, the branching ratio $B=0.7468$ falls below the near‑critical range of $0.9$ to $1$. This suggests that the self‑exciting feedback loop between jumps and volatility is weaker in the Nepalese banking sector than in developed markets like the US or UK. Possible reasons include lower frequency of high‑frequency trading, less algorithmic feedback, and a smaller derivatives market. Despite this, the model still generates long memory ($H>0.5$) and multifractality, indicating that even a moderate branching ratio can produce persistent volatility clustering.
+
+Third, the tail index $\gamma \approx 2.78$ implies that the return distribution has finite variance, contrary to the theoretical condition $\gamma \le 2$ for infinite variance. This is not surprising for an emerging market where extreme moves are less frequent than in developed markets during crises. Nevertheless, the Hill estimate is close to the critical value, and the model’s implied tail index is even higher ($2.89$), showing consistency.
+
+\section{Practical Implications}
+For investors and risk managers, the COGARCH‑based risk measures provide a more accurate picture of downside risk than traditional historical simulation or Gaussian approximations. The VaR$_{95\%}$ of $-1.7\%$ may seem low, but it is an annual figure; the corresponding daily VaR is about $-0.11\%$, which is reasonable given the low volatility of the banking index over the sample period. The CVaR numbers highlight that losses, when they occur, are considerably larger than the VaR threshold. The $8.4\%$ probability of a negative annual return is a useful benchmark for strategic asset allocation.
+
+Regulators can use the model to stress‑test the banking sector under simulated jump scenarios. The estimated jump intensity of $19.3$ jumps per year (in the volatility process) implies that volatility spikes occur frequently, which can be incorporated into capital adequacy calculations.
+
+\section{Limitations and Future Work}
+Several limitations of the present study should be acknowledged.
+\begin{enumerate}
+    \item \textbf{Data frequency:} Daily data may miss intraday jumps and clustering. A future study using 5‑minute or 1‑minute data could provide more precise estimates of $\lambda$ and $\phi$.
+    \item \textbf{Constant jump intensity:} The Poisson assumption with constant $\lambda$ is restrictive. A self‑exciting Hawkes process for the jump intensity would allow for clustering of jumps, which is often observed in financial markets.
+    \item \textbf{Structural break:} While we used the post‑break sample, the Zivot–Andrews test did not reject the unit root null, implying no permanent break. However, rolling window estimation could reveal time‑varying parameters. A regime‑switching COGARCH model is a natural extension.
+    \item \textbf{Model comparison:} We did not compare the COGARCH with simpler alternatives (e.g., GARCH‑jump, EGARCH). Future work should include model selection criteria (AIC, BIC) and out‑of‑sample forecasting exercises.
+    \item \textbf{Multivariate extension:} The banking sector index is an aggregate; systemic risk across individual banks could be studied with a multivariate COGARCH.
+\end{enumerate}

@@ -1,0 +1,177 @@
+\chapter{INTRODUCTION}
+
+\section{Background}
+Empirical studies show that stock markets exhibit sudden shocks and persistent volatility \cite{duong2010empirical}. For emerging markets like the Nepal Stock Exchange (NEPSE), these features are amplified by thin liquidity, political uncertainty, and external shocks \cite{worldbank2020nepal}. Traditional models based on constant volatility and continuous paths fail to capture the observed leptokurtic returns and volatility clustering.
+
+Theoretical framework \cite{kluppelberg2004continuous} couples a jump‑diffusion price process with a continuous‑time GARCH (COGARCH) volatility feedback. This model possesses an internal self‑exciting mechanism that, in a near‑critical branching regime, produces patterns indistinguishable from deterministic chaos with heavy‑tailed volatility, long memory, and multifractal scaling. The model provides us with falsifiable conditions linking these “chaotic” signatures to a branching ratio $B$, a tail index $\gamma$, and the Hurst exponent $H$. This paper attempts to find out those theoretical predictions to empirical scrutiny using real data from the NEPSE banking sector.
+
+\section{Problem Statement}
+The theoretical jump‑diffusion COGARCH model states that when the branching ratio $B$ approaches $1$ from below, the volatility process enters a near‑critical state characterised by:
+\begin{enumerate}[label=(\roman*)]
+    \item a tail index $\gamma \le 2$ (infinite variance of volatility),
+    \item a Hurst exponent $H > 0.5$ for absolute returns (long memory),
+    \item non‑linear scaling $\zeta(q)$ in the moment structure (multifractality).
+\end{enumerate}
+These conditions constitute a set of falsifiable hypotheses. The present study asks: \emph{Do daily returns from the NEPSE banking sector satisfy these conditions?} If so, the model is validated and can be used for risk quantification, if not, the critical branching hypothesis is rejected for NEPSE.
+
+\section{Literature Review}
+The literature on jump‑diffusion and stochastic volatility has been comprehensively reviewed in \cite{kluppelberg2004continuous}. Key developments include Merton’s jump‑diffusion \cite{merton1976option}, the GARCH family \cite{engle1982autoregressive, bollerslev1986generalized}, and the continuous‑time COGARCH \cite{kluppelberg2004continuous}. The application of chaos theory to financial markets gained traction after Peters \cite{peters1994fractal}, while Mandelbrot’s fractal geometry \cite{mandelbrot2013fractals} and the multifractal model of asset returns \cite{calvet2002multifractality} provided tools to detect scaling behaviour. Hardiman et al.\ \cite{hardiman2013critical} demonstrated that developed markets operate near a critical branching ratio $B \approx 1$, but similar tests in emerging markets remain scarce. Studies on NEPSE have largely focused on simple GARCH models \cite{gajurel2021volatility} without exploring jump‑driven feedback or chaotic diagnostics. This study bridges that gap by conducting a full empirical validation of the jump‑diffusion COGARCH framework in NEPSE.
+
+\section{Objectives}
+The study is organised around the following objectives:
+\begin{enumerate}[label=(\roman*)]
+    \item Conduct exploratory data analysis (EDA) of NEPSE banking sector returns.
+    \item Estimate the continuous‑time COGARCH parameters using the Method of Simulated Moments (MSM) with a discrete GARCH‑jump approximation.
+    \item Compute chaos diagnostics (branching ratio $B$, tail index $\gamma$, Hurst exponent $H$, multifractal width $\Delta\alpha$) and compare them with theoretical thresholds.
+    \item Quantify one‑year ahead risk measures (VaR, CVaR, drawdown probabilities) via Monte Carlo simulation of the fitted model.
+\end{enumerate}
+
+\section{Scope and Limitations}
+This study is confined to the \textbf{Commercial Banks} sector index of NEPSE, using daily closing prices(index) from 1 October 2013 to 3 June 2026 ($T=2886$ observations). The start date is chosen as the endogenous break point identified using Zivot–Andrews test. The study focuses on model validation and risk simulation. It does not extend to high‑frequency data and multivariate settings.
+
+Limitations include:
+\begin{enumerate}[label=(\roman*)]
+    \item Daily data may miss intraday jumps, potentially and can have bias for jump intensity estimates.
+    \item The Poisson assumption with constant intensity $\lambda$ may be restrictive, more robust Hawkes process could better capture clustering.
+    \item The discrete‑time approximation used in MSM introduces a mapping error from the continuous COGARCH.
+    \item Results from the banking sector may not generalize to other sectors or the overall market, but we can use this framework for other sectors as well.
+\end{enumerate}
+
+% ===============================
+% SECTION: MATHEMATICAL PRELIMINARIES (within a chapter, e.g., after INTRODUCTION)
+% ===============================
+\section{MATHEMATICAL PRELIMINARIES}
+
+This section provides an overview of the statistical, econometric, and chaos‑theoretic concepts used throughout the study. Each method is briefly described, and the relevant test statistics or estimators are defined.
+
+\subsection{Distributional Diagnostics}
+
+\subsubsection{Skewness and Excess Kurtosis}
+Skewness measures the asymmetry of a distribution:
+\[
+\text{Skewness} = \frac{\mathbb{E}[(X-\mu)^3]}{\sigma^3}.
+\]
+Positive skewness indicates a longer right tail. Excess kurtosis measures tail heaviness:
+\[
+\text{Excess Kurtosis} = \frac{\mathbb{E}[(X-\mu)^4]}{\sigma^4} - 3.
+\]
+A normal distribution has excess kurtosis zero; positive values indicate heavy tails (leptokurtosis).
+
+\subsubsection{Jarque–Bera Test}
+The Jarque–Bera (JB) test assesses whether a sample comes from a normal distribution. It uses sample skewness \(S\) and excess kurtosis \(K\):
+\[
+\text{JB} = \frac{n}{6}\left(S^2 + \frac{K^2}{4}\right),
+\]
+where \(n\) is the sample size. Under the null hypothesis of normality, JB follows a \(\chi^2\) distribution with 2 degrees of freedom.
+
+\subsubsection{Shapiro–Wilk Test}
+The Shapiro–Wilk test is a powerful omnibus test for normality. The statistic is
+\[
+W = \frac{\left(\sum_{i=1}^{n} a_i x_{(i)}\right)^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2},
+\]
+where \(x_{(i)}\) are the ordered sample values and \(a_i\) are coefficients generated from the order statistics of a standard normal. Small values of \(W\) indicate non‑normality.
+
+\subsubsection{Quantile-Quantile (Q-Q) Plot}
+A Q-Q plot compares the empirical quantiles of a sample against the theoretical quantiles of a specified distribution (e.g., normal). If the points lie approximately on the 45° line, the sample is consistent with the theoretical distribution. Deviations in the tails indicate heavier or lighter tails than the normal.
+
+\subsection{Time Series Dependence Tests}
+
+\subsubsection{Ljung–Box Q-test}
+The Ljung–Box test checks for autocorrelation in a time series up to a specified lag \(h\). The test statistic is
+\[
+Q_h = n(n+2) \sum_{k=1}^{h} \frac{\hat{\rho}_k^2}{n-k},
+\]
+where \(\hat{\rho}_k\) is the sample autocorrelation at lag \(k\). Under the null hypothesis of no serial correlation (white noise), \(Q_h \sim \chi^2_h\).
+
+\subsubsection{Engle’s ARCH Lagrange Multiplier (LM) Test}
+This test detects autoregressive conditional heteroskedasticity (ARCH). It regresses the squared residuals on their own lags:
+\[
+\hat{\varepsilon}_t^2 = \alpha_0 + \alpha_1 \hat{\varepsilon}_{t-1}^2 + \cdots + \alpha_p \hat{\varepsilon}_{t-p}^2 + u_t.
+\]
+The LM statistic is \(nR^2\) under the null of no ARCH (\(\alpha_1 = \cdots = \alpha_p = 0\)), asymptotically distributed as \(\chi^2_p\).
+
+\subsection{Stationarity Tests}
+
+\subsubsection{Augmented Dickey–Fuller (ADF) Test}
+The ADF test examines for a unit root. The regression is
+\[
+\Delta y_t = \beta_0 + \beta_1 t + \gamma y_{t-1} + \sum_{i=1}^{p} \delta_i \Delta y_{t-i} + \varepsilon_t.
+\]
+The null hypothesis is \(\gamma = 0\) (unit root). Rejection indicates stationarity.
+
+\subsubsection{KPSS Test}
+The KPSS test has the null hypothesis that the series is stationary (trend‑stationary). The test statistic is based on the partial sum of residuals. A small p‑value (\(<0.05\)) rejects stationarity.
+
+\subsection{Jump Detection and Structural Break}
+
+\subsubsection{Dynamic \(3\sigma\) Filter}
+A rolling window of length \(w\) (e.g., 21 days) is used to compute the local mean \(\mu_t\) and standard deviation \(\sigma_t\). An observation is flagged as a jump if
+\[
+|r_t - \mu_t| > 3\sigma_t.
+\]
+
+\subsubsection{Zivot–Andrews Test}
+This test allows for one endogenous structural break in the level or trend of a time series under the unit‑root null. The test statistic is the minimum \(t\)-statistic over all possible break dates. A break date is chosen where the test statistic is most negative.
+
+\subsection{Chaos Diagnostics}
+
+\subsubsection{Hill Tail Index}
+The Hill estimator estimates the tail index \(\gamma\) of a heavy‑tailed distribution. For the top \(k\) order statistics of absolute returns \(|r_t|\):
+\[
+\hat{\gamma} = \frac{1}{k} \sum_{i=1}^{k} \ln\left(\frac{X_{(i)}}{X_{(k+1)}}\right),
+\]
+where \(X_{(1)} \ge X_{(2)} \ge \cdots\) are the sorted absolute returns.
+
+\subsubsection{Detrended Fluctuation Analysis (DFA)}
+DFA quantifies long‑memory in non‑stationary time series. The integrated series is divided into boxes of length \(n\). A polynomial trend is removed, and the fluctuation function \(F(n)\) is computed. The Hurst exponent \(H\) is the slope of \(\log F(n)\) versus \(\log n\).  
+\(H = 0.5\): uncorrelated (white noise); \(H > 0.5\): persistent (long memory); \(H < 0.5\): anti‑persistent.
+
+\subsubsection{Multifractal Detrended Fluctuation Analysis (MF‑DFA)}
+MF‑DFA generalises DFA by considering different moment orders \(q\). The \(q\)-th order fluctuation function is
+\[
+F_q(n) = \left( \frac{1}{N_n} \sum_{\nu=1}^{N_n} \left[ F^2(\nu,n) \right]^{q/2} \right)^{1/q},
+\]
+where \(F^2(\nu,n)\) is the variance in box \(\nu\). The generalised Hurst exponent \(H(q)\) is obtained from \(F_q(n) \propto n^{H(q)}\). The scaling function is \(\zeta(q) = qH(q) - 1\). Non‑linear \(\zeta(q)\) indicates multifractality. The multifractal spectrum \(f(\alpha)\) is related to \(H(q)\) via a Legendre transform, and its width \(\Delta\alpha = \alpha_{\max} - \alpha_{\min}\) quantifies the degree of multifractality.
+
+\subsection{COGARCH Model and Estimation}
+
+\subsubsection{Jump‑Diffusion COGARCH Model}
+The continuous‑time model is given by
+\begin{align}
+\frac{dS_t}{S_{t-}} &= \alpha\,dt + \sqrt{V_{t-}}\,dW_t + \bigl(e^{\sqrt{V_{t-}}Z} - 1\bigr)\,dN_t, \\
+dV_t &= \kappa(\theta - V_{t-})\,dt + \phi\, V_{t-}\,Z^2\,dN_t,
+\end{align}
+with \(W_t\) Brownian motion, \(N_t\) Poisson process (intensity \(\lambda\)), and \(Z\sim\mathcal{N}(0,1)\).
+
+\subsubsection{Branching Ratio}
+\[
+B = \frac{\lambda\,\phi\,\mathbb{E}[Z^2]}{\kappa}.
+\]
+When \(B \lesssim 1\), the volatility process is near‑critical, exhibiting long memory and multifractality.
+
+\subsubsection{Method of Simulated Moments (MSM)}
+MSM estimates parameters by minimising the weighted distance between empirical moments and moments computed from simulated data:
+\[
+\hat{\theta} = \arg\min_{\theta} \left( m_{\text{emp}} - m_{\text{sim}}(\theta) \right)' W \left( m_{\text{emp}} - m_{\text{sim}}(\theta) \right).
+\]
+Moments include mean, variance, skewness, kurtosis, autocorrelations of \(|r_t|\), and the Hill tail index.
+
+\subsection{Risk Measures}
+
+\subsubsection{Value‑at‑Risk (VaR)}
+VaR at confidence level \(p\) (e.g., 95\%) is the \(p\)-th percentile of the return distribution:
+\[
+\text{VaR}_p = \inf\{ x \mid F(x) \ge p \}.
+\]
+
+\subsubsection{Conditional VaR (CVaR)}
+CVaR, also called Expected Shortfall, is the expected loss given that the loss exceeds VaR:
+\[
+\text{CVaR}_p = \mathbb{E}[\,X \mid X \le \text{VaR}_p\,].
+\]
+
+\subsubsection{Maximum Drawdown}
+For a price path \(P_t\), the maximum drawdown is the largest peak‑to‑trough decline:
+\[
+\text{MDD} = \max_{0 \le s \le t \le T} \left( \frac{P_s - P_t}{P_s} \right).
+\]

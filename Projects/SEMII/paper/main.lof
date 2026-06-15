@@ -1,0 +1,18 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Empirical return density vs. Gaussian baseline (leptokurtic peak).}}{9}{figure.caption.27}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Normal Q-Q plot showing tail deviations.}}{10}{figure.caption.28}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces ACF and PACF of raw returns (mean equation) and squared returns (variance equation).}}{11}{figure.caption.32}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Volatility clustering visual inspection (log returns with 21‑day rolling volatility corridor).}}{12}{figure.caption.33}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Dynamic jump extraction timeline (rolling $3\sigma $ corridor and detected jumps).}}{13}{figure.caption.37}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Macro Structural Break Evaluation (Zivot-Andrews Long-Term Baseline).}}{13}{figure.caption.39}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Hill tail index plot for absolute returns $|r_t|$ (stability over $k$).}}{14}{figure.caption.41}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Generalised Hurst Exponent $H(q)$ from MF‑DFA.}}{15}{figure.caption.43}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Multifractal spectrum $\alpha $ vs. $f(\alpha )$ from MF‑DFA.}}{16}{figure.caption.45}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Simulated price paths (100 of 10,000) from the fitted COGARCH model.}}{21}{figure.caption.48}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Distribution of 1‑year simple returns from Monte Carlo simulation.}}{22}{figure.caption.49}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }

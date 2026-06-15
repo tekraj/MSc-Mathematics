@@ -1,0 +1,82 @@
+\newpage
+\addcontentsline{toc}{chapter}{\bf LIST OF SYMBOLS}
+
+\begin{center}
+{\LARGE{\bf{LIST OF SYMBOLS}}}
+\end{center}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{2.5cm} p{8cm} p{4cm}}
+\hline
+\textbf{Symbol} & \textbf{Description} & \textbf{Context/Equation} \\
+\hline
+$S_t$ & Stock price at time $t$ & Main state variable \\
+$V_t$ & Instantaneous variance (volatility) process & COGARCH process \\
+$r_t$ & Daily log‑return & $r_t = \ln(S_t/S_{t-1})$ \\
+$\alpha$ & Drift coefficient of the price process & Equation (1) \\
+$W_t$ & Standard Brownian motion (continuous noise) & Equation (1) \\
+$N_t$ & Poisson process with intensity $\lambda$ & Jump counting process \\
+$Z$ & Jump size, $Z \sim \mathcal{N}(0,1)$ & Jump component \\
+$\lambda$ & Daily jump probability (intensity parameter) & COGARCH, Table 3.1 \\
+$\phi$ & Volatility feedback (jump sensitivity) parameter & Equation (2) \\
+$\kappa$ & Mean reversion speed of volatility & Equation (2) \\
+$\theta$ & Long‑run mean of the variance process & Equation (2) \\
+$B$ & Branching ratio & $B = \frac{\lambda\phi\,\mathbb{E}[Z^2]}{\kappa}$ \\
+$\gamma$ & Tail index (Hill estimator) & Measures tail heaviness of $|r_t|$ \\
+$H$ & Hurst exponent (long‑memory indicator) & DFA on $|r_t|$ \\
+$\Delta\alpha$ & Width of the multifractal spectrum & MF‑DFA, indicates multifractality \\
+$\zeta(q)$ & Scaling function & $\zeta(q) = qH(q) - 1$ \\
+$H(q)$ & Generalised Hurst exponent & MF‑DFA, varies with moment order $q$ \\
+$f(\alpha)$ & Multifractal spectrum & Hölder exponent $\alpha$ vs. dimension $f(\alpha)$ \\
+\hline
+\end{tabular}
+\caption{Core symbols used in the jump‑diffusion COGARCH framework and chaos diagnostics}
+\label{tab:symbols1}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{2.5cm} p{8cm} p{4cm}}
+\hline
+\textbf{Symbol} & \textbf{Description} & \textbf{Context/Equation} \\
+\hline
+$\mathbb{E}[Z^2]$ & Second moment of jump size & For $Z\sim\mathcal{N}(0,1)$, $\mathbb{E}[Z^2]=1$ \\
+$\omega$ & Base variance injection rate & $\omega = \kappa\theta$, GARCH(1,1) approximation \\
+$\alpha_1$ & ARCH (shock sensitivity) coefficient & $\alpha_1 = \phi\lambda$ \\
+$\beta_1$ & GARCH (persistence) coefficient & $\beta_1 = 1 - \kappa$ \\
+$\hat{\gamma}$ & Estimated tail index & Hill estimator: $\hat{\gamma} = \frac{1}{k}\sum_{i=1}^{k}\ln\frac{X_{(i)}}{X_{(k+1)}}$ \\
+$X_{(i)}$ & $i$-th order statistic of $|r_t|$ & Used in Hill estimator \\
+$k$ & Number of upper order statistics & Typically $5\%$ of sample \\
+$F_q(n)$ & $q$-th order fluctuation function & MF‑DFA \\
+$q$ & Moment order in multifractal analysis & MF‑DFA, $q\in[-5,5]\setminus\{0\}$ \\
+$T$ & Total number of observations & Post‑break sample: $T=2886$ \\
+$\lambda_{\text{annual}}$ & Annualised jump intensity & $\lambda_{\text{annual}} = \lambda \times 252$ \\
+\hline
+\end{tabular}
+\caption{Secondary symbols and estimation quantities}
+\label{tab:symbols2}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{p{2.5cm} p{8cm} p{4cm}}
+\hline
+\textbf{Symbol} & \textbf{Description} & \textbf{Context/Equation} \\
+\hline
+$\text{VaR}_p$ & Value‑at‑Risk at confidence level $p$ & Risk measure: $p=0.95,0.99$ \\
+$\text{CVaR}_p$ & Conditional VaR (Expected Shortfall) & Average loss beyond VaR$_p$ \\
+$\text{ACF}$ & Autocorrelation function & Used on $r_t$ and $|r_t|$ \\
+$\text{PACF}$ & Partial autocorrelation function & Used for mean equation specification \\
+$\text{DFA}$ & Detrended fluctuation analysis & Estimates Hurst exponent $H$ \\
+$\text{MF‑DFA}$ & Multifractal DFA & Estimates $H(q)$ and $\Delta\alpha$ \\
+$\text{MSM}$ & Method of Simulated Moments & Estimation procedure for COGARCH \\
+$\text{ADF}$ & Augmented Dickey–Fuller test & Stationarity test (unit root null) \\
+$\text{KPSS}$ & Kwiatkowski–Phillips–Schmidt–Shin test & Stationarity test (stationary null) \\
+$\text{LB}$ & Ljung–Box $Q$‑test & Test for serial correlation \\
+$\text{ARCH LM}$ & Engle’s ARCH Lagrange multiplier test & Test for conditional heteroskedasticity \\
+\hline
+\end{tabular}
+\caption{Acronyms and risk measures}
+\label{tab:symbols3}
+\end{table}

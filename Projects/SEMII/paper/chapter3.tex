@@ -1,0 +1,51 @@
+\chapter{COGARCH Model and Estimation}
+
+\section{Model Specification}
+The continuous‑time jump‑diffusion COGARCH model \cite{kluppelberg2004continuous} is defined by
+\begin{align}
+\frac{dS_t}{S_{t-}} &= \alpha\,dt + \sqrt{V_{t-}}\,dW_t + \bigl(e^{\sqrt{V_{t-}}Z} - 1\bigr)\,dN_t , \label{eq:price_sde}\\
+dV_t &= \kappa(\theta - V_{t-})\,dt + \phi\, V_{t-}\,Z^2\,dN_t , \label{eq:var_sde}
+\end{align}
+where $W_t$ is a standard Brownian motion, $N_t$ a Poisson process with intensity $\lambda$, and $Z\sim\mathcal{N}(0,1)$ i.i.d.\ jump sizes. The key parameter for criticality is the branching ratio
+\begin{equation}
+B = \frac{\lambda\,\phi\,\mathbb{E}[Z^2]}{\kappa}. \label{eq:B}
+\end{equation}
+When $B \lesssim 1$, the volatility process exhibits near‑critical behaviour: long memory, heavy tails, and multifractal scaling.
+
+\section{Method of Simulated Moments (MSM)}
+Because the likelihood of the COGARCH model is intractable, we employ the Method of Simulated Moments. The following moments are matched:
+\begin{itemize}
+    \item Mean, standard deviation, skewness, excess kurtosis of returns;
+    \item Autocorrelation of $|r_t|$ at lags 1 and 5;
+    \item Hill tail index (top 5\% of $|r_t|$).
+\end{itemize}
+The objective function minimises the weighted squared distance between empirical moments and their simulated counterparts. We use differential evolution with 10 simulations per evaluation to avoid local optima.
+
+\section{Estimation Results}
+Table \ref{tab:params} reports the estimated daily discrete‑time parameters (derived from the exact discretisation of the COGARCH) and the annualised continuous‑time parameters.
+
+\begin{table}[H]
+\centering
+\caption{Estimated MSM parameters for the COGARCH model (post‑break sample).}
+\label{tab:params}
+\begin{tabular}{l c}
+\toprule
+\textbf{Parameter} & \textbf{Estimate} \\
+\midrule
+$\kappa$ (mean reversion speed, annual) & $0.0729$ \\
+$\theta$ (long‑run variance, annual) & $0.000213$ \\
+$\phi$ (volatility jump sensitivity) & $0.7100$ \\
+$\lambda$ (daily jump probability) & $0.0767$ \\
+$\lambda$ (annual jump intensity) & $19.335$ \\
+$\mathbb{E}[Z^2]$ & $1.000$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The branching ratio computed from \eqref{eq:B} using the daily $\lambda$ (since the discrete approximation uses daily probability) is
+\[
+B = \frac{0.0767 \times 0.7100 \times 1}{0.0729} = 0.7468.
+\]
+This value is below the near‑critical window $[0.9,1)$ typically observed in developed markets \cite{hardiman2013critical}. However, as we show next, the model still generates long memory and multifractality.
+
+

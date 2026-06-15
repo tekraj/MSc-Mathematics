@@ -1,0 +1,72 @@
+\begin{thebibliography}{10}
+
+\bibitem{worldbank2020nepal}
+{World Bank}.
+\newblock Nepal development update: Financial sector stability, 2020.
+
+\bibitem{gajurel2021volatility}
+Ram~Prasad Gajurel et~al.
+\newblock Volatility of daily nepal stock exchange (nepse) index return: A garch family models.
+\newblock {\em Tribhuvan University Journal}, 36(01):31--44, 2021.
+
+\bibitem{cont2001empirical}
+Rama Cont.
+\newblock Empirical properties of asset returns: stylized facts and statistical issues.
+\newblock {\em Quantitative Finance}, 1(2):223--236, 2001.
+
+\bibitem{engle1982autoregressive}
+Robert~F Engle.
+\newblock Autoregressive conditional heteroscedasticity with estimates of the variance of united kingdom inflation.
+\newblock {\em Econometrica: Journal of the econometric society}, pages 987--1007, 1982.
+
+\bibitem{peters1994fractal}
+Edgar~E Peters.
+\newblock {\em Fractal market analysis: applying chaos theory to investment and economics}.
+\newblock John Wiley \& Sons, 1994.
+
+\bibitem{calvet2002multifractality}
+Laurent Calvet and Adlai Fisher.
+\newblock Multifractality in asset returns: theory and evidence.
+\newblock {\em Review of Economics and Statistics}, 84(3):381--406, 2002.
+
+\bibitem{merton1976option}
+R.~C. Merton.
+\newblock Option pricing when underlying stock returns are discontinuous.
+\newblock {\em Journal of Financial Economics}, 3:125--144, 1976.
+
+\bibitem{duong2010empirical}
+D.~Duong and N.~R. Swanson.
+\newblock Empirical evidence of jump persistence in financial markets.
+\newblock {\em Journal of Econometrics}, 160(2):298--312, 2010.
+
+\bibitem{bollerslev1986generalized}
+Tim Bollerslev.
+\newblock Generalized autoregressive conditional heteroskedasticity.
+\newblock {\em Journal of econometrics}, 31(3):307--327, 1986.
+
+\bibitem{nelson1991conditional}
+Daniel~B Nelson.
+\newblock Conditional heteroskedasticity in asset returns: A new approach.
+\newblock {\em Econometrica: Journal of the Econometric Society}, 59(2):347--370, 1991.
+
+\bibitem{barndorff2001non}
+Ole~E Barndorff-Nielsen and Neil Shephard.
+\newblock Non-{G}aussian {O}rnstein--{U}hlenbeck-based models and some of their uses in financial economics.
+\newblock {\em Journal of the Royal Statistical Society: Series B (Statistical Methodology)}, 63(2):167--241, 2001.
+
+\bibitem{kluppelberg2004continuous}
+Claudia Kl{\"u}ppelberg, Alexander Lindner, and Ross Maller.
+\newblock A continuous-time garch process driven by a l{\'e}vy process: stationarity and second-order behaviour.
+\newblock {\em Journal of Applied Probability}, 41(3):601--622, 2004.
+
+\bibitem{mandelbrot2013fractals}
+Benoit~B Mandelbrot.
+\newblock {\em Fractals and scaling in finance: Discontinuity, concentration, risk. Selecta volume E}.
+\newblock Springer Science \& Business Media, 2013.
+
+\bibitem{hardiman2013critical}
+Stephen~J Hardiman, Nicolas Bercot, and Jean-Philippe Bouchaud.
+\newblock Critical reflexivity in financial markets: a hawkes process analysis.
+\newblock {\em The European Physical Journal B}, 86(10):442, 2013.
+
+\end{thebibliography}

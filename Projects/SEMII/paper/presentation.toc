@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Literature Review}{6}{0}{2}
+\beamer@sectionintoc {3}{Data \& Exploratory Analysis}{8}{0}{3}
+\beamer@sectionintoc {4}{COGARCH Model \& Estimation}{14}{0}{4}
+\beamer@sectionintoc {5}{Chaos Diagnostics \& Model Validation}{16}{0}{5}
+\beamer@sectionintoc {6}{Risk Quantification}{18}{0}{6}
+\beamer@sectionintoc {7}{Discussion}{20}{0}{7}
+\beamer@sectionintoc {8}{Conclusion}{22}{0}{8}
