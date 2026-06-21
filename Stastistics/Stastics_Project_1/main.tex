@@ -1,0 +1,126 @@
+\documentclass[12pt,a4paper,fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{hyperref}
+
+% --- Font Settings: Times New Roman ---
+\usepackage{newtxtext,newtxmath} 
+
+\geometry{margin=1in}
+
+\begin{document}
+
+% -------- COVER PAGE --------
+\begin{titlepage}
+    \centering
+    \vspace*{0.2cm}
+    
+    \includegraphics[width=0.2\textwidth]{assets/ku-logo.jpg}\par\vspace{1cm}
+    
+    {\scshape\LARGE Kathmandu University \par}
+    \vspace{8pt}
+    {\Large School of Science \par}
+    {\large Department of Mathematics \par} 
+    
+    \vspace{1.8cm}
+
+    % Title Section
+    \rule{\linewidth}{0.8pt} \\[0.1cm]
+    {\Huge \bfseries Seasonal Trading Strategies: Identifying Optimal Entry and Exit Windows across NEPSE Sub-Sectors \par}
+    \vspace{0.4cm}
+    \rule{\linewidth}{0.8pt} \\[2cm]
+
+    % Submission Type
+    {\Large \bfseries A Project Proposal \par}
+ \vspace{1cm}
+    % Authors Section
+    {\Large \textbf{Authors:}\par}
+    \vspace{0.3cm}
+    {\large \textbf{Tek Raj Pant} \par} 
+    {\large \textbf{Himal Jung Oli} \par}
+    \vspace{0.2cm}
+    {\large M.Sc. Computational Mathematics \par}
+    {\large Computational Statistics \par}
+    
+    \vspace{1cm}
+
+    % Supervisor Section
+    {\Large \textbf{Submitted to:}\par}
+    \vspace{0.3cm}
+    {\large Professor Dr. Jyoti U. Devkota \par}
+\end{titlepage}
+
+\newpage
+% --- MAIN CONTENT ---
+\pagenumbering{arabic} 
+\setcounter{page}{1}
+
+\section{Introduction}
+The Nepal Stock Exchange (NEPSE) often exhibits patterns influenced by the Bikram Sambat (B.S.) calendar, fiscal year cycles, and major cultural festivals. This project explores the ``Seasonality Hypothesis'' as the stock returns are not purely random but follow periodic trends that challenge the weak-form efficiency of the market \cite{joshi2025}. By analyzing sectoral performance over a five-year horizon, this study aims to distinguish between genuine market anomalies and random noise, providing a data-driven roadmap for investors in the Nepali capital market. 
+
+Stock markets often display recurring patterns influenced by economic cycles and investor behavior. In the context of NEPSE, different sub-sectors such as banking and hydropower exhibit unique trends tied specifically to fiscal year closings and the festive window (Dashain/Tihar) \cite{gurung2024}. This study focuses on analyzing historical data from NEPSE sub-sectors to identify optimal entry and exit windows that can help investors improve trading decisions.
+
+\section{Objective}
+The primary objectives of this research are:
+\begin{itemize}
+    \item To identify statistically significant monthly and seasonal trends within specific NEPSE sub-sectors.
+    \item To quantify the risk-return profile of sectors like Banking, Hydropower, and Insurance during high-volatility periods.
+    \item To develop a ``Z-Score'' based entry and exit framework to optimize trading timing.
+\end{itemize}
+
+\section{Data Source}
+The analysis utilizes daily closing price data for the period of \textbf{2021 to 2026}.
+\begin{itemize}
+    \item \textbf{Primary Source:} Data is curated from \textit{Nepse Alpha} (\url{https://nepsealpha.com/nepse-data}).
+    \item \textbf{Scope:} The dataset encompasses five major sectors: Banking, Hydropower, Manufacturing, Microfinance, and Non-Life Insurance.
+\end{itemize}
+
+\section{Methodology}
+
+\subsection{Exploratory Analysis and Visual Representation}
+We perform exploratory analysis of NEPSE sub-sector returns using Boxplots to detect spread and outliers, and histograms to visualize frequency distributions.
+
+\subsection{Probability Distribution}
+The returns are examined for normality, skewness, and kurtosis. This helps in selecting appropriate statistical tests and assessing risk.
+
+\subsection{Confirmatory Analysis and Confidence Interval}
+Hypothesis testing is conducted to verify patterns. Confidence intervals estimate the expected range of returns, providing a statistical basis for investment decisions.
+
+\subsection{Mathematical Modeling}
+Simple linear models and non-linear models are developed to capture basic trends and cyclical patterns in returns.
+
+\subsection{Multiple Linear Regression}
+Multiple regression examines factors like market index and previous returns to identify significant predictors for sectoral performance.
+
+\subsection{Chi-Square Test}
+Used to study dependence between categorical variables, such as return direction (gain/loss) versus the specific month of the year.
+
+\subsection{Analysis of Variance (ANOVA)}
+ANOVA compares mean returns across different sub-sectors or months to test if observed differences in seasonal performance are statistically significant.
+
+\subsection{Non-Parametric Tests}
+Kruskal-Wallis and Mann-Whitney tests are applied if data does not meet normality assumptions, ensuring robustness when dealing with the high-volatility and irregular return distributions observed in the post-pandemic NEPSE \cite{rijal2025}.
+
+\section{Conclusion}
+This study aims to identify the most favorable times of the year for buying and selling stocks across various NEPSE sectors using historical data. By analyzing which months typically ofer the highest returns and which involve the most risk, we intend to provide a clear guide for investors to better time their market entries and exits. Ultimately, the project will determine if predictable events, such as the fscal year-end in Asadh or the major festival seasons, ofer a consistent way for the average investor to improve their returns compared to a simple long-term holding strategy.
+
+% -------- REFERENCES SECTION --------
+\begin{thebibliography}{99}
+
+\bibitem{joshi2025} 
+Joshi, P. (2025). Broad market indices of Nepal Stock Exchange: Testing of efficient market hypothesis. \textit{Academia Journal of Research \& Innovation}, 1(1), 60-70. \url{https://doi.org/10.3126/ajri.v1i1.88468}
+
+\bibitem{gurung2024} 
+Gurung, R., \& Subedi, P. (2024). Fiscal Year and Festive Effects on Market Price Movements: A Guide to Trading Strategies at Nepal Stock Exchange. \textit{Pravaha}, 30(1), 20-30. \url{https://doi.org/10.3126/pravaha.v30i1.76887}
+
+\bibitem{rijal2025} 
+Rijal, S. (2025). Turn of the Month Effect in Nepalese Stock Market: During and After COVID-19 Period. \textit{New Perspective: Journal of Business and Economics}, 8(1), 147-159. \url{https://doi.org/10.3126/npjbe.v8i1.85410}
+
+\end{thebibliography}
+
+\end{document}

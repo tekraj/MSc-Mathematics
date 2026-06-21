@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Objectives}{4}{0}{2}
+\beamer@sectionintoc {3}{Data Source}{5}{0}{3}
+\beamer@sectionintoc {4}{Methodology}{6}{0}{4}
+\beamer@sectionintoc {5}{Results and Discussion}{8}{0}{5}
+\beamer@sectionintoc {6}{Conclusion}{22}{0}{6}

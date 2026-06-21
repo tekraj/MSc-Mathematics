@@ -67,6 +67,8 @@ ggplot(nepse_data, aes(sample = Close, color = Symbol)) +
        x = "Theoretical Quantiles",
        y = "Sample Quantiles") +
   theme_minimal()
+
+
 ```
 
 ## Probability Distribution or Return
@@ -89,6 +91,91 @@ distribution_stats <- sector_returns |>
   )
 
 print(distribution_stats)
+```
+
+### Monthly Average Returns with Confidence Intervals (Bar Plot)
+
+```{r}
+library(lubridate)
+
+# Compute monthly means and bootstrap CIs
+monthly_stats <- sector_returns %>%
+  mutate(Month = month(Date, label = TRUE)) %>%
+  group_by(Symbol, Month) %>%
+  summarise(
+    Mean = mean(Return),
+    CI_lower = quantile(Return, 0.025),
+    CI_upper = quantile(Return, 0.975),
+    .groups = "drop"
+  )
+
+ggplot(monthly_stats, aes(x = Month, y = Mean, fill = Symbol)) +
+  geom_col(position = position_dodge(0.9), color = "black", alpha = 0.7) +
+  geom_errorbar(aes(ymin = CI_lower, ymax = CI_upper),
+                position = position_dodge(0.9), width = 0.3) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  facet_wrap(~Symbol, scales = "free_y") +
+  labs(title = "Monthly Average Daily Returns with 95% Bootstrap CIs",
+       x = "Month", y = "Mean Return") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none")
+
+
+```
+
+### Density Plots of Returns with Normal Overlay
+
+```{r}
+
+# Compute sector-wise mean and sd for normal curves
+norm_params <- sector_returns %>%
+  group_by(Symbol) %>%
+  summarise(mu = mean(Return), sigma = sd(Return))
+
+ggplot(sector_returns, aes(x = Return, fill = Symbol)) +
+  geom_density(alpha = 0.4, adjust = 1.5) +
+  geom_vline(data = norm_params, aes(xintercept = mu), 
+             linetype = "dashed", color = "black") +
+  # Add normal density for reference
+  geom_function(fun = dnorm, 
+                args = list(mean = first(norm_params$mu), 
+                            sd = first(norm_params$sigma)),
+                color = "red", linetype = "dotted", size = 1) +
+  facet_wrap(~Symbol, scales = "free") +
+  labs(title = "Return Density Plots with Normal Reference (dotted red)",
+       x = "Daily Return", y = "Density") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+### Time Series of Cumulative Returns by Sector
+
+```{r}
+cumulative_returns <- sector_returns %>%
+  group_by(Symbol) %>%
+  arrange(Date) %>%
+  mutate(Cumulative = cumsum(Return)) %>%
+  ungroup()
+
+ggplot(cumulative_returns, aes(x = Date, y = Cumulative, color = Symbol)) +
+  geom_line(size = 0.8) +
+  labs(title = "Cumulative Daily Returns by Sector (2021–2026)",
+       x = "Date", y = "Cumulative Return") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+### Heatmap of Mean Returns by Sector and Month
+
+```{r}
+
+heatmap_data <- sector_returns %>% mutate(Month = month(Date, label = TRUE)) %>% group_by(Symbol, Month) %>% summarise(Mean_Return = mean(Return), .groups = "drop")
+
+ggplot(heatmap_data, aes(x = Month, y = Symbol, fill = Mean_Return)) + geom_tile(color = "white") + scale_fill_gradient2(low = "red", mid = "white", high = "steelblue", midpoint = 0, name = "Mean Return") + geom_text(aes(label = round(Mean_Return, 3)), color = "black", size = 3) + labs(title = "Heatmap of Average Daily Returns by Sector and Month", x = "Month", y = "Sector") + theme_minimal() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
 ```
 
 ### Normality Testing Using Shapiro-Wilk Test

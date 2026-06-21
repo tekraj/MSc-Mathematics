@@ -1,0 +1,367 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{float}
+\geometry{a4paper, margin=1in}
+
+\begin{document}
+
+\textbf{1. The joint probability distribution of $X$ and $Y$ is given by $f(x, y) = \frac{1}{4}$ for $x = 0,1; y = 0,1$}
+
+\textbf{(a) Find the marginal distributions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \sum_{y=0}^{1} f(x,y) = f(x,0) + f(x,1) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2} \quad \text{for } x \in \{0,1\} \\
+f_Y(y) &= \sum_{x=0}^{1} f(x,y) = f(0,y) + f(1,y) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2} \quad \text{for } y \in \{0,1\}
+\end{align*}
+
+\textbf{(b) Find the means of $X$ and $Y$.}
+\begin{align*}
+\mu_X &= E[X] = \sum_{x=0}^{1} x f_X(x) = 0\left(\frac{1}{2}\right) + 1\left(\frac{1}{2}\right) = \frac{1}{2} \\
+\mu_Y &= E[Y] = \sum_{y=0}^{1} y f_Y(y) = 0\left(\frac{1}{2}\right) + 1\left(\frac{1}{2}\right) = \frac{1}{2}
+\end{align*}
+
+\textbf{(c) Are $X$ and $Y$ independent?}
+Yes, because $f(x,y) = \frac{1}{4} = \left(\frac{1}{2}\right)\left(\frac{1}{2}\right) = f_X(x)f_Y(y)$ for all $x,y$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{2. The joint probability distribution of $X$ and $Y$ is given by the table:} \\
+(Assuming rows represent $X \in \{0,1\}$ and columns represent $Y \in \{0,1\}$ based on the prompt's matrix structure):
+$$
+\begin{array}{c|cc}
+X \backslash Y & 0 & 1 \\
+\hline
+0 & 2/9 & 1/9 \\
+1 & 1/9 & 5/9
+\end{array}
+$$
+
+\textbf{(a) Find the marginal distributions of $X$ and $Y$.}
+\begin{align*}
+f_X(0) &= \frac{2}{9} + \frac{1}{9} = \frac{1}{3}, \quad f_X(1) = \frac{1}{9} + \frac{5}{9} = \frac{2}{3} \\
+f_Y(0) &= \frac{2}{9} + \frac{1}{9} = \frac{1}{3}, \quad f_Y(1) = \frac{1}{9} + \frac{5}{9} = \frac{2}{3}
+\end{align*}
+
+\textbf{(b) Find the means of $X$ and $Y$.}
+\begin{align*}
+\mu_X &= 0\left(\frac{1}{3}\right) + 1\left(\frac{2}{3}\right) = \frac{2}{3} \\
+\mu_Y &= 0\left(\frac{1}{3}\right) + 1\left(\frac{2}{3}\right) = \frac{2}{3}
+\end{align*}
+
+\textbf{(c) Are $X$ and $Y$ independent?}
+No. For $X=0, Y=0$: $f(0,0) = \frac{2}{9}$, but $f_X(0)f_Y(0) = \left(\frac{1}{3}\right)\left(\frac{1}{3}\right) = \frac{1}{9}$. Since $\frac{2}{9} \neq \frac{1}{9}$, they are not independent.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{3. The joint probability distribution of $X$ and $Y$ is given by $f(x,y) = \frac{3x+4y}{63}$ for $x = 0,1,2; y = 0,1,2$}
+
+\textbf{(a) Find the marginal distributions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \sum_{y=0}^{2} \frac{3x+4y}{63} = \frac{3x+0}{63} + \frac{3x+4}{63} + \frac{3x+8}{63} = \frac{9x+12}{63} = \frac{3x+4}{21} \quad \text{for } x \in \{0,1,2\} \\
+f_Y(y) &= \sum_{x=0}^{2} \frac{3x+4y}{63} = \frac{0+4y}{63} + \frac{3+4y}{63} + \frac{6+4y}{63} = \frac{12y+9}{63} = \frac{4y+3}{21} \quad \text{for } y \in \{0,1,2\}
+\end{align*}
+
+\textbf{(b) Find the means of $X$ and $Y$.}
+\begin{align*}
+\mu_X &= \sum_{x=0}^{2} x \frac{3x+4}{21} = 0 + 1\left(\frac{7}{21}\right) + 2\left(\frac{10}{21}\right) = \frac{27}{21} = \frac{9}{7} \\
+\mu_Y &= \sum_{y=0}^{2} y \frac{4y+3}{21} = 0 + 1\left(\frac{7}{21}\right) + 2\left(\frac{11}{21}\right) = \frac{29}{21}
+\end{align*}
+
+\textbf{(c) Are $X$ and $Y$ independent?}
+No. $f(0,0) = 0$, but $f_X(0)f_Y(0) = \left(\frac{4}{21}\right)\left(\frac{3}{21}\right) \neq 0$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{4. The joint probability distribution of $X$ and $Y$ is given by $f(x,y) = x+2y$} \\
+\textit{Note: The problem statement is incomplete as the domain and normalizer are omitted. Assuming a discrete domain $x, y \in \{0, 1\}$ with a missing constant $K$ such that $\sum f(x,y) = 1$. $\sum_{x=0}^1 \sum_{y=0}^1 K(x+2y) = K(0 + 2 + 1 + 3) = 6K = 1 \implies K = \frac{1}{6}$. Thus, let $f(x,y) = \frac{x+2y}{6}$.}
+
+\textbf{(a) Find the marginal distributions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \sum_{y=0}^{1} \frac{x+2y}{6} = \frac{2x+2}{6} = \frac{x+1}{3} \quad \text{for } x \in \{0,1\} \\
+f_Y(y) &= \sum_{x=0}^{1} \frac{x+2y}{6} = \frac{1+4y}{6} \quad \text{for } y \in \{0,1\}
+\end{align*}
+
+\textbf{(b) Find the means of $X$ and $Y$.}
+\begin{align*}
+\mu_X &= 0 + 1\left(\frac{2}{3}\right) = \frac{2}{3} \\
+\mu_Y &= 0 + 1\left(\frac{5}{6}\right) = \frac{5}{6}
+\end{align*}
+
+\textbf{(c) Are $X$ and $Y$ independent?}
+No. $f(0,0) = 0$, but $f_X(0)f_Y(0) = \left(\frac{1}{3}\right)\left(\frac{1}{6}\right) \neq 0$.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{5. The joint probability distribution of $X$ and $Y$ is given by $f(x,y) = K(3x+y)$ for $x = 0,1,2; y = 1,2,3$}
+
+\textbf{(a) Find the value of $K$.}
+$$\sum_{x=0}^{2} \sum_{y=1}^{3} K(3x+y) = K \sum_{x=0}^{2} (9x+6) = K(6 + 15 + 24) = 45K = 1 \implies K = \frac{1}{45}$$
+
+\textbf{(b) Find the marginal distributions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \sum_{y=1}^{3} \frac{3x+y}{45} = \frac{9x+6}{45} = \frac{3x+2}{15} \quad \text{for } x \in \{0,1,2\} \\
+f_Y(y) &= \sum_{x=0}^{2} \frac{3x+y}{45} = \frac{3y+9}{45} = \frac{y+3}{15} \quad \text{for } y \in \{1,2,3\}
+\end{align*}
+
+\textbf{(c) Check if $X$ and $Y$ are independent.}
+No. $f(0,1) = \frac{1}{45}$, but $f_X(0)f_Y(1) = \left(\frac{2}{15}\right)\left(\frac{4}{15}\right) = \frac{8}{225} \neq \frac{1}{45}$.
+
+\textbf{(d) Find $P(X \le 1,Y \le 2)$.}
+$$P(X \le 1, Y \le 2) = \frac{1}{45} [ (0+1) + (0+2) + (3+1) + (3+2) ] = \frac{1+2+4+5}{45} = \frac{12}{45} = \frac{4}{15}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{6. The joint density function of $X$ and $Y$ is given by $f(x,y) = Kxy$ if $0 < x < 2, 0 < y < 4$, and $0$ otherwise}
+
+\textbf{(a) Find the value of the constant $K$.}
+$$\int_{0}^{4} \int_{0}^{2} Kxy \,dx \,dy = K \left[ \frac{x^2}{2} \right]_0^2 \left[ \frac{y^2}{2} \right]_0^4 = K (2) (8) = 16K = 1 \implies K = \frac{1}{16}$$
+
+\textbf{(b) Find $P(X \ge 1, Y \le 2)$.}
+The region of integration is the shaded rectangle in Figure~\ref{fig:6b}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1.5]
+  \draw[->] (-0.2,0) -- (2.5,0) node[right] {$x$};
+  \draw[->] (0,-0.2) -- (0,4.5) node[above] {$y$};
+  \draw[thick] (0,0) rectangle (2,4);
+  \fill[gray!30] (1,0) rectangle (2,2);
+  \draw[dashed] (1,0) -- (1,2);
+  \draw[dashed] (0,2) -- (2,2);
+  \draw (2,0) node[below] {$2$};
+  \draw (0,4) node[left] {$4$};
+  \draw (1,0) node[below] {$1$};
+  \draw (0,2) node[left] {$2$};
+\end{tikzpicture}
+\caption{Shaded region: $X \ge 1$, $Y \le 2$}
+\label{fig:6b}
+\end{figure}
+$$P(X \ge 1, Y \le 2) = \int_{0}^{2} \int_{1}^{2} \frac{xy}{16} \,dx \,dy = \frac{1}{16} \left[ \frac{x^2}{2} \right]_1^2 \left[ \frac{y^2}{2} \right]_0^2 = \frac{1}{16} \left(2 - \frac{1}{2}\right)(2) = \frac{3}{16}$$
+
+\textbf{(c) Find the marginal density functions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \int_{0}^{4} \frac{xy}{16} \,dy = \frac{x}{16} \left[ \frac{y^2}{2} \right]_0^4 = \frac{x}{2} \quad \text{for } 0 < x < 2 \\
+f_Y(y) &= \int_{0}^{2} \frac{xy}{16} \,dx = \frac{y}{16} \left[ \frac{x^2}{2} \right]_0^2 = \frac{y}{8} \quad \text{for } 0 < y < 4
+\end{align*}
+
+\textbf{(d) Check if $X$ and $Y$ are independent.}
+Yes, since $f(x,y) = \frac{xy}{16} = \left(\frac{x}{2}\right)\left(\frac{y}{8}\right) = f_X(x)f_Y(y)$ over the rectangular domain.
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{7. The joint density function of $X$ and $Y$ is given by $f(x,y) = K(x^2 + y^2)$ if $0 < x < 1, 0 < y < 1$}
+
+\textbf{(a) Find the value of the constant $K$.}
+$$\int_{0}^{1} \int_{0}^{1} K(x^2 + y^2) \,dx \,dy = K \int_{0}^{1} \left( \frac{1}{3} + y^2 \right) \,dy = K\left(\frac{1}{3} + \frac{1}{3}\right) = \frac{2K}{3} = 1 \implies K = \frac{3}{2}$$
+
+\textbf{(b) Find the marginal density functions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \int_{0}^{1} \frac{3}{2}(x^2+y^2) \,dy = \frac{3}{2}\left(x^2 + \frac{1}{3}\right) = \frac{3x^2+1}{2} \quad \text{for } 0 < x < 1 \\
+f_Y(y) &= \int_{0}^{1} \frac{3}{2}(x^2+y^2) \,dx = \frac{3y^2+1}{2} \quad \text{for } 0 < y < 1
+\end{align*}
+
+\textbf{(c) Check if $X$ and $Y$ are independent.}
+No, $f_X(x)f_Y(y) = \left(\frac{3x^2+1}{2}\right)\left(\frac{3y^2+1}{2}\right) \neq \frac{3}{2}(x^2+y^2)$.
+
+\textbf{(d) Find $P(0.2 < X < 0.4)$ and $P(0.3 < Y < 0.6)$.}
+\begin{align*}
+P(0.2 < X < 0.4) &= \int_{0.2}^{0.4} \frac{3x^2+1}{2} \,dx = \frac{1}{2}\left[x^3+x\right]_{0.2}^{0.4} = \frac{1}{2}(0.464 - 0.208) = 0.128 \\
+P(0.3 < Y < 0.6) &= \int_{0.3}^{0.6} \frac{3y^2+1}{2} \,dy = \frac{1}{2}\left[y^3+y\right]_{0.3}^{0.6} = \frac{1}{2}(0.816 - 0.327) = 0.2445
+\end{align*}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{8. The joint density function of $X$ and $Y$ is given by $f(x, y) = 6x$ if $0 < x < y < 1$}
+
+\textbf{(a) Find the marginal density functions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \int_{x}^{1} 6x \,dy = 6x(1-x) \quad \text{for } 0 < x < 1 \\
+f_Y(y) &= \int_{0}^{y} 6x \,dx = 3y^2 \quad \text{for } 0 < y < 1
+\end{align*}
+
+\textbf{(b) Check if $X$ and $Y$ are independent.}
+No. The support bounds are dependent ($0 < x < y < 1$). Also, $f_X(x)f_Y(y) \neq 6x$.
+
+\textbf{(c) Find $P(X +Y > 1)$.}
+The support triangle and the region $X+Y>1$ are shown in Figure~\ref{fig:8}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=4]
+  \draw[->] (-0.1,0) -- (1.2,0) node[right] {$x$};
+  \draw[->] (0,-0.1) -- (0,1.2) node[above] {$y$};
+  \draw[thick] (0,0) -- (0,1) -- (1,1) -- cycle;
+  \draw[thick] (0,0) -- (1,1);
+  \draw[dashed] (1,0) -- (0,1) node[midway, above left] {$x+y=1$};
+  \fill[gray!30] (0.5,0.5) -- (0,1) -- (1,1) -- cycle;
+  \draw (1,0) node[below] {$1$};
+  \draw (0,1) node[left] {$1$};
+  \draw (0,0) node[below left] {$0$};
+  \draw (0.5,0.5) node[below right] {$0.5$};
+  \draw (1,1) node[above right] {$(1,1)$};
+\end{tikzpicture}
+\caption{Support $0<x<y<1$ (triangle) and region $X+Y>1$ (shaded).}
+\label{fig:8}
+\end{figure}
+The region is bounded by $y > 1-x$ and $x < y < 1$. Intersection of $y=1-x$ and $x=y$ is at $y=0.5$.
+$$P(X+Y > 1) = \int_{1/2}^{1} \int_{1-y}^{y} 6x \,dx \,dy = \int_{1/2}^{1} 3(y^2 - (1-y)^2) \,dy = \int_{1/2}^{1} 3(2y - 1) \,dy = 3\left[y^2 - y\right]_{1/2}^1 = \frac{3}{4}$$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{9. The joint density function of $X$ and $Y$ is given by $f(x, y) = 4e^{-2x}y$ if $x > 0, 0 < y < 1$}
+
+\textbf{(a) Find the marginal density functions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \int_{0}^{1} 4e^{-2x}y \,dy = 2e^{-2x} \quad \text{for } x > 0 \\
+f_Y(y) &= \int_{0}^{\infty} 4e^{-2x}y \,dx = 2y \quad \text{for } 0 < y < 1
+\end{align*}
+
+\textbf{(b) Check if $X$ and $Y$ are independent.}
+Yes, since $f(x,y) = 4e^{-2x}y = (2e^{-2x})(2y) = f_X(x)f_Y(y)$.
+
+\textbf{(c) Find the means of $X$ and $Y$.}
+\begin{align*}
+\mu_X &= \int_{0}^{\infty} x(2e^{-2x}) \,dx = \frac{1}{2} \quad \text{(mean of Exponential with } \lambda=2) \\
+\mu_Y &= \int_{0}^{1} y(2y) \,dy = \left[ \frac{2y^3}{3} \right]_0^1 = \frac{2}{3}
+\end{align*}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{10. The joint density function of $X$ and $Y$ is given by $f(x,y) = K(1+x^2)y$ if $0 < x < 1, 0 < y < 2$}
+
+\textbf{(a) Find the value of the constant $K$.}
+$$\int_{0}^{1} \int_{0}^{2} K(1+x^2)y \,dy \,dx = K \left[x + \frac{x^3}{3}\right]_0^1 \left[\frac{y^2}{2}\right]_0^2 = K\left(\frac{4}{3}\right)(2) = \frac{8K}{3} = 1 \implies K = \frac{3}{8}$$
+
+\textbf{(b) Find the marginal density functions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \int_{0}^{2} \frac{3}{8}(1+x^2)y \,dy = \frac{3}{4}(1+x^2) \quad \text{for } 0 < x < 1 \\
+f_Y(y) &= \int_{0}^{1} \frac{3}{8}(1+x^2)y \,dx = \frac{y}{2} \quad \text{for } 0 < y < 2
+\end{align*}
+
+\textbf{(c) Check if $X$ and $Y$ are independent.}
+Yes, $f(x,y) = \frac{3}{8}(1+x^2)y = \left( \frac{3}{4}(1+x^2) \right) \left( \frac{y}{2} \right) = f_X(x)f_Y(y)$.
+
+\textbf{(d) Find $P(X +Y < 1)$.}
+The region $X+Y<1$ inside the rectangle $[0,1]\times[0,2]$ is shown in Figure~\ref{fig:10d}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=3]
+  \draw[->] (-0.1,0) -- (1.3,0) node[right] {$x$};
+  \draw[->] (0,-0.1) -- (0,2.3) node[above] {$y$};
+  \draw[thick] (0,0) rectangle (1,2);
+  \draw[dashed] (1,0) -- (0,1);
+  \fill[gray!30] (0,0) -- (1,0) -- (0,1) -- cycle;
+  \draw (1,0) node[below] {$1$};
+  \draw (0,2) node[left] {$2$};
+  \draw (0,1) node[left] {$1$};
+  \draw (0.5,0.5) node {$X+Y<1$};
+\end{tikzpicture}
+\caption{Region for $X+Y<1$ inside the support $0<x<1, 0<y<2$.}
+\label{fig:10d}
+\end{figure}
+\begin{align*}
+P(X+Y < 1) &= \int_{0}^{1} \int_{0}^{1-x} \frac{3}{8}(1+x^2)y \,dy \,dx = \frac{3}{16} \int_{0}^{1} (1+x^2)(1-x)^2 \,dx \\
+&= \frac{3}{16} \int_{0}^{1} (1 - 2x + 2x^2 - 2x^3 + x^4) \,dx = \frac{3}{16} \left( 1 - 1 + \frac{2}{3} - \frac{1}{2} + \frac{1}{5} \right) = \frac{11}{160}
+\end{align*}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{11. The joint density function of $X$ and $Y$ is given by $f(x, y) = K$ if $0 < y < x < 2$}
+
+\textbf{(a) Find the value of the constant $K$.}
+The support is the shaded triangle in Figure~\ref{fig:11}.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=2]
+  \draw[->] (-0.2,0) -- (2.5,0) node[right] {$x$};
+  \draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+  \fill[gray!20] (0,0) -- (2,0) -- (2,2) -- cycle;
+  \draw[thick] (0,0) -- (2,0) -- (2,2) -- cycle;
+  \draw[thick] (0,0) -- (2,2) node[midway, above left] {$y=x$};
+  \draw (2,0) node[below] {$2$};
+  \draw (0,2) node[left] {$2$};
+  \draw (2,2) node[right] {$(2,2)$};
+  \draw (0,0) node[below left] {$0$};
+\end{tikzpicture}
+\caption{Support: $0<y<x<2$ (shaded).}
+\label{fig:11}
+\end{figure}
+The area of the triangular support is $\frac{1}{2}(2)(2) = 2$.
+$$\iint K \,dA = 2K = 1 \implies K = \frac{1}{2}$$
+
+\textbf{(b) Find the marginal density functions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \int_{0}^{x} \frac{1}{2} \,dy = \frac{x}{2} \quad \text{for } 0 < x < 2 \\
+f_Y(y) &= \int_{y}^{2} \frac{1}{2} \,dx = \frac{2-y}{2} = 1 - \frac{y}{2} \quad \text{for } 0 < y < 2
+\end{align*}
+
+\textbf{(c) Check if $X$ and $Y$ are independent.}
+No, the support $y < x$ creates dependence, and $f_X(x)f_Y(y) \neq \frac{1}{2}$.
+
+\textbf{(d) Find the means of $X$ and $Y$.}
+\begin{align*}
+\mu_X &= \int_{0}^{2} x\left(\frac{x}{2}\right) \,dx = \left[ \frac{x^3}{6} \right]_0^2 = \frac{4}{3} \\
+\mu_Y &= \int_{0}^{2} y\left(\frac{2-y}{2}\right) \,dy = \left[ \frac{y^2}{2} - \frac{y^3}{6} \right]_0^2 = 2 - \frac{8}{6} = \frac{2}{3}
+\end{align*}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{12. The joint density function of $X$ and $Y$ is given by $f(x, y) = K(x+1)e^{-y}$ if $0 < x < 1, y > 0$}
+
+\textbf{(a) Find the value of the constant $K$.}
+$$\int_{0}^{1} \int_{0}^{\infty} K(x+1)e^{-y} \,dy \,dx = K \left[ \frac{x^2}{2} + x \right]_0^1 \left[ -e^{-y} \right]_0^\infty = K\left(\frac{3}{2}\right)(1) = 1 \implies K = \frac{2}{3}$$
+
+\textbf{(b) Find the marginal density functions of $X$ and $Y$.}
+\begin{align*}
+f_X(x) &= \int_{0}^{\infty} \frac{2}{3}(x+1)e^{-y} \,dy = \frac{2}{3}(x+1) \quad \text{for } 0 < x < 1 \\
+f_Y(y) &= \int_{0}^{1} \frac{2}{3}(x+1)e^{-y} \,dx = e^{-y} \quad \text{for } y > 0
+\end{align*}
+
+\textbf{(c) Check if $X$ and $Y$ are independent.}
+Yes, since $f(x,y) = \frac{2}{3}(x+1)e^{-y} = f_X(x)f_Y(y)$.
+
+\textbf{(d) Find $P(0 < x < \frac{1}{2}, y > 1)$.}
+The region is a sub‑rectangle of the infinite strip (Figure~\ref{fig:12d}).
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=3]
+  \draw[->] (-0.2,0) -- (1.3,0) node[right] {$x$};
+  \draw[->] (0,-0.2) -- (0,2.5) node[above] {$y$};
+  \draw[thick] (0,0) -- (0,2.2);
+  \draw[thick] (1,0) -- (1,2.2);
+  \fill[gray!30] (0,1) rectangle (0.5,2.2);
+  \draw[dashed] (0,1) -- (1,1);
+  \draw[->] (0,2.2) -- (0,2.5);
+  \draw[->] (1,2.2) -- (1,2.5);
+  \draw (0.5,0) node[below] {$\frac{1}{2}$};
+  \draw (1,0) node[below] {$1$};
+  \draw (0,1) node[left] {$1$};
+\end{tikzpicture}
+\caption{Support $0<x<1, y>0$ and region $0<X<\frac{1}{2}, Y>1$ (shaded).}
+\label{fig:12d}
+\end{figure}
+$$P\left(0 < X < \frac{1}{2}, Y > 1\right) = \left( \int_{0}^{1/2} \frac{2}{3}(x+1) \,dx \right) \left( \int_{1}^{\infty} e^{-y} \,dy \right) = \frac{2}{3}\left[\frac{x^2}{2} + x\right]_0^{1/2} (e^{-1}) = \frac{2}{3}\left(\frac{5}{8}\right)e^{-1} = \frac{5}{12e}$$
+
+\end{document}

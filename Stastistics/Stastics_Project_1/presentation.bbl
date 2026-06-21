@@ -1,0 +1,123 @@
+\begin{thebibliography}{10}
+
+\bibitem{shrestha2023seasonal}
+B.~Shrestha.
+\newblock Seasonal anomalies in emerging markets: evidence from nepse.
+\newblock {\em Journal of Nepalese Business Studies}, 15(1):45--60, 2023.
+
+\bibitem{joshi2025broad}
+P.~Joshi.
+\newblock Broad market indices of nepal stock exchange: Testing of efficient market hypothesis.
+\newblock {\em Academia Journal of Research \& Innovation}, 1(1):60--70, 2025.
+
+\bibitem{basnet2022efficient}
+A.~Basnet.
+\newblock Testing weak-form market efficiency in nepse: a comprehensive review.
+\newblock {\em Nepalese Journal of Finance}, 4(1):22--38, 2022.
+
+\bibitem{gurung2024fiscal}
+R.~Gurung and P.~Subedi.
+\newblock Fiscal year and festive effects on market price movements: A guide to trading strategies at nepal stock exchange.
+\newblock {\em Pravaha}, 30(1):20--30, 2024.
+
+\bibitem{adhikari2024calendar}
+S.~Adhikari and R.~Koirala.
+\newblock Calendar effects and trading strategies in south asian stock exchanges.
+\newblock {\em Asian Journal of Finance \& Economics}, 12(2):89--104, 2024.
+
+\bibitem{sharma2021investor}
+S.~Sharma and B.~Thapa.
+\newblock Investor sentiment and calendar anomalies: evidence from nepal.
+\newblock {\em South Asian Journal of Business Studies}, 10(3):301--318, 2021.
+
+\bibitem{tukey1977eda}
+John~W. Tukey.
+\newblock {\em Exploratory Data Analysis}.
+\newblock Addison-Wesley, 1977.
+
+\bibitem{chambers1983graphical}
+John~M. Chambers, William~S. Cleveland, Beat Kleiner, and Paul~A. Tukey.
+\newblock {\em Graphical Methods for Data Analysis}.
+\newblock Wadsworth, 1983.
+
+\bibitem{joanes1998comparing}
+D.~N. Joanes and C.~A. Gill.
+\newblock Comparing measures of sample skewness and kurtosis.
+\newblock {\em The Statistician}, 47(1):183--189, 1998.
+
+\bibitem{de1992tests}
+Lawrence~T. DeCarlo.
+\newblock On the meaning and use of kurtosis.
+\newblock {\em Psychological Methods}, 2(3):292--307, 1997.
+
+\bibitem{shapiro1965variance}
+S.~S. Shapiro and M.~B. Wilk.
+\newblock An analysis of variance test for normality (complete samples).
+\newblock {\em Biometrika}, 52(3/4):591--611, 1965.
+
+\bibitem{pearson1900chi}
+Karl Pearson.
+\newblock On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling.
+\newblock {\em Philosophical Magazine}, 50(302):157--175, 1900.
+
+\bibitem{fisher1925statistical}
+Ronald~A. Fisher.
+\newblock {\em Statistical Methods for Research Workers}.
+\newblock Oliver and Boyd, 1925.
+
+\bibitem{kutner2005applied}
+Michael~H. Kutner, Christopher~J. Nachtsheim, John Neter, and William Li.
+\newblock {\em Applied Linear Statistical Models}.
+\newblock McGraw-Hill, 5th edition, 2005.
+
+\bibitem{kruskal1952use}
+William~H. Kruskal and W.~Allen Wallis.
+\newblock Use of ranks in one-criterion variance analysis.
+\newblock {\em Journal of the American Statistical Association}, 47(260):583--621, 1952.
+
+\bibitem{mann1947test}
+Henry~B. Mann and Donald~R. Whitney.
+\newblock On a test of whether one of two random variables is stochastically larger than the other.
+\newblock {\em Annals of Mathematical Statistics}, 18(1):50--60, 1947.
+
+\bibitem{sharpe1966mutual}
+William~F. Sharpe.
+\newblock Mutual fund performance.
+\newblock {\em Journal of Business}, 39(1):119--138, 1966.
+
+\bibitem{tsay2010analysis}
+Ruey~S. Tsay.
+\newblock {\em Analysis of Financial Time Series}.
+\newblock Wiley, 3rd edition, 2010.
+
+\bibitem{lakonishok1988seasonal}
+Josef Lakonishok and Seymour Smidt.
+\newblock Are seasonal anomalies real? a ninety-year perspective.
+\newblock {\em Review of Financial Studies}, 1(4):403--425, 1988.
+
+\bibitem{efron1994introduction}
+Bradley Efron and Robert~J. Tibshirani.
+\newblock {\em An Introduction to the Bootstrap}.
+\newblock Chapman \& Hall/CRC, 1994.
+
+\bibitem{wilcox2017introduction}
+Rand~R. Wilcox.
+\newblock {\em Introduction to Robust Estimation and Hypothesis Testing}.
+\newblock Academic Press, 4th edition, 2017.
+
+\bibitem{good2005permutation}
+Phillip Good.
+\newblock {\em Permutation, Parametric, and Bootstrap Tests of Hypotheses}.
+\newblock Springer, 3rd edition, 2005.
+
+\bibitem{draper1998applied}
+Norman~R. Draper and Harry Smith.
+\newblock {\em Applied Regression Analysis}.
+\newblock Wiley, 3rd edition, 1998.
+
+\bibitem{cont2001empirical}
+Rama Cont.
+\newblock Empirical properties of asset returns: stylized facts and statistical issues.
+\newblock {\em Quantitative Finance}, 1(2):223--236, 2001.
+
+\end{thebibliography}
