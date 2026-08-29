@@ -1,0 +1,975 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% Page geometry
+\geometry{margin=1in}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{MATH 509 -- Real Analysis}
+\lhead{Assignment I Solutions}
+\cfoot{\thepage}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+
+\title{
+    \textbf{Kathmandu University} \\[0.5cm]
+    \Large Assignment I -- Solutions \\[0.3cm]
+    \large MATH 509: Real Analysis \\[0.3cm]
+    \normalsize \textit{Text Book: Introduction to Real Analysis (4th Edition)} \\
+    \normalsize \textit{by R.G.\ Bartle and D.R.\ Sherbert}
+}
+\author{M.Sc.\ Mathematics}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%=============================================================================
+% SECTION A
+%=============================================================================
+\section{Section A}
+
+\subsection{Definitions}
+
+% --- Set theory prerequisites ---
+\begin{definition}[Ordered Pair and Cartesian Product]
+Let \(A\) and \(B\) be nonempty sets. An \textbf{ordered pair} \((a,b)\) consists of a first component \(a\in A\) and a second component \(b\in B\). The \textbf{Cartesian product} of \(A\) and \(B\) is the set of all such ordered pairs:
+\[
+    A \times B \coloneqq \set{(a,b) : a\in A \text{ and } b\in B}.
+\]
+\end{definition}
+
+\begin{definition}[Function (or Mapping)]
+Let \(A\) and \(B\) be sets. A \textbf{function} \(f\) from \(A\) to \(B\), written \(f:A\to B\), is a rule that assigns to each element \(x\in A\) a uniquely determined element \(f(x)\in B\).  
+The set \(A\) is called the \textbf{domain} of \(f\), and \(B\) is the \textbf{codomain}.  
+The subset
+\[
+    f(A)\coloneqq \set{f(x) : x\in A} \subseteq B
+\]
+is the \textbf{range} (or \textbf{image}) of \(f\).
+
+A function \(f\) is
+\begin{itemize}
+    \item \textbf{injective} (or \textbf{one-to-one}) if \(x_1\neq x_2\) implies \(f(x_1)\neq f(x_2)\);
+    \item \textbf{surjective} (or \textbf{onto}) if \(f(A)=B\);
+    \item \textbf{bijective} if it is both injective and surjective.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Inverse Function]
+Let \(f:A\to B\) be bijective. The \textbf{inverse function} of \(f\) is the function \(f^{-1}:B\to A\) defined by: for each \(b\in B\), \(f^{-1}(b)\) is the unique element \(a\in A\) satisfying \(f(a)=b\). Equivalently,
+\[
+    f^{-1}(b)=a \quad\Longleftrightarrow\quad f(a)=b.
+\]
+\end{definition}
+
+% --- Absolute value ---
+\begin{definition}[Absolute Value]
+For a real number \(a\in\R\), its \textbf{absolute value} is
+\[
+    \abs{a} \coloneqq \begin{cases}
+        a, & \text{if } a\ge 0,\\
+        -a, & \text{if } a<0.
+    \end{cases}
+\]
+\end{definition}
+
+% --- Bounded sets, supremum, infimum ---
+Before defining supremum and infimum we recall the notions of upper and lower bounds.
+
+\begin{definition}[Upper Bound, Lower Bound]
+Let \(S\) be a nonempty subset of \(\R\).
+\begin{itemize}
+    \item A number \(u\in\R\) is an \textbf{upper bound} of \(S\) if \(s\le u\) for all \(s\in S\).  
+          If such a \(u\) exists, \(S\) is said to be \textbf{bounded above}.
+    \item A number \(\ell\in\R\) is a \textbf{lower bound} of \(S\) if \(\ell\le s\) for all \(s\in S\).  
+          If such an \(\ell\) exists, \(S\) is said to be \textbf{bounded below}.
+    \item \(S\) is \textbf{bounded} if it is both bounded above and bounded below.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Supremum (Least Upper Bound)]
+Let \(S\subseteq\R\) be nonempty and bounded above. A number \(u^*\in\R\) is called the \textbf{supremum} (or \textbf{least upper bound}) of \(S\), denoted \(u^*=\sup S\), if
+\begin{enumerate}[label=(\roman*)]
+    \item \(u^*\) is an upper bound of \(S\): \(s\le u^*\) for all \(s\in S\);
+    \item \(u^*\) is the smallest such bound: if \(v\) is any upper bound of \(S\), then \(u^*\le v\).
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Infimum (Greatest Lower Bound)]
+Let \(S\subseteq\R\) be nonempty and bounded below. A number \(\ell_*\in\R\) is called the \textbf{infimum} (or \textbf{greatest lower bound}) of \(S\), denoted \(\ell_*=\inf S\), if
+\begin{enumerate}[label=(\roman*)]
+    \item \(\ell_*\) is a lower bound of \(S\): \(\ell_*\le s\) for all \(s\in S\);
+    \item \(\ell_*\) is the greatest such bound: if \(t\) is any lower bound of \(S\), then \(t\le \ell_*\).
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Bounded Function]
+A function \(f:A\to\R\) is called \textbf{bounded on \(A\)} if its range \(f(A)\) is a bounded subset of \(\R\); i.e., there exists a constant \(M>0\) such that
+\[
+    \abs{f(x)}\le M \qquad\text{for all } x\in A.
+\]
+\end{definition}
+
+\begin{definition}[Neighborhood]
+Let \(a\in\R\) and \(\eps>0\). The \textbf{\(\eps\)-neighborhood} of \(a\) is the open interval
+\[
+    V_\eps(a) \coloneqq \set{x\in\R : \abs{x-a}<\eps} = (a-\eps,\; a+\eps).
+\]
+\end{definition}
+
+% --- The Completeness Axiom and Archimedean Property ---
+We also recall the two fundamental properties of the real numbers that will be used throughout.
+
+\textbf{Completeness Property of \(\R\).} Every nonempty set of real numbers that is bounded above possesses a supremum in \(\R\).
+
+\textbf{Archimedean Property.} If \(x>0\) is any real number, there exists a natural number \(n\) such that \(n>x\). Equivalently, for any \(a,b\in\R\) with \(a>0\), there exists \(n\in\N\) with \(na>b\).
+
+\subsection{Theorems, Lemmas, and Proofs}
+
+% --- De Morgan's Laws ---
+\textbf{Theorem 1.1.4 (De Morgan's Laws).} Let \(A,B\) be subsets of a set \(S\). Then
+\begin{enumerate}[label=(\alph*)]
+    \item \(S\setminus (A\cup B) = (S\setminus A)\cap (S\setminus B)\);
+    \item \(S\setminus (A\cap B) = (S\setminus A)\cup (S\setminus B)\).
+\end{enumerate}
+
+\begin{proof}
+\textbf{(a)} We prove the equality by showing that each side is a subset of the other.
+
+\((\subseteq)\): Let \(x\in S\setminus (A\cup B)\). By definition of set difference, \(x\in S\) and \(x\notin A\cup B\). The latter means that \(x\) is not in \(A\) \textbf{and} not in \(B\); i.e., \(x\notin A\) and \(x\notin B\). Since \(x\in S\), we obtain \(x\in S\setminus A\) and \(x\in S\setminus B\). Hence \(x\in (S\setminus A)\cap (S\setminus B)\).
+
+\((\supseteq)\): Conversely, take \(x\in (S\setminus A)\cap (S\setminus B)\). Then \(x\in S\), \(x\notin A\), and \(x\notin B\). From \(x\notin A\) and \(x\notin B\) we conclude \(x\notin A\cup B\). Together with \(x\in S\) this yields \(x\in S\setminus (A\cup B)\).
+
+Thus the two sets are equal.
+
+\textbf{(b)} Again we prove both inclusions.
+
+\((\subseteq)\): Let \(x\in S\setminus (A\cap B)\). Then \(x\in S\) and \(x\notin A\cap B\). Hence \(x\) fails to belong to at least one of the sets \(A,B\); i.e., \(x\notin A\) or \(x\notin B\) (or both). If \(x\notin A\), then \(x\in S\setminus A\); otherwise \(x\notin B\) gives \(x\in S\setminus B\). In either case \(x\in (S\setminus A)\cup (S\setminus B)\).
+
+\((\supseteq)\): Let \(x\in (S\setminus A)\cup (S\setminus B)\). Then \(x\in S\) and we have \(x\notin A\) or \(x\notin B\) (or both). If \(x\) is missing from at least one of the sets, it cannot belong to their intersection; thus \(x\notin A\cap B\). Together with \(x\in S\) this gives \(x\in S\setminus (A\cap B)\).
+\end{proof}
+
+% --- Uncountability of R ---
+\textbf{Theorem 1.3.13 (Uncountability of \(\R\)).} The set \(\R\) of real numbers is uncountable. In particular, the interval \([0,1]\) is uncountable.
+
+\begin{proof}
+We use Cantor's diagonal argument. Assume, for contradiction, that the interval \([0,1]\) is countable. Then its elements can be written as a sequence \((x_n)_{n=1}^\infty\). Express each \(x_n\) by its decimal expansion
+\[
+    x_n = 0.a_{n1}\,a_{n2}\,a_{n3}\cdots,
+\]
+where each digit \(a_{nk}\in\{0,1,\dots,9\}\). To avoid ambiguity, we choose for every number the representation that does \emph{not} end with an infinite string of \(9\)'s (this choice is unique).
+
+Now construct a new number \(y = 0.b_1b_2b_3\cdots\) by defining its digits as follows:
+\[
+    b_n = \begin{cases}
+        2, & \text{if } a_{nn}\neq 2,\\
+        3, & \text{if } a_{nn}=2.
+    \end{cases}
+\]
+Because each \(b_n\) is chosen from \(\{2,3\}\), the decimal expansion of \(y\) does not contain any \(0\) or \(9\); therefore it is a valid non‑terminating expansion and \(y\in[0,1]\).
+
+By construction, the \(n\)-th digit of \(y\) differs from the \(n\)-th digit of \(x_n\) (\(b_n\neq a_{nn}\)), so \(y\neq x_n\) for every \(n\in\N\). This contradicts the assumption that \((x_n)\) lists \emph{all} elements of \([0,1]\). Hence \([0,1]\) is uncountable, and consequently \(\R\) is uncountable.
+\end{proof}
+
+% --- Algebraic Properties 2.1.1 ---
+\textbf{Theorem 2.1.1 (Some Algebraic Properties of \(\R\)).}
+The following hold for all \(a,b,c\in\R\):
+\begin{enumerate}[label=(\alph*)]
+    \item If \(a+b=a+c\), then \(b=c\) \hfill (cancellation law for addition).
+    \item \(a\cdot 0 = 0\).
+    \item \((-a)b = -(ab) = a(-b)\).
+    \item \((-a)(-b)=ab\).
+    \item If \(a\cdot b = 0\), then \(a=0\) or \(b=0\).
+\end{enumerate}
+
+\begin{proof}
+Throughout we use the field axioms of the real numbers: commutativity and associativity of addition and multiplication, the distributive law, existence of additive and multiplicative identities (0 and 1), additive inverses \((-a)\), and for \(a\neq0\) a multiplicative inverse \(a^{-1}\).
+
+\textbf{(a)} Suppose \(a+b=a+c\). Adding the additive inverse \((-a)\) to both sides yields
+\[
+(-a)+(a+b)=(-a)+(a+c).
+\]
+By associativity, \(((-a)+a)+b = ((-a)+a)+c\). Since \((-a)+a=0\) and \(0+b=b\), \(0+c=c\), we obtain \(b=c\).
+
+\textbf{(b)} Using the distributive law and the fact that \(0+0=0\),
+\[
+a\cdot 0 = a\cdot(0+0)=a\cdot0 + a\cdot0.
+\]
+Now add \(-(a\cdot0)\) to both sides: \(0 = a\cdot0 + a\cdot0 - a\cdot0 = a\cdot0\), proving the claim.
+
+\textbf{(c)} Observe that \(ab + (-a)b = (a+(-a))b = 0\cdot b = 0\) by (b) and the distributive law. Hence \((-a)b\) is the additive inverse of \(ab\); i.e., \((-a)b = -(ab)\). The equality \(-(ab)=a(-b)\) follows by an analogous computation using commutativity.
+
+\textbf{(d)} Apply (c) twice:
+\[
+(-a)(-b) = -\bigl(a(-b)\bigr) = -\bigl(-(ab)\bigr) = ab.
+\]
+
+\textbf{(e)} Assume \(ab=0\) and \(a\neq0\). Since \(a\neq0\), it possesses a multiplicative inverse \(a^{-1}\). Multiply the equation \(ab=0\) on both sides by \(a^{-1}\):
+\[
+a^{-1}(ab) = a^{-1}\cdot0.
+\]
+By associativity and (b), the left side is \((a^{-1}a)b = 1\cdot b = b\); the right side is \(0\). Hence \(b=0\). If instead \(b\neq0\), symmetry gives \(a=0\).
+\end{proof}
+
+% --- Theorem 2.1.7 ---
+\textbf{Theorem 2.1.7.} If \(a\in\R\) satisfies \(0\le a\le\eps\) for every \(\eps>0\), then \(a=0\).
+
+\begin{proof}
+Suppose, to the contrary, that \(a>0\). Take \(\eps_0 = a/2 > 0\). The hypothesis then gives \(a\le\eps_0 = a/2\), which implies \(a/2\le0\) and therefore \(a\le0\). This contradicts \(a>0\). Hence \(a=0\).
+\end{proof}
+
+% --- Triangle Inequality ---
+\textbf{Theorem 2.2.2 (Triangle Inequality).} For all \(a,b\in\R\),
+\[
+\abs{a+b}\le\abs{a}+\abs{b}.
+\]
+
+\begin{proof}
+From the definition of absolute value we have the elementary bounds
+\[
+-\abs{a}\le a\le\abs{a},\qquad -\abs{b}\le b\le\abs{b}.
+\]
+Adding these two inequalities yields
+\[
+-(\abs{a}+\abs{b})\le a+b\le\abs{a}+\abs{b}.
+\]
+For any real number \(x\) and any \(M\ge0\), the inequality \(\abs{x}\le M\) is equivalent to the pair of inequalities \(-M\le x\le M\). Applying this fact with \(x=a+b\) and \(M=\abs{a}+\abs{b}\) gives exactly
+\[
+\abs{a+b}\le\abs{a}+\abs{b}. \qedhere
+\]
+\end{proof}
+
+% --- Example 2.2.6 ---
+\textbf{Example 2.2.6.}
+\begin{enumerate}[label=(\alph*)]
+    \item Find all \(x\in\R\) satisfying \(\abs{x-2}\le1\).
+    
+    \textbf{Solution.} The inequality \(\abs{x-2}\le1\) is equivalent to \(-1\le x-2\le1\). Adding \(2\) throughout gives \(1\le x\le3\). Thus the solution set is \([1,3]\).
+
+    \item Find all \(x\in\R\) satisfying \(\abs{x-1}\le\abs{x}\).
+
+    \textbf{Solution.} Both sides are non‑negative, so squaring preserves the inequality:
+    \[
+    (x-1)^2\le x^2\;\Longrightarrow\; x^2-2x+1\le x^2\;\Longrightarrow\; -2x+1\le0\;\Longrightarrow\; x\ge\tfrac12.
+    \]
+    The solution set is \([\tfrac12,\infty)\).
+
+    \item Determine \(\set{x\in\R : \abs{x-1}+\abs{x+1}\le4}\).
+
+    \textbf{Solution.} We consider three cases based on the critical points \(x=-1\) and \(x=1\).
+
+    \begin{itemize}
+        \item \textbf{Case \(x\le-1\).} Then \(x-1<0\) and \(x+1\le0\), so
+        \[
+        \abs{x-1}=1-x,\quad \abs{x+1}=-(x+1)=-x-1.
+        \]
+        The inequality becomes \((1-x)+(-x-1)=-2x\le4\), i.e., \(x\ge-2\). Together with \(x\le-1\) this gives the interval \([-2,-1]\).
+
+        \item \textbf{Case \(-1<x<1\).} Now \(x-1<0\) and \(x+1>0\), hence
+        \[
+        \abs{x-1}=1-x,\quad \abs{x+1}=x+1.
+        \]
+        The sum is \((1-x)+(x+1)=2\), and the inequality \(2\le4\) holds for all \(x\) in this range. Thus every \(x\in(-1,1)\) is a solution.
+
+        \item \textbf{Case \(x\ge1\).} Here \(x-1\ge0\) and \(x+1>0\), so
+        \[
+        \abs{x-1}=x-1,\quad \abs{x+1}=x+1.
+        \]
+        The inequality becomes \((x-1)+(x+1)=2x\le4\), i.e., \(x\le2\). Together with \(x\ge1\) we obtain \([1,2]\).
+    \end{itemize}
+    Combining the three cases, the complete solution set is \([-2,2]\).
+\end{enumerate}
+
+% --- Lemma 2.3.4: Characterization of Supremum ---
+\textbf{Lemma 2.3.4 (Characterization of Supremum).} Let \(S\subseteq\R\) be nonempty and bounded above. An upper bound \(u\) of \(S\) is the supremum of \(S\) if and only if for every \(\eps>0\) there exists an element \(s_\eps\in S\) such that \(u-\eps < s_\eps\).
+
+\begin{proof}
+\((\Rightarrow)\) Suppose \(u=\sup S\). Let \(\eps>0\). Because \(u\) is the \emph{least} upper bound, the smaller number \(u-\eps\) cannot be an upper bound of \(S\). Hence there exists some \(s_\eps\in S\) with \(s_\eps > u-\eps\).
+
+\((\Leftarrow)\) Assume \(u\) is an upper bound of \(S\) and satisfies the stated condition. Let \(v\) be any upper bound of \(S\). If \(v<u\), set \(\eps_0 = u-v>0\). By hypothesis there exists \(s_{\eps_0}\in S\) with \(u-\eps_0 < s_{\eps_0}\), i.e., \(v < s_{\eps_0}\). This contradicts the fact that \(v\) is an upper bound. Therefore no upper bound can be smaller than \(u\); hence \(u\le v\) for every upper bound \(v\), which means \(u=\sup S\).
+\end{proof}
+
+% --- Theorem 2.4.8: Density of Rationals ---
+\textbf{Theorem 2.4.8 (Density of \(\Q\) in \(\R\)).} If \(x,y\in\R\) with \(x<y\), then there exists a rational number \(r\in\Q\) such that \(x<r<y\).
+
+\begin{proof}
+Since \(y-x>0\), the Archimedean Property guarantees an integer \(n\in\N\) with
+\[
+n(y-x) > 1 \quad\Longleftrightarrow\quad ny - nx > 1. \tag{1}
+\]
+Again by the Archimedean Property, the set \(\{m\in\Z : m > nx\}\) is nonempty (choose an integer larger than \(nx\)) and bounded below (by \(nx\) itself). Hence it possesses a smallest element; call it \(m\). Thus
+\[
+m-1 \le nx < m. \tag{2}
+\]
+From the right‑hand inequality of (2) and the left‑hand inequality of (1) we obtain
+\[
+m \le nx+1 < ny \quad\Longrightarrow\quad m < ny.
+\]
+Together with \(nx < m\) from (2) we have \(nx < m < ny\). Dividing by the positive number \(n\) gives
+\[
+x < \frac{m}{n} < y.
+\]
+Choosing \(r = m/n\in\Q\) completes the proof.
+\end{proof}
+
+\newpage
+%=============================================================================
+% SECTION B
+%=============================================================================
+\section{Section B}
+
+\subsection{Definitions}
+
+\begin{definition}[Sequence of Real Numbers]
+A \textbf{sequence} of real numbers is a function \(x:\N\to\R\). We write \(x_n\coloneqq x(n)\) for the \(n\)-th term and denote the sequence by \((x_n)_{n=1}^\infty\) or simply \((x_n)\).
+\end{definition}
+
+\begin{definition}[Convergence and Limit]
+A sequence \((x_n)\) \textbf{converges} to a real number \(L\) if for every \(\eps>0\) there exists a natural number \(K(\eps)\) such that
+\[
+\abs{x_n - L} < \eps \qquad\text{for all } n\ge K(\eps).
+\]
+We then write \(\lim_{n\to\infty} x_n = L\) or \(x_n\to L\), and call \(L\) the \textbf{limit} of the sequence. A sequence that does not converge is called \textbf{divergent}.
+\end{definition}
+
+\begin{definition}[Tail of a Sequence]
+Given a sequence \((x_n)\) and an integer \(m\in\N\), the \textbf{\(m\)-tail} of \((x_n)\) is the subsequence consisting of the terms from position \(m+1\) onward:
+\[
+(x_{m+n})_{n=1}^\infty = (x_{m+1},\, x_{m+2},\, x_{m+3},\,\dots).
+\]
+\end{definition}
+
+\begin{definition}[Bounded Sequence]
+A sequence \((x_n)\) is \textbf{bounded} if there exists a constant \(M>0\) such that \(\abs{x_n}\le M\) for all \(n\in\N\).
+\end{definition}
+
+\begin{definition}[Monotone Sequence]
+A sequence \((x_n)\) is
+\begin{itemize}
+    \item \textbf{increasing} if \(x_n\le x_{n+1}\) for all \(n\in\N\);
+    \item \textbf{decreasing} if \(x_n\ge x_{n+1}\) for all \(n\in\N\);
+    \item \textbf{monotone} if it is either increasing or decreasing.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Subsequence]
+Let \((x_n)\) be a sequence and let \(n_1<n_2<n_3<\cdots\) be a strictly increasing sequence of natural numbers. Then the sequence \((x_{n_k})_{k=1}^\infty\) is called a \textbf{subsequence} of \((x_n)\).
+\end{definition}
+
+\begin{definition}[Cauchy Sequence]
+A sequence \((x_n)\) is a \textbf{Cauchy sequence} if for every \(\eps>0\) there exists an integer \(H(\eps)\in\N\) such that
+\[
+\abs{x_m - x_n} < \eps \qquad\text{for all } m,n\ge H(\eps).
+\]
+\end{definition}
+
+\begin{definition}[Series]
+Let \((x_n)\) be a sequence of real numbers. The \textbf{series} generated by \((x_n)\) is the sequence \((s_k)\) of \textbf{partial sums} defined by
+\[
+s_k \coloneqq \sum_{n=1}^{k} x_n = x_1 + x_2 + \cdots + x_k.
+\]
+The series is said to \textbf{converge} if the sequence \((s_k)\) converges; its sum is \(\sum_{n=1}^{\infty} x_n \coloneqq \lim_{k\to\infty} s_k\). Otherwise the series \textbf{diverges}.
+\end{definition}
+
+\subsection{Theorems, Lemmas, and Proofs}
+
+% --- Uniqueness of Limits ---
+\textbf{Theorem 3.1.4 (Uniqueness of Limits).} A sequence of real numbers can have at most one limit.
+
+\begin{proof}
+Suppose \(x_n\to L\) and \(x_n\to L'\). Let \(\eps>0\). By definition there exist \(K_1,K_2\in\N\) such that
+\[
+\abs{x_n-L}<\frac{\eps}{2}\quad (n\ge K_1),\qquad 
+\abs{x_n-L'}<\frac{\eps}{2}\quad (n\ge K_2).
+\]
+Set \(K=\max\{K_1,K_2\}\). For any \(n\ge K\) the triangle inequality gives
+\[
+\abs{L-L'} \le \abs{L-x_n}+\abs{x_n-L'} < \frac{\eps}{2}+\frac{\eps}{2}= \eps.
+\]
+Thus \(\abs{L-L'}<\eps\) for every \(\eps>0\). By Theorem 2.1.7 we must have \(\abs{L-L'}=0\); hence \(L=L'\).
+\end{proof}
+
+% --- Convergent implies bounded ---
+\textbf{Theorem 3.1.5.} Every convergent sequence is bounded.
+
+\begin{proof}
+Let \(x_n\to L\). Take \(\eps=1\); there exists \(K\in\N\) such that \(\abs{x_n-L}<1\) for all \(n\ge K\). Then for \(n\ge K\),
+\[
+\abs{x_n} = \abs{(x_n-L)+L} \le \abs{x_n-L}+\abs{L} < 1+\abs{L}.
+\]
+Define
+\[
+M \coloneqq \max\set{\abs{x_1},\abs{x_2},\dots,\abs{x_{K-1}},\; 1+\abs{L}}.
+\]
+Clearly \(\abs{x_n}\le M\) for every \(n\in\N\); hence \((x_n)\) is bounded.
+\end{proof}
+
+% --- Squeeze Theorem ---
+\textbf{Theorem 3.1.9 (Squeeze Theorem).} Suppose that \(x_n\le y_n\le z_n\) for all \(n\in\N\) and that \(\lim x_n = \lim z_n = L\). Then \(\lim y_n = L\).
+
+\begin{proof}
+Let \(\eps>0\). Because \(x_n\to L\) and \(z_n\to L\), we can find \(K_1,K_2\in\N\) such that
+\[
+L-\eps < x_n \quad (n\ge K_1),\qquad z_n < L+\eps \quad (n\ge K_2).
+\]
+Choose \(K=\max\{K_1,K_2\}\). For every \(n\ge K\) we have
+\[
+L-\eps < x_n \le y_n \le z_n < L+\eps,
+\]
+which is equivalent to \(\abs{y_n-L}<\eps\). Therefore \(y_n\to L\).
+\end{proof}
+
+% --- Limit Laws for Sequences ---
+\textbf{Theorem 3.2.2 (Limit Laws for Sequences).} Let \((x_n)\) and \((y_n)\) be convergent sequences with \(\lim x_n = x\) and \(\lim y_n = y\). Then:
+\begin{enumerate}[label=(\alph*)]
+    \item \(\lim (x_n + y_n) = x + y\);
+    \item \(\lim (x_n - y_n) = x - y\);
+    \item \(\lim (x_n y_n) = x y\);
+    \item if \(y\neq0\) and \(y_n\neq0\) for all \(n\), then \(\lim (x_n / y_n) = x/y\).
+\end{enumerate}
+
+\begin{proof}
+\textbf{(a)} Given \(\eps>0\), choose \(K_1,K_2\) such that
+\[
+\abs{x_n-x}<\frac{\eps}{2}\quad (n\ge K_1),\qquad 
+\abs{y_n-y}<\frac{\eps}{2}\quad (n\ge K_2).
+\]
+Take \(K=\max\{K_1,K_2\}\). For \(n\ge K\),
+\[
+\abs{(x_n+y_n)-(x+y)} \le \abs{x_n-x}+\abs{y_n-y} < \frac{\eps}{2}+\frac{\eps}{2}=\eps.
+\]
+
+\textbf{(b)} Apply (a) to the sequences \((x_n)\) and \((-y_n)\), noting that \(\lim(-y_n) = -y\).
+
+\textbf{(c)} Write the difference as
+\[
+x_ny_n - xy = x_n(y_n-y) + y(x_n-x).
+\]
+Since \((x_n)\) converges, it is bounded (Theorem 3.1.5); choose \(M>0\) with \(\abs{x_n}\le M\) for all \(n\).
+
+Let \(\eps>0\). Because \(y_n\to y\) and \(x_n\to x\), there exist integers \(K_1,K_2\) with
+\[
+\abs{y_n-y} < \frac{\eps}{2M}\;\;(n\ge K_1),\qquad 
+\abs{x_n-x} < \frac{\eps}{2(\abs{y}+1)}\;\;(n\ge K_2).
+\]
+For \(n\ge K\coloneqq\max\{K_1,K_2\}\) we estimate
+\[
+\abs{x_ny_n-xy} \le \abs{x_n}\,\abs{y_n-y} + \abs{y}\,\abs{x_n-x}
+< M\cdot\frac{\eps}{2M} + \abs{y}\cdot\frac{\eps}{2(\abs{y}+1)} < \frac{\eps}{2}+\frac{\eps}{2}=\eps.
+\]
+
+\textbf{(d)} It suffices to prove \(\lim(1/y_n)=1/y\) and then combine with (c).
+
+Since \(y\neq0\) and \(y_n\to y\), there exists \(K_0\) such that \(\abs{y_n} > \abs{y}/2 > 0\) for all \(n\ge K_0\). For such \(n\),
+\[
+\abs{\frac{1}{y_n}-\frac{1}{y}} = \frac{\abs{y-y_n}}{\abs{y_n}\abs{y}}
+\le \frac{\abs{y_n-y}}{(\abs{y}/2)\,\abs{y}} = \frac{2}{\abs{y}^2}\,\abs{y_n-y}.
+\]
+Now let \(\eps>0\). Choose \(K_1\ge K_0\) so that \(\abs{y_n-y} < \frac{\eps\abs{y}^2}{2}\) for all \(n\ge K_1\). Then
+\[
+\abs{\frac{1}{y_n}-\frac{1}{y}} < \eps \qquad (n\ge K_1),
+\]
+so \(1/y_n\to 1/y\).
+\end{proof}
+
+% --- Bolzano-Weierstrass Theorem ---
+\textbf{Theorem 3.4.8 (Bolzano–Weierstrass Theorem).} Every bounded sequence of real numbers possesses a convergent subsequence.
+
+\begin{proof}
+Let \((x_n)\) be bounded; then there exists an interval \([a,b]\) such that \(x_n\in[a,b]\) for all \(n\). Set \(a_1=a\), \(b_1=b\). We construct a sequence of nested intervals \([a_k,b_k]\) and a subsequence inductively.
+
+Suppose \([a_k,b_k]\) has been chosen and contains infinitely many terms of \((x_n)\). Bisect it at the midpoint \(c_k = (a_k+b_k)/2\). At least one of the subintervals \([a_k,c_k]\) or \([c_k,b_k]\) still contains infinitely many terms. Define \([a_{k+1},b_{k+1}]\) to be such a half, and pick an index \(n_k > n_{k-1}\) (with \(n_0=0\)) such that \(x_{n_k}\in[a_{k+1},b_{k+1}]\). This is possible because infinitely many terms lie in that half.
+
+The intervals satisfy \(b_{k+1}-a_{k+1} = (b_1-a_1)/2^k \to 0\). By the Nested Intervals Property (a consequence of the Completeness Axiom), the intersection \(\bigcap_{k=1}^{\infty}[a_k,b_k]\) consists of exactly one point, say \(L\). Because \(x_{n_k}\in[a_k,b_k]\), we have
+\[
+\abs{x_{n_k}-L} \le b_k-a_k \to 0 \quad\text{as } k\to\infty.
+\]
+Thus the subsequence \((x_{n_k})\) converges to \(L\).
+\end{proof}
+
+% --- Cauchy Lemmas and Criterion ---
+\textbf{Lemma 3.5.3.} Every convergent sequence is Cauchy.
+
+\begin{proof}
+Assume \(x_n\to L\) and let \(\eps>0\). Choose \(K\) such that \(\abs{x_n-L}<\eps/2\) for all \(n\ge K\). Then for any \(m,n\ge K\),
+\[
+\abs{x_m-x_n} \le \abs{x_m-L}+\abs{L-x_n} < \frac{\eps}{2}+\frac{\eps}{2} = \eps,
+\]
+which is the Cauchy condition.
+\end{proof}
+
+\textbf{Lemma 3.5.4.} Every Cauchy sequence is bounded.
+
+\begin{proof}
+Let \((x_n)\) be Cauchy. Take \(\eps=1\); there exists \(H\) such that \(\abs{x_m-x_n}<1\) for all \(m,n\ge H\). In particular, \(\abs{x_n-x_H}<1\) for \(n\ge H\), so \(\abs{x_n}\le \abs{x_H}+1\) for those \(n\). Setting
+\[
+M \coloneqq \max\set{\abs{x_1},\abs{x_2},\dots,\abs{x_{H-1}},\;\abs{x_H}+1}
+\]
+gives \(\abs{x_n}\le M\) for every \(n\).
+\end{proof}
+
+\textbf{Theorem 3.5.5 (Cauchy Convergence Criterion).} A sequence of real numbers converges if and only if it is a Cauchy sequence.
+
+\begin{proof}
+\((\Rightarrow)\) is Lemma 3.5.3.
+
+\((\Leftarrow)\) Let \((x_n)\) be Cauchy. By Lemma 3.5.4 it is bounded. The Bolzano–Weierstrass Theorem yields a convergent subsequence \((x_{n_k})\) with limit \(L\). We claim that the whole sequence converges to \(L\).
+
+Given \(\eps>0\), the Cauchy condition provides \(H\) with \(\abs{x_m-x_n}<\eps/2\) for all \(m,n\ge H\). Because \(x_{n_k}\to L\), there exists \(K\) such that \(\abs{x_{n_k}-L}<\eps/2\) whenever \(k\ge K\). Choose \(k\) large enough that \(k\ge K\) and \(n_k\ge H\). Then for any \(n\ge H\),
+\[
+\abs{x_n-L} \le \abs{x_n-x_{n_k}} + \abs{x_{n_k}-L} < \frac{\eps}{2}+\frac{\eps}{2} = \eps.
+\]
+Hence \(x_n\to L\), proving convergence.
+\end{proof}
+
+% --- nth Term Test ---
+\textbf{Theorem 3.7.3 (The \(n\)th Term Test).} If the series \(\sum_{n=1}^{\infty} x_n\) converges, then \(\lim_{n\to\infty} x_n = 0\).
+
+\begin{proof}
+Let \(s_k = \sum_{n=1}^{k} x_n\) be the partial sums, and suppose \(s_k \to s\). For \(n\ge 2\) we have \(x_n = s_n - s_{n-1}\). Since both \(s_n\) and \(s_{n-1}\) converge to \(s\),
+\[
+\lim_{n\to\infty} x_n = \lim_{n\to\infty}(s_n - s_{n-1}) = s - s = 0. \qedhere
+\]
+\end{proof}
+
+\begin{remark}
+The converse is false: the harmonic series \(\sum_{n=1}^{\infty} \frac{1}{n}\) diverges even though \(\frac{1}{n}\to 0\).
+\end{remark}
+
+\newpage
+%=============================================================================
+% SECTION C
+%=============================================================================
+\section{Section C}
+
+\subsection{Definitions}
+
+\begin{definition}[Cluster Point]
+Let \(A\subseteq\R\). A point \(c\in\R\) is a \textbf{cluster point} (or \textbf{accumulation point}) of \(A\) if for every \(\delta>0\) the intersection \((A\setminus\{c\})\cap V_\delta(c)\) is nonempty. Equivalently, every \(\delta\)-neighborhood of \(c\) contains at least one point of \(A\) different from \(c\).
+\end{definition}
+
+\begin{definition}[Limit of a Function ($\varepsilon$--$\delta$ Definition)]
+Let \(A\subseteq\R\), \(f:A\to\R\), and let \(c\) be a cluster point of \(A\). We say that \(L\in\R\) is the \textbf{limit of \(f\) at \(c\)}, written \(\lim_{x\to c} f(x)=L\), if for every \(\eps>0\) there exists \(\delta>0\) such that for all \(x\in A\),
+\[
+0 < \abs{x-c} < \delta \quad\Longrightarrow\quad \abs{f(x)-L} < \eps.
+\]
+\end{definition}
+
+\begin{definition}[Bounded Function]
+A function \(f:A\to\R\) is \textbf{bounded on \(A\)} if its image \(f(A)\) is a bounded subset of \(\R\); i.e., there exists \(M>0\) with \(\abs{f(x)}\le M\) for all \(x\in A\). It is \textbf{bounded above} (resp. \textbf{bounded below}) if there exists a real number \(M\) such that \(f(x)\le M\) (resp. \(f(x)\ge M\)) for all \(x\in A\).
+\end{definition}
+
+\begin{definition}[Right-Hand Limit]
+Let \(A\subseteq\R\), \(f:A\to\R\), and let \(c\) be a cluster point of \(A\cap(c,\infty)\). We say \(L\in\R\) is the \textbf{right-hand limit} of \(f\) at \(c\), denoted \(\lim_{x\to c^+} f(x)=L\), if for every \(\eps>0\) there exists \(\delta>0\) such that for all \(x\in A\),
+\[
+c < x < c+\delta \quad\Longrightarrow\quad \abs{f(x)-L} < \eps.
+\]
+The left-hand limit is defined analogously.
+\end{definition}
+
+\begin{definition}[Continuous Function]
+Let \(A\subseteq\R\) and \(f:A\to\R\).
+\begin{itemize}
+    \item \(f\) is \textbf{continuous at a point} \(c\in A\) if for every \(\eps>0\) there exists \(\delta>0\) such that for all \(x\in A\),
+    \[
+    \abs{x-c}<\delta \;\Longrightarrow\; \abs{f(x)-f(c)}<\eps.
+    \]
+    If \(c\) is a cluster point of \(A\), this is equivalent to \(\lim_{x\to c}f(x)=f(c)\).
+    \item \(f\) is \textbf{continuous on \(A\)} if it is continuous at every point of \(A\).
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Absolute Maximum/Minimum]
+Let \(f:A\to\R\). A point \(x^*\in A\) is an \textbf{absolute maximum} of \(f\) on \(A\) if \(f(x^*)\ge f(x)\) for all \(x\in A\); the value \(f(x^*)\) is the maximum value. Absolute minimum is defined similarly with the inequality reversed.
+\end{definition}
+
+\begin{definition}[Uniform Continuity]
+A function \(f:A\to\R\) is \textbf{uniformly continuous on \(A\)} if for every \(\eps>0\) there exists a \(\delta>0\) (depending only on \(\eps\)) such that for all \(x,u\in A\),
+\[
+\abs{x-u}<\delta \quad\Longrightarrow\quad \abs{f(x)-f(u)}<\eps.
+\]
+The crucial point is that the same \(\delta\) works for every pair of points in \(A\).
+\end{definition}
+
+\begin{definition}[Lipschitz Function]
+A function \(f:A\to\R\) is called a \textbf{Lipschitz function} (or satisfies a \textbf{Lipschitz condition}) on \(A\) if there exists a constant \(K>0\) such that
+\[
+\abs{f(x)-f(u)} \le K\abs{x-u} \qquad\text{for all } x,u\in A.
+\]
+The number \(K\) is a \textbf{Lipschitz constant} for \(f\).
+\end{definition}
+
+\subsection{Theorems, Lemmas, and Proofs}
+
+% --- Sequential Criterion ---
+\textbf{Theorem 4.1.5 (Sequential Criterion for Functional Limits).} Let \(A\subseteq\R\), \(f:A\to\R\), and let \(c\) be a cluster point of \(A\). Then \(\lim_{x\to c}f(x)=L\) if and only if for every sequence \((x_n)\) in \(A\setminus\{c\}\) with \(x_n\to c\), we have \(f(x_n)\to L\).
+
+\begin{proof}
+\((\Rightarrow)\) Assume \(\lim_{x\to c}f(x)=L\) and let \((x_n)\) be a sequence in \(A\setminus\{c\}\) with \(x_n\to c\). Given \(\eps>0\), choose \(\delta>0\) such that \(0<\abs{x-c}<\delta,\;x\in A \Rightarrow \abs{f(x)-L}<\eps\). Because \(x_n\to c\) and \(x_n\neq c\), there exists \(K\) such that \(0<\abs{x_n-c}<\delta\) for all \(n\ge K\). Hence \(\abs{f(x_n)-L}<\eps\) for \(n\ge K\); i.e., \(f(x_n)\to L\).
+
+\((\Leftarrow)\) We prove the contrapositive. Suppose \(\lim_{x\to c}f(x)\neq L\). Then there exists \(\eps_0>0\) such that for every \(\delta>0\) we can find \(x_\delta\in A\) with \(0<\abs{x_\delta-c}<\delta\) yet \(\abs{f(x_\delta)-L}\ge\eps_0\). Taking \(\delta=1/n\) (\(n\in\N\)) yields a sequence \((x_n)\) in \(A\setminus\{c\}\) with \(\abs{x_n-c}<1/n\) and \(\abs{f(x_n)-L}\ge\eps_0\). Then \(x_n\to c\) but \(f(x_n)\not\to L\), completing the contrapositive.
+\end{proof}
+
+% --- Limit Laws for Functions ---
+\textbf{Theorem 4.2.2 (Limit Laws for Functions).} Let \(A\subseteq\R\), \(f,g:A\to\R\), and let \(c\) be a cluster point of \(A\). If \(\lim_{x\to c}f(x)=L\) and \(\lim_{x\to c}g(x)=M\), then
+\begin{enumerate}[label=(\alph*)]
+    \item \(\lim_{x\to c}[f(x)+g(x)] = L+M\);
+    \item \(\lim_{x\to c}[f(x)\,g(x)] = L\cdot M\);
+    \item if \(M\neq0\), then \(\lim_{x\to c}[f(x)/g(x)] = L/M\).
+\end{enumerate}
+
+\begin{proof}
+Let \((x_n)\) be an arbitrary sequence in \(A\setminus\{c\}\) with \(x_n\to c\). By the Sequential Criterion, \(f(x_n)\to L\) and \(g(x_n)\to M\). Applying the limit laws for sequences (Theorem 3.2.2) gives
+\[
+f(x_n)+g(x_n)\to L+M,\quad f(x_n)g(x_n)\to L M,\quad \frac{f(x_n)}{g(x_n)}\to \frac{L}{M}\;\;(\text{if }M\neq0).
+\]
+Since this holds for every such sequence, the Sequential Criterion (in the converse direction) yields the corresponding limits for the function combinations.
+\end{proof}
+
+% --- Squeeze Theorem for Functions ---
+\textbf{Theorem 4.2.4 (Squeeze Theorem for Functions).} Let \(A\subseteq\R\), \(f,g,h:A\to\R\), and let \(c\) be a cluster point of \(A\). If
+\[
+f(x)\le g(x)\le h(x)\quad\text{for all }x\in A,\;x\neq c,
+\]
+and \(\lim_{x\to c}f(x)=\lim_{x\to c}h(x)=L\), then \(\lim_{x\to c}g(x)=L\).
+
+\begin{proof}
+Take a sequence \((x_n)\) in \(A\setminus\{c\}\) with \(x_n\to c\). Then \(f(x_n)\le g(x_n)\le h(x_n)\) for all \(n\), and \(f(x_n)\to L\), \(h(x_n)\to L\). By the Squeeze Theorem for sequences (Theorem 3.1.9), \(g(x_n)\to L\). The Sequential Criterion now gives \(\lim_{x\to c}g(x)=L\).
+\end{proof}
+
+% --- Theorem 4.2.6 ---
+\textbf{Theorem 4.2.6.} Let \(A\subseteq\R\), \(f:A\to\R\), and let \(c\) be a cluster point of \(A\). If \(\lim_{x\to c}f(x)=L>0\), then there exists a \(\delta\)-neighborhood \(V_\delta(c)\) such that \(f(x)>0\) for all \(x\in A\cap V_\delta(c)\) with \(x\neq c\).
+
+\begin{proof}
+Choose \(\eps = L/2>0\). By definition of the limit, there exists \(\delta>0\) such that \(\abs{f(x)-L}<L/2\) whenever \(x\in A\) and \(0<\abs{x-c}<\delta\). The inequality \(\abs{f(x)-L}<L/2\) implies \(f(x) > L - L/2 = L/2 > 0\). Hence \(f(x)>0\) on the required set.
+\end{proof}
+
+% --- Theorem 4.2.7 ---
+\textbf{Theorem 4.2.7.} Let \(A\subseteq\R\), \(f,g:A\to\R\), and let \(c\) be a cluster point of \(A\). Suppose \(\lim_{x\to c}f(x)=L\) and \(\lim_{x\to c}g(x)=M\). If \(f(x)\le g(x)\) for all \(x\in A\) with \(x\neq c\), then \(L\le M\).
+
+\begin{proof}
+Assume, to the contrary, that \(L>M\). Set \(\eps = (L-M)/2>0\). By the definition of limits we can find \(\delta_1,\delta_2>0\) such that
+\[
+0<\abs{x-c}<\delta_1 \Rightarrow \abs{f(x)-L}<\eps,\qquad
+0<\abs{x-c}<\delta_2 \Rightarrow \abs{g(x)-M}<\eps.
+\]
+Let \(\delta = \min\{\delta_1,\delta_2\}\) and pick a point \(x_0\in A\) with \(0<\abs{x_0-c}<\delta\) (such a point exists because \(c\) is a cluster point). Then
+\[
+f(x_0) > L-\eps = L - \frac{L-M}{2} = \frac{L+M}{2},
+\]
+\[
+g(x_0) < M+\eps = M + \frac{L-M}{2} = \frac{L+M}{2}.
+\]
+Thus \(f(x_0) > g(x_0)\), contradicting the hypothesis \(f(x)\le g(x)\). Therefore \(L\le M\).
+\end{proof}
+
+% --- Combinations of Continuous Functions ---
+\textbf{Theorem 5.2.1 (Continuity of Sums, Products, Quotients).} Let \(A\subseteq\R\), \(f,g:A\to\R\), and let \(c\in A\). If \(f\) and \(g\) are continuous at \(c\), then
+\begin{enumerate}[label=(\alph*)]
+    \item \(f+g\) is continuous at \(c\);
+    \item \(f-g\) is continuous at \(c\);
+    \item \(fg\) is continuous at \(c\);
+    \item \(b f\) is continuous at \(c\) for any \(b\in\R\);
+    \item \(f/g\) is continuous at \(c\), provided \(g(c)\neq0\).
+\end{enumerate}
+
+\begin{proof}
+If \(c\) is an isolated point of \(A\) (i.e., not a cluster point), continuity is automatic. If \(c\) is a cluster point, then \(\lim_{x\to c}f(x)=f(c)\) and \(\lim_{x\to c}g(x)=g(c)\). The stated results follow directly from the limit laws for functions (Theorem 4.2.2). For instance,
+\[
+\lim_{x\to c}(f+g)(x) = \lim_{x\to c}f(x) + \lim_{x\to c}g(x) = f(c)+g(c) = (f+g)(c),
+\]
+so \(f+g\) is continuous at \(c\). The other parts are analogous.
+\end{proof}
+
+% --- Composition of Continuous Functions ---
+\textbf{Theorem 5.2.6 (Continuity of Composition).} Let \(A,B\subseteq\R\) and let \(f:A\to\R\), \(g:B\to\R\) with \(f(A)\subseteq B\). If \(f\) is continuous at \(c\in A\) and \(g\) is continuous at \(f(c)\in B\), then the composition \(g\circ f:A\to\R\) is continuous at \(c\).
+
+\begin{proof}
+Let \(\eps>0\). Since \(g\) is continuous at \(b\coloneqq f(c)\), there exists \(\delta_1>0\) such that for all \(y\in B\),
+\[
+\abs{y-b}<\delta_1 \;\Longrightarrow\; \abs{g(y)-g(b)}<\eps.
+\]
+By continuity of \(f\) at \(c\), there exists \(\delta>0\) such that for all \(x\in A\),
+\[
+\abs{x-c}<\delta \;\Longrightarrow\; \abs{f(x)-f(c)}<\delta_1.
+\]
+Now, if \(x\in A\) and \(\abs{x-c}<\delta\), then \(f(x)\in B\) and \(\abs{f(x)-b}<\delta_1\), so \(\abs{g(f(x))-g(b)}<\eps\). That is,
+\[
+\abs{(g\circ f)(x)-(g\circ f)(c)}<\eps,
+\]
+proving continuity of \(g\circ f\) at \(c\).
+\end{proof}
+
+\newpage
+%=============================================================================
+% SECTION D
+%=============================================================================
+\section{Section D}
+
+\subsection{Derivative and Differentiability}
+
+\begin{definition}[Derivative]
+Let \(I\subseteq\R\) be an interval, \(f:I\to\R\), and \(c\in I\). The \textbf{derivative of \(f\) at \(c\)} is defined by
+\[
+f'(c) \coloneqq \lim_{x\to c} \frac{f(x)-f(c)}{x-c},
+\]
+provided this limit exists. In that case we say \(f\) is \textbf{differentiable at \(c\)}. If \(f\) is differentiable at every point of \(I\), it is \textbf{differentiable on \(I\)}.
+\end{definition}
+
+\textbf{Theorem (Differentiability Implies Continuity).} If \(f:I\to\R\) is differentiable at \(c\in I\), then \(f\) is continuous at \(c\).
+
+\begin{proof}
+Since \(f'(c) = \lim_{x\to c}\frac{f(x)-f(c)}{x-c}\) exists, we can write
+\[
+\lim_{x\to c}\bigl(f(x)-f(c)\bigr) = \lim_{x\to c}\left[\frac{f(x)-f(c)}{x-c}\,(x-c)\right].
+\]
+The limit of the product is the product of the limits (the first factor tends to \(f'(c)\), the second to \(0\)). Hence the limit is \(f'(c)\cdot0 = 0\), which gives \(\lim_{x\to c}f(x)=f(c)\). Thus \(f\) is continuous at \(c\).
+\end{proof}
+
+\begin{remark}
+The converse is false: \(f(x)=\abs{x}\) is continuous at \(0\) but not differentiable there, because
+\[
+\lim_{x\to0^+}\frac{\abs{x}}{x}=1,\qquad \lim_{x\to0^-}\frac{\abs{x}}{x}=-1.
+\]
+\end{remark}
+
+\subsection{Extreme Value Theorem}
+
+\textbf{Theorem (Extreme Value Theorem).} If \(f:[a,b]\to\R\) is continuous on the closed bounded interval \([a,b]\), then \(f\) attains its absolute maximum and minimum; i.e., there exist \(x^*,x_*\in[a,b]\) such that
+\[
+f(x_*)\le f(x)\le f(x^*) \quad\text{for all } x\in[a,b].
+\]
+
+\begin{proof}
+We first prove that \(f\) is bounded on \([a,b]\). Suppose, for contradiction, that \(f\) is not bounded above. Then for each \(n\in\N\) there exists \(x_n\in[a,b]\) with \(f(x_n)>n\). The sequence \((x_n)\) lies in \([a,b]\) and is therefore bounded. By the Bolzano–Weierstrass Theorem, it has a convergent subsequence \((x_{n_k})\) with limit \(c\in[a,b]\) (the interval is closed, so the limit stays inside). By continuity, \(f(x_{n_k})\to f(c)\), which implies that \((f(x_{n_k}))\) is bounded. Yet \(f(x_{n_k})>n_k\ge k\), forcing \(f(x_{n_k})\to\infty\), a contradiction. Hence \(f\) is bounded above. A similar argument (or applying the same reasoning to \(-f\)) shows \(f\) is bounded below.
+
+Now set \(M\coloneqq\sup\set{f(x):x\in[a,b]}\); this supremum exists because \(f\) is bounded above. For each \(n\in\N\), the number \(M-1/n\) is not an upper bound, so we can choose \(u_n\in[a,b]\) with \(f(u_n)>M-1/n\). This gives a sequence \((u_n)\) with \(f(u_n)\to M\). Again extract a convergent subsequence \(u_{n_k}\to x^*\in[a,b]\). By continuity, \(f(u_{n_k})\to f(x^*)\). But \(f(u_{n_k})\) also converges to \(M\) (as a subsequence of a sequence converging to \(M\)). Hence \(f(x^*)=M\), and \(x^*\) is an absolute maximum.
+
+The existence of an absolute minimum follows by applying the same argument to \(-f\) (or repeating the construction with the infimum). Thus \(f\) attains both extreme values.
+\end{proof}
+
+\subsection{Interior Extremum Theorem}
+
+\textbf{Theorem (Interior Extremum Theorem).} Let \(c\) be an interior point of an interval \(I\) and let \(f:I\to\R\). If \(f\) has a local extremum (maximum or minimum) at \(c\) and \(f'(c)\) exists, then \(f'(c)=0\).
+
+\begin{proof}
+We treat the case of a local maximum; the minimum case is symmetric. Since \(c\) is a local maximum, there exists \(\delta>0\) such that \((c-\delta,c+\delta)\subseteq I\) and \(f(x)\le f(c)\) for all \(x\) in this interval.
+
+For \(x\in(c,c+\delta)\) we have \(x-c>0\) and \(f(x)-f(c)\le0\), hence
+\[
+\frac{f(x)-f(c)}{x-c}\le0 \quad\Longrightarrow\quad \lim_{x\to c^+}\frac{f(x)-f(c)}{x-c}\le0.
+\]
+Because \(f\) is differentiable at \(c\), the two‑sided limit exists and equals the right‑hand limit, so \(f'(c)\le0\).
+
+For \(x\in(c-\delta,c)\) we have \(x-c<0\) and \(f(x)-f(c)\le0\), giving
+\[
+\frac{f(x)-f(c)}{x-c}\ge0 \quad\Longrightarrow\quad \lim_{x\to c^-}\frac{f(x)-f(c)}{x-c}\ge0,
+\]
+so \(f'(c)\ge0\). The inequalities \(f'(c)\le0\) and \(f'(c)\ge0\) together force \(f'(c)=0\).
+\end{proof}
+
+\subsection{Rolle's Theorem}
+
+\textbf{Theorem (Rolle's Theorem).} Let \(f\) be continuous on \([a,b]\) and differentiable on \((a,b)\). If \(f(a)=f(b)\), then there exists \(c\in(a,b)\) such that \(f'(c)=0\).
+
+\begin{proof}
+If \(f\) is constant on \([a,b]\), then \(f'(x)=0\) for every \(x\in(a,b)\) and we are done.
+
+If \(f\) is not constant, then because \(f(a)=f(b)\), the function attains a value different from \(f(a)\). By the Extreme Value Theorem, \(f\) attains a maximum \(M\) and a minimum \(m\) on \([a,b]\). At least one of \(M\) or \(m\) differs from \(f(a)\); suppose \(M>f(a)\) (the case \(m<f(a)\) is analogous). The maximum \(M\) cannot be attained at the endpoints because \(f(a)=f(b)<M\); therefore it is attained at some interior point \(c\in(a,b)\). Thus \(f\) has a local maximum at \(c\), and by the Interior Extremum Theorem, \(f'(c)=0\).
+\end{proof}
+
+\subsection{Mean Value Theorem}
+
+\textbf{Theorem (Mean Value Theorem).} Let \(f\) be continuous on \([a,b]\) and differentiable on \((a,b)\). Then there exists \(c\in(a,b)\) such that
+\[
+f'(c) = \frac{f(b)-f(a)}{b-a}.
+\]
+
+\begin{proof}
+Define the auxiliary function
+\[
+\varphi(x) \coloneqq f(x) - f(a) - \frac{f(b)-f(a)}{b-a}\,(x-a).
+\]
+The function \(\varphi\) is continuous on \([a,b]\) and differentiable on \((a,b)\) (it is built from \(f\) and a linear function). Moreover,
+\[
+\varphi(a)=0,\qquad \varphi(b)=f(b)-f(a)-\frac{f(b)-f(a)}{b-a}(b-a)=0.
+\]
+Thus \(\varphi\) satisfies the hypotheses of Rolle's Theorem. Hence there exists \(c\in(a,b)\) with \(\varphi'(c)=0\). Computing the derivative,
+\[
+\varphi'(x) = f'(x) - \frac{f(b)-f(a)}{b-a},
+\]
+so \(\varphi'(c)=0\) yields exactly \(f'(c) = \frac{f(b)-f(a)}{b-a}\).
+\end{proof}
+
+\subsection{Darboux's Theorem (Intermediate Value Property of Derivatives)}
+
+\textbf{Theorem (Darboux's Theorem).} Let \(I\) be an interval and \(f:I\to\R\) differentiable on \(I\). If \(a,b\in I\) with \(a<b\) and \(k\) is a number lying between \(f'(a)\) and \(f'(b)\), then there exists \(c\in(a,b)\) such that \(f'(c)=k\).
+
+\begin{proof}
+Assume without loss of generality that \(f'(a) < k < f'(b)\). Define \(g(x)\coloneqq f(x)-kx\) on \(I\). Then \(g\) is differentiable with \(g'(x)=f'(x)-k\). We have
+\[
+g'(a) = f'(a)-k < 0,\qquad g'(b) = f'(b)-k > 0.
+\]
+Because \(g'(a)<0\), \(g\) is strictly decreasing immediately to the right of \(a\); thus there exists \(\delta_1>0\) such that \(g(x)<g(a)\) for \(x\in(a,a+\delta_1)\). Similarly, \(g'(b)>0\) implies \(g\) is strictly increasing just left of \(b\), so there is \(\delta_2>0\) with \(g(x)<g(b)\) for \(x\in(b-\delta_2,b)\). In particular, neither \(a\) nor \(b\) can be a minimum point of \(g\) on \([a,b]\).
+
+Since \(g\) is continuous on \([a,b]\) (differentiability implies continuity), the Extreme Value Theorem guarantees that \(g\) attains an absolute minimum at some point \(c\in[a,b]\). By the observations above, \(c\neq a\) and \(c\neq b\); therefore \(c\in(a,b)\). At this interior minimum, \(g'(c)\) exists and, by the Interior Extremum Theorem, \(g'(c)=0\). Hence \(f'(c)-k=0\), i.e., \(f'(c)=k\).
+\end{proof}
+
+\subsection{Increasing and Decreasing Functions}
+
+\textbf{Theorem (Monotonicity via the Derivative).} Let \(f\) be continuous on \([a,b]\) and differentiable on \((a,b)\).
+\begin{enumerate}[label=(\alph*)]
+    \item If \(f'(x)\ge0\) for all \(x\in(a,b)\), then \(f\) is increasing on \([a,b]\).
+    \item If \(f'(x)>0\) for all \(x\in(a,b)\), then \(f\) is strictly increasing on \([a,b]\).
+    \item If \(f'(x)\le0\) for all \(x\in(a,b)\), then \(f\) is decreasing on \([a,b]\).
+    \item If \(f'(x)<0\) for all \(x\in(a,b)\), then \(f\) is strictly decreasing on \([a,b]\).
+    \item If \(f'(x)=0\) for all \(x\in(a,b)\), then \(f\) is constant on \([a,b]\).
+\end{enumerate}
+
+\begin{proof}
+We prove (a) and (b); the remaining cases follow by applying these to \(-f\).
+
+Let \(x_1,x_2\in[a,b]\) with \(x_1<x_2\). By the Mean Value Theorem, there exists \(c\in(x_1,x_2)\) such that
+\[
+f(x_2)-f(x_1) = f'(c)(x_2-x_1).
+\]
+If \(f'(x)\ge0\) on \((a,b)\), then \(f'(c)\ge0\) and \(x_2-x_1>0\) give \(f(x_2)-f(x_1)\ge0\), so \(f(x_1)\le f(x_2)\). Thus \(f\) is increasing.
+
+If \(f'(x)>0\) on \((a,b)\), then \(f'(c)>0\) and the same product yields \(f(x_2)-f(x_1)>0\), i.e., \(f(x_1)<f(x_2)\). Hence \(f\) is strictly increasing.
+
+Part (e) follows by the same MVT argument: for any \(x_1,x_2\) the difference is zero, so \(f\) is constant.
+\end{proof}
+
+\subsection{Taylor's Theorem with Lagrange Remainder}
+
+\textbf{Theorem (Taylor's Theorem).} Let \(n\in\N\), let \(I\) be an interval, and let \(f:I\to\R\) be such that \(f,f',\dots,f^{(n)}\) are continuous on \(I\) and \(f^{(n+1)}\) exists on the interior of \(I\). If \(a,x\in I\), then there exists a point \(c\) between \(a\) and \(x\) such that
+\[
+f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x-a)^k + R_{n+1}(x),
+\]
+where the remainder (Lagrange form) is
+\[
+R_{n+1}(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}.
+\]
+
+\begin{proof}
+Fix \(x\neq a\) (the statement is trivial for \(x=a\)). Define the function
+\[
+F(t) \coloneqq f(x) - \sum_{k=0}^{n} \frac{f^{(k)}(t)}{k!}(x-t)^k,
+\]
+for \(t\) between \(a\) and \(x\). Then
+\[
+F(x)=f(x)-f(x)=0,\qquad F(a)=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^k = R_{n+1}(x).
+\]
+A straightforward differentiation (telescoping sum) yields
+\[
+F'(t) = -\frac{f^{(n+1)}(t)}{n!}(x-t)^n.
+\]
+Indeed, the derivative of the term \(\frac{f^{(k)}(t)}{k!}(x-t)^k\) is
+\[
+\frac{f^{(k+1)}(t)}{k!}(x-t)^k - \frac{f^{(k)}(t)}{(k-1)!}(x-t)^{k-1},
+\]
+and summing from \(k=0\) to \(n\) cancels all intermediate terms, leaving only the stated expression.
+
+Now introduce the auxiliary function
+\[
+G(t) \coloneqq F(t) - \left(\frac{x-t}{x-a}\right)^{\!n+1} F(a).
+\]
+Then \(G(a)=F(a)-F(a)=0\) and \(G(x)=F(x)-0=0\). The function \(G\) is continuous on the closed interval between \(a\) and \(x\) and differentiable on the open interval. By Rolle's Theorem, there exists a point \(c\) strictly between \(a\) and \(x\) such that \(G'(c)=0\).
+
+Compute the derivative:
+\[
+G'(t) = F'(t) + \frac{(n+1)(x-t)^n}{(x-a)^{n+1}} F(a).
+\]
+Setting \(t=c\) and using \(F'(c) = -\frac{f^{(n+1)}(c)}{n!}(x-c)^n\), we get
+\[
+-\frac{f^{(n+1)}(c)}{n!}(x-c)^n + \frac{(n+1)(x-c)^n}{(x-a)^{n+1}} F(a) = 0.
+\]
+Since \(c\) is between \(a\) and \(x\) and \(c\neq x\), the factor \((x-c)^n\) is non‑zero. Canceling it yields
+\[
+\frac{f^{(n+1)}(c)}{n!} = \frac{n+1}{(x-a)^{n+1}} F(a),
+\]
+or equivalently
+\[
+F(a) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}.
+\]
+Recalling that \(F(a)=R_{n+1}(x)\) completes the proof.
+\end{proof}
+
+\subsection{L'H\^opital's Rule}
+
+First we recall Cauchy's Mean Value Theorem, which is used in the proof.
+
+\textbf{Cauchy's Mean Value Theorem.} Let \(f,g\) be continuous on \([a,b]\) and differentiable on \((a,b)\). Then there exists \(c\in(a,b)\) such that
+\[
+\bigl(f(b)-f(a)\bigr)g'(c) = \bigl(g(b)-g(a)\bigr)f'(c).
+\]
+
+\textbf{Theorem (L'H\^opital's Rule, \(0/0\) Form).} Let \(f,g\) be differentiable on an interval \((a,b)\) and let \(c\in[a,b)\). Suppose
+\begin{enumerate}[label=(\roman*)]
+    \item \(\lim_{x\to c^+} f(x) = 0\) and \(\lim_{x\to c^+} g(x) = 0\);
+    \item \(g'(x)\neq0\) for all \(x\in(c,b)\);
+    \item \(\lim_{x\to c^+} \frac{f'(x)}{g'(x)} = L\), where \(L\) is a real number (the case \(L=\pm\infty\) can be handled similarly).
+\end{enumerate}
+Then
+\[
+\lim_{x\to c^+} \frac{f(x)}{g(x)} = L.
+\]
+
+\begin{proof}
+Extend \(f\) and \(g\) continuously by defining \(f(c)=g(c)=0\). Then \(f\) and \(g\) are continuous on \([c,b)\) and differentiable on \((c,b)\).
+
+Let \(\eps>0\). By (iii) there exists \(\delta>0\) with \(c+\delta<b\) such that for all \(t\in(c,c+\delta)\),
+\[
+\abs{\frac{f'(t)}{g'(t)} - L} < \eps.
+\]
+Take any \(x\in(c,c+\delta)\). Apply Cauchy's Mean Value Theorem to \(f\) and \(g\) on the interval \([c,x]\). There exists a point \(t\in(c,x)\) (hence \(t\in(c,c+\delta)\)) such that
+\[
+\frac{f(x)-f(c)}{g(x)-g(c)} = \frac{f'(t)}{g'(t)}.
+\]
+Since \(f(c)=g(c)=0\) and \(g(x)\neq0\) (if \(g(x)=0\), Rolle's Theorem would give a zero of \(g'\) in \((c,x)\), contradicting (ii)), we have
+\[
+\frac{f(x)}{g(x)} = \frac{f'(t)}{g'(t)}.
+\]
+Consequently,
+\[
+\abs{\frac{f(x)}{g(x)} - L} = \abs{\frac{f'(t)}{g'(t)} - L} < \eps
+\]
+for all \(x\in(c,c+\delta)\). This proves \(\lim_{x\to c^+}\frac{f(x)}{g(x)}=L\).
+\end{proof}
+
+\begin{remark}
+L'H\^opital's Rule also holds for the \(\infty/\infty\) indeterminate form under analogous hypotheses, as well as for two‑sided limits.
+\end{remark}
+
+\end{document}

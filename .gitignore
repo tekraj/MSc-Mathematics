@@ -1,2 +1,17 @@
 .venv
 .Rproj.user
+*.fls
+*.gz
+*.aux
+*.toc
+*.out
+*.log
+*.auxlock
+*.synctex.gz
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc

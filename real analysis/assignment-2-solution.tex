@@ -1,0 +1,763 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+% Page geometry
+\geometry{margin=1in}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{MATH 509 -- Real Analysis}
+\lhead{Assignment II Solutions}
+\cfoot{\thepage}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Custom commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\diam}{\operatorname{diam}}
+
+\title{
+    \textbf{Kathmandu University} \\[0.5cm]
+    \Large Assignment II -- Solutions \\[0.3cm]
+    \large MATH 509: Real Analysis \\[0.3cm]
+    \normalsize \textit{Text Book: Mathematical Analysis (2nd Edition)} \\
+    \normalsize \textit{by Tom M.\ Apostol}
+}
+\author{M.Sc.\ Mathematics}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%=============================================================================
+% SECTION A
+%=============================================================================
+\section{Section A: Metric Spaces and Continuity}
+
+%-----------------------------------------------------------------------------
+\subsection{Definitions}
+%-----------------------------------------------------------------------------
+
+\begin{definition}[Metric Space]
+A \textbf{metric space} is a pair $(S, d)$ where $S$ is a nonempty set and $d: S \times S \to \R$ is a function (called a \textbf{metric} or \textbf{distance function}) satisfying for all $x, y, z \in S$:
+\begin{enumerate}[label=(M\arabic*)]
+    \item $d(x, y) \geq 0$, and $d(x, y) = 0$ if and only if $x = y$ \textup{(positive definiteness)}.
+    \item $d(x, y) = d(y, x)$ \textup{(symmetry)}.
+    \item $d(x, y) \leq d(x, z) + d(z, y)$ \textup{(triangle inequality)}.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Convergent Sequence in a Metric Space]
+Let $(S, d)$ be a metric space. A sequence $\{p_n\}$ in $S$ is said to \textbf{converge} to a point $p \in S$ if for every $\eps > 0$ there exists an integer $N$ such that
+\[
+    d(p_n, p) < \eps \quad \text{for all } n \geq N.
+\]
+We write $p_n \to p$ or $\lim_{n \to \infty} p_n = p$.
+\end{definition}
+
+\begin{definition}[Cauchy Sequence in a Metric Space]
+A sequence $\{p_n\}$ in a metric space $(S, d)$ is called a \textbf{Cauchy sequence} if for every $\eps > 0$ there exists an integer $N$ such that
+\[
+    d(p_m, p_n) < \eps \quad \text{for all } m, n \geq N.
+\]
+\end{definition}
+
+\begin{definition}[Complete Metric Space]
+A metric space $(S, d)$ is said to be \textbf{complete} if every Cauchy sequence in $S$ converges to a point in $S$. Examples: $\R^n$ with the Euclidean metric is complete; $\Q$ with the usual metric is not complete.
+\end{definition}
+
+\begin{definition}[Continuous Function in a Metric Space]
+Let $(S, d_S)$ and $(T, d_T)$ be metric spaces. A function $f: S \to T$ is \textbf{continuous at a point} $p \in S$ if for every $\eps > 0$ there exists $\delta > 0$ such that
+\[
+    d_T(f(x), f(p)) < \eps \quad \text{whenever } d_S(x, p) < \delta.
+\]
+The function $f$ is \textbf{continuous on $S$} if it is continuous at every point of $S$.
+\end{definition}
+
+\begin{definition}[Uniformly Continuous Function in a Metric Space]
+Let $(S, d_S)$ and $(T, d_T)$ be metric spaces. A function $f: S \to T$ is \textbf{uniformly continuous on $S$} if for every $\eps > 0$ there exists $\delta > 0$ such that
+\[
+    d_T(f(x), f(y)) < \eps \quad \text{for all } x, y \in S \text{ with } d_S(x, y) < \delta.
+\]
+\textit{Note:} The crucial distinction from pointwise continuity is that $\delta$ depends only on $\eps$, not on any particular point.
+\end{definition}
+
+%-----------------------------------------------------------------------------
+\subsection{Theorems}
+%-----------------------------------------------------------------------------
+
+% --- Theorem 3.34 ---
+\begin{theorem}[Theorem 3.34 -- Convergent Sequences are Cauchy]
+In a metric space $(S, d)$, every convergent sequence is a Cauchy sequence.
+\end{theorem}
+
+\begin{proof}
+Let $\{p_n\}$ converge to $p$ in $S$. Let $\eps > 0$. There exists $N \in \N$ such that $d(p_n, p) < \eps/2$ for all $n \geq N$.
+
+For $m, n \geq N$, by the triangle inequality:
+\[
+    d(p_m, p_n) \leq d(p_m, p) + d(p, p_n) < \frac{\eps}{2} + \frac{\eps}{2} = \eps.
+\]
+Hence $\{p_n\}$ is a Cauchy sequence.
+\end{proof}
+
+% --- Theorem 3.38 ---
+\begin{theorem}[Theorem 3.38 -- Cauchy Sequence with Convergent Subsequence]
+In a metric space $(S, d)$, if a Cauchy sequence $\{p_n\}$ has a subsequence $\{p_{n_k}\}$ that converges to a point $p \in S$, then the entire sequence converges to $p$.
+\end{theorem}
+
+\begin{proof}
+Let $\eps > 0$.
+
+Since $\{p_n\}$ is Cauchy, there exists $N_1 \in \N$ such that
+\[
+    d(p_m, p_n) < \frac{\eps}{2} \quad \text{for all } m, n \geq N_1.
+\]
+
+Since $p_{n_k} \to p$, there exists $K \in \N$ such that
+\[
+    d(p_{n_k}, p) < \frac{\eps}{2} \quad \text{for all } k \geq K.
+\]
+
+Choose $k_0 \geq K$ such that $n_{k_0} \geq N_1$. Then for all $n \geq N_1$:
+\[
+    d(p_n, p) \leq d(p_n, p_{n_{k_0}}) + d(p_{n_{k_0}}, p) < \frac{\eps}{2} + \frac{\eps}{2} = \eps.
+\]
+Therefore $p_n \to p$.
+\end{proof}
+
+% --- Theorem 4.2 ---
+\begin{theorem}[Theorem 4.2 -- Sequential Criterion for Limits of Functions]
+Let $(S, d_S)$ and $(T, d_T)$ be metric spaces, $A \subseteq S$, $f: A \to T$, and let $p$ be an accumulation point of $A$. Then
+\[
+    \lim_{x \to p} f(x) = q
+\]
+if and only if for every sequence $\{p_n\}$ in $A$ with $p_n \neq p$ for all $n$ and $p_n \to p$, we have $f(p_n) \to q$.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$): Suppose $\lim_{x \to p} f(x) = q$. Let $\{p_n\}$ be a sequence in $A$ with $p_n \neq p$ and $p_n \to p$. Let $\eps > 0$. There exists $\delta > 0$ such that
+\[
+    d_T(f(x), q) < \eps \quad \text{whenever } x \in A \text{ and } 0 < d_S(x, p) < \delta.
+\]
+Since $p_n \to p$, there exists $N$ with $d_S(p_n, p) < \delta$ for all $n \geq N$. Since $p_n \neq p$, we have $0 < d_S(p_n, p) < \delta$, so $d_T(f(p_n), q) < \eps$ for all $n \geq N$. Hence $f(p_n) \to q$.
+
+\medskip
+($\Leftarrow$): We prove the contrapositive. Suppose $\lim_{x \to p} f(x) \neq q$. Then there exists $\eps_0 > 0$ such that for every $n \in \N$, there exists $p_n \in A$ with $0 < d_S(p_n, p) < 1/n$ but $d_T(f(p_n), q) \geq \eps_0$.
+
+Then $\{p_n\}$ is a sequence in $A$ with $p_n \neq p$, $p_n \to p$, but $f(p_n) \not\to q$. This shows the condition fails.
+\end{proof}
+
+% --- Theorem 4.8 ---
+\begin{theorem}[Theorem 4.8 -- Open Set Characterization of Continuity]
+Let $(S, d_S)$ and $(T, d_T)$ be metric spaces. A function $f: S \to T$ is continuous on $S$ if and only if $f^{-1}(G)$ is open in $S$ for every open set $G$ in $T$.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$): Suppose $f$ is continuous on $S$. Let $G$ be open in $T$. If $f^{-1}(G) = \emptyset$, it is open. Otherwise, let $p \in f^{-1}(G)$, so $f(p) \in G$. Since $G$ is open, there exists $\eps > 0$ with $B_T(f(p), \eps) \subseteq G$.
+
+Since $f$ is continuous at $p$, there exists $\delta > 0$ such that $d_T(f(x), f(p)) < \eps$ whenever $d_S(x, p) < \delta$. Thus $f(B_S(p, \delta)) \subseteq B_T(f(p), \eps) \subseteq G$, so $B_S(p, \delta) \subseteq f^{-1}(G)$. Hence $p$ is an interior point, and $f^{-1}(G)$ is open.
+
+\medskip
+($\Leftarrow$): Suppose $f^{-1}(G)$ is open for every open $G \subseteq T$. Let $p \in S$ and $\eps > 0$. The ball $B_T(f(p), \eps)$ is open in $T$, so $f^{-1}(B_T(f(p), \eps))$ is open in $S$.
+
+Since $p \in f^{-1}(B_T(f(p), \eps))$ and this set is open, there exists $\delta > 0$ with $B_S(p, \delta) \subseteq f^{-1}(B_T(f(p), \eps))$. Therefore $d_S(x, p) < \delta \implies d_T(f(x), f(p)) < \eps$. Hence $f$ is continuous at $p$.
+\end{proof}
+
+% --- Theorem 4.10 ---
+\begin{theorem}[Theorem 4.10 -- Continuous Image of a Compact Set]
+Let $(S, d_S)$ and $(T, d_T)$ be metric spaces and $f: S \to T$ be continuous. If $K \subseteq S$ is compact, then $f(K)$ is compact in $T$.
+\end{theorem}
+
+\begin{proof}
+Let $\{G_\alpha\}_{\alpha \in I}$ be an open cover of $f(K)$: $f(K) \subseteq \bigcup_\alpha G_\alpha$.
+
+Since $f$ is continuous, each $f^{-1}(G_\alpha)$ is open in $S$ by Theorem 4.8. Moreover:
+\[
+    K \subseteq f^{-1}(f(K)) \subseteq f^{-1}\!\left(\bigcup_\alpha G_\alpha\right) = \bigcup_\alpha f^{-1}(G_\alpha).
+\]
+So $\{f^{-1}(G_\alpha)\}_\alpha$ is an open cover of $K$. Since $K$ is compact, there exist $\alpha_1, \ldots, \alpha_n$ such that
+\[
+    K \subseteq f^{-1}(G_{\alpha_1}) \cup \cdots \cup f^{-1}(G_{\alpha_n}).
+\]
+Applying $f$:
+\[
+    f(K) \subseteq G_{\alpha_1} \cup \cdots \cup G_{\alpha_n}.
+\]
+Hence $f(K)$ is compact.
+\end{proof}
+
+% --- Theorem 4.17 ---
+\begin{theorem}[Theorem 4.17 -- Uniform Continuity on Compact Metric Spaces]
+If $(S, d_S)$ is a compact metric space and $f: S \to T$ is continuous, then $f$ is uniformly continuous on $S$.
+\end{theorem}
+
+\begin{proof}
+Suppose, for contradiction, that $f$ is not uniformly continuous. Then there exists $\eps_0 > 0$ and sequences $\{x_n\}, \{y_n\}$ in $S$ such that
+\[
+    d_S(x_n, y_n) < \frac{1}{n} \quad \text{but} \quad d_T(f(x_n), f(y_n)) \geq \eps_0 \quad \text{for all } n.
+\]
+
+Since $S$ is compact (hence sequentially compact), $\{x_n\}$ has a subsequence $\{x_{n_k}\}$ converging to some $p \in S$.
+
+Since $d_S(x_{n_k}, y_{n_k}) < 1/n_k \to 0$ and $x_{n_k} \to p$, we also have $y_{n_k} \to p$.
+
+By continuity of $f$ at $p$: $f(x_{n_k}) \to f(p)$ and $f(y_{n_k}) \to f(p)$.
+
+Therefore $d_T(f(x_{n_k}), f(y_{n_k})) \to 0$, contradicting $d_T(f(x_{n_k}), f(y_{n_k})) \geq \eps_0$.
+
+Hence $f$ is uniformly continuous on $S$.
+\end{proof}
+
+% --- Theorem 4.22 ---
+\begin{theorem}[Theorem 4.22 -- Extreme Value Theorem in Metric Spaces]
+Let $(S, d)$ be a compact metric space and $f: S \to \R$ be continuous. Then $f$ is bounded and attains its supremum and infimum on $S$.
+\end{theorem}
+
+\begin{proof}
+By Theorem 4.10, $f(S)$ is a compact subset of $\R$. By the Heine-Borel theorem, compact subsets of $\R$ are closed and bounded.
+
+\textbf{Bounded:} Since $f(S)$ is bounded, $f$ is bounded on $S$.
+
+\textbf{Attains supremum:} Let $M = \sup f(S)$. Since $f(S)$ is bounded, $M$ is finite. For each $n \in \N$, $M - 1/n$ is not an upper bound of $f(S)$, so there exists $x_n \in S$ with $f(x_n) > M - 1/n$. Thus $f(x_n) \to M$.
+
+Since $S$ is compact (sequentially compact), $\{x_n\}$ has a subsequence $\{x_{n_k}\}$ with $x_{n_k} \to p \in S$. By continuity, $f(x_{n_k}) \to f(p)$. But also $f(x_{n_k}) \to M$, so $f(p) = M$.
+
+\textbf{Attains infimum:} Similarly, there exists $q \in S$ with $f(q) = \inf f(S)$.
+\end{proof}
+
+% --- Theorem 4.23 ---
+\begin{theorem}[Theorem 4.23 -- Preservation of Connectedness]
+Let $(S, d_S)$ and $(T, d_T)$ be metric spaces and $f: S \to T$ be continuous. If $S$ is connected, then $f(S)$ is connected.
+\end{theorem}
+
+\begin{proof}
+Suppose, for contradiction, that $f(S)$ is disconnected. Then there exist two nonempty sets $A, B$ that are open in $f(S)$ such that:
+\[
+    f(S) = A \cup B, \quad A \cap B = \emptyset, \quad A \neq \emptyset, \quad B \neq \emptyset.
+\]
+
+Let $U = f^{-1}(A)$ and $V = f^{-1}(B)$. Since there exist open sets $G_1, G_2$ in $T$ with $A = f(S) \cap G_1$ and $B = f(S) \cap G_2$, we have $U = f^{-1}(G_1)$ and $V = f^{-1}(G_2)$, which are open in $S$ (by continuity).
+
+Moreover:
+\begin{itemize}
+    \item $U \cup V = f^{-1}(A) \cup f^{-1}(B) = f^{-1}(A \cup B) = f^{-1}(f(S)) = S$.
+    \item $U \cap V = f^{-1}(A) \cap f^{-1}(B) = f^{-1}(A \cap B) = f^{-1}(\emptyset) = \emptyset$.
+    \item $U \neq \emptyset$ since $A \neq \emptyset$, and $V \neq \emptyset$ since $B \neq \emptyset$.
+\end{itemize}
+This gives a disconnection of $S$, contradicting the assumption that $S$ is connected. Hence $f(S)$ is connected.
+\end{proof}
+
+\begin{corollary}[Intermediate Value Theorem]
+If $f: [a,b] \to \R$ is continuous, then $f$ takes every value between $f(a)$ and $f(b)$. That is, if $f(a) < \gamma < f(b)$ \textup{(}or $f(b) < \gamma < f(a)$\textup{)}, there exists $c \in (a,b)$ with $f(c) = \gamma$.
+\end{corollary}
+
+\begin{proof}
+The interval $[a,b]$ is connected, so $f([a,b])$ is connected by Theorem 4.23. A connected subset of $\R$ is an interval. Since $f(a)$ and $f(b)$ belong to $f([a,b])$, every value between them also belongs to $f([a,b])$.
+\end{proof}
+
+\newpage
+%=============================================================================
+% SECTION B
+%=============================================================================
+\section{Section B: Functions of Bounded Variation}
+
+%-----------------------------------------------------------------------------
+\subsection{Definitions}
+%-----------------------------------------------------------------------------
+
+\begin{definition}[Partition]
+A \textbf{partition} of an interval $[a,b]$ is a finite set of points $P = \{x_0, x_1, \ldots, x_n\}$ such that
+\[
+    a = x_0 < x_1 < x_2 < \cdots < x_n = b.
+\]
+A partition $P^*$ is called a \textbf{refinement} of $P$ if $P \subseteq P^*$. The \textbf{common refinement} of two partitions $P_1$ and $P_2$ is $P_1 \cup P_2$.
+\end{definition}
+
+\begin{definition}[Functions of Bounded Variation]
+Let $f: [a,b] \to \R$. For a partition $P = \{x_0, x_1, \ldots, x_n\}$ of $[a,b]$, define
+\[
+    V(P, f) := \sum_{k=1}^{n} |f(x_k) - f(x_{k-1})|.
+\]
+The function $f$ is said to be of \textbf{bounded variation} on $[a,b]$, written $f \in BV[a,b]$, if the set $\{V(P, f) : P \text{ is a partition of } [a,b]\}$ is bounded above.
+\end{definition}
+
+\begin{definition}[Total Variation]
+If $f \in BV[a,b]$, the \textbf{total variation} of $f$ on $[a,b]$ is
+\[
+    V_f(a,b) := \sup\{V(P, f) : P \text{ is a partition of } [a,b]\}.
+\]
+The \textbf{total variation function} $V: [a,b] \to \R$ is defined by $V(a) = 0$ and $V(x) = V_f(a,x)$ for $x \in (a,b]$.
+\end{definition}
+
+%-----------------------------------------------------------------------------
+\subsection{Theorems}
+%-----------------------------------------------------------------------------
+
+% --- Theorem 6.2 ---
+\begin{theorem}[Theorem 6.2 -- Monotone Functions are of Bounded Variation]
+If $f$ is monotone on $[a,b]$, then $f \in BV[a,b]$ and $V_f(a,b) = |f(b) - f(a)|$.
+\end{theorem}
+
+\begin{proof}
+Assume $f$ is increasing (the decreasing case is analogous). For any partition $P = \{x_0, x_1, \ldots, x_n\}$:
+\[
+    V(P, f) = \sum_{k=1}^n |f(x_k) - f(x_{k-1})| = \sum_{k=1}^n \bigl(f(x_k) - f(x_{k-1})\bigr) = f(b) - f(a),
+\]
+since the sum telescopes. Thus $V(P,f) = f(b) - f(a)$ for \emph{every} partition, so
+\[
+    V_f(a,b) = \sup_P V(P,f) = f(b) - f(a) = |f(b) - f(a)|.
+\]
+For $f$ decreasing: $|f(x_k) - f(x_{k-1})| = f(x_{k-1}) - f(x_k)$, telescoping to $f(a) - f(b) = |f(b) - f(a)|$.
+\end{proof}
+
+% --- Theorem 6.6 ---
+\begin{theorem}[Theorem 6.6 -- Additivity of Total Variation]
+If $c \in (a,b)$, then $f \in BV[a,b]$ if and only if $f \in BV[a,c]$ and $f \in BV[c,b]$. Moreover,
+\[
+    V_f(a,b) = V_f(a,c) + V_f(c,b).
+\]
+\end{theorem}
+
+\begin{proof}
+\textbf{($\leq$ direction):} Let $P$ be any partition of $[a,b]$. Let $P^* = P \cup \{c\}$. Adding a point does not decrease variation (triangle inequality), so $V(P,f) \leq V(P^*, f)$.
+
+Write $P^* = P_1 \cup P_2$ where $P_1 = P^* \cap [a,c]$ is a partition of $[a,c]$ and $P_2 = P^* \cap [c,b]$ is a partition of $[c,b]$. Then
+\[
+    V(P, f) \leq V(P^*, f) = V(P_1, f) + V(P_2, f) \leq V_f(a,c) + V_f(c,b).
+\]
+Taking supremum over $P$: $V_f(a,b) \leq V_f(a,c) + V_f(c,b)$.
+
+\textbf{($\geq$ direction):} Let $P_1$ be any partition of $[a,c]$ and $P_2$ any partition of $[c,b]$. Then $P = P_1 \cup P_2$ is a partition of $[a,b]$ (containing $c$), and
+\[
+    V(P_1, f) + V(P_2, f) = V(P, f) \leq V_f(a,b).
+\]
+Taking sup over $P_1$: $V_f(a,c) + V(P_2, f) \leq V_f(a,b)$. Taking sup over $P_2$:
+\[
+    V_f(a,c) + V_f(c,b) \leq V_f(a,b).
+\]
+
+Combining: $V_f(a,b) = V_f(a,c) + V_f(c,b)$. The equivalence of $f \in BV[a,b]$ with $f \in BV[a,c] \cap BV[c,b]$ follows immediately.
+\end{proof}
+
+% --- Theorem 6.9 ---
+\begin{theorem}[Theorem 6.9 -- Properties of Total Variation Function]
+If $f \in BV[a,b]$, then:
+\begin{enumerate}[label=(\alph*)]
+    \item The total variation function $V(x) = V_f(a,x)$ is increasing on $[a,b]$.
+    \item The function $V - f$ is also increasing on $[a,b]$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{(a)} For $a \leq x < y \leq b$, by additivity (Theorem 6.6):
+\[
+    V(y) = V_f(a,y) = V_f(a,x) + V_f(x,y) = V(x) + V_f(x,y).
+\]
+Since $V_f(x,y) \geq 0$, we have $V(y) \geq V(x)$, so $V$ is increasing.
+
+\textbf{(b)} For $a \leq x < y \leq b$, we need $(V-f)(y) \geq (V-f)(x)$, i.e., $V(y) - V(x) \geq f(y) - f(x)$.
+
+By additivity, $V(y) - V(x) = V_f(x,y)$. Using the partition $\{x, y\}$ of $[x,y]$:
+\[
+    V_f(x,y) \geq |f(y) - f(x)| \geq f(y) - f(x).
+\]
+Hence $V(y) - V(x) \geq f(y) - f(x)$, proving $V - f$ is increasing.
+\end{proof}
+
+% --- Theorem 6.11 ---
+\begin{theorem}[Theorem 6.11 -- Jordan Decomposition Theorem]
+A function $f: [a,b] \to \R$ is of bounded variation on $[a,b]$ if and only if $f$ can be written as the difference of two increasing functions.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$): Let $f \in BV[a,b]$ and define $V(x) = V_f(a,x)$. By Theorem 6.9, both $V$ and $g := V - f$ are increasing on $[a,b]$. Therefore
+\[
+    f(x) = V(x) - g(x)
+\]
+expresses $f$ as the difference of two increasing functions.
+
+\medskip
+($\Leftarrow$): Suppose $f = g - h$ where $g$ and $h$ are increasing on $[a,b]$. For any partition $P = \{x_0, \ldots, x_n\}$:
+\begin{align*}
+    V(P, f) &= \sum_{k=1}^n |f(x_k) - f(x_{k-1})| \\
+    &= \sum_{k=1}^n |(g(x_k) - g(x_{k-1})) - (h(x_k) - h(x_{k-1}))| \\
+    &\leq \sum_{k=1}^n |g(x_k) - g(x_{k-1})| + \sum_{k=1}^n |h(x_k) - h(x_{k-1})| \\
+    &= \sum_{k=1}^n (g(x_k) - g(x_{k-1})) + \sum_{k=1}^n (h(x_k) - h(x_{k-1})) \\
+    &= (g(b) - g(a)) + (h(b) - h(a)) < \infty.
+\end{align*}
+So $V(P,f)$ is bounded above for all $P$, hence $f \in BV[a,b]$ and $V_f(a,b) \leq (g(b)-g(a))+(h(b)-h(a))$.
+\end{proof}
+
+% --- Theorem 6.12 ---
+\begin{theorem}[Theorem 6.12 -- Continuity of Total Variation Function]
+If $f \in BV[a,b]$ and $f$ is continuous at a point $c \in [a,b]$, then the total variation function $V(x) = V_f(a,x)$ is also continuous at $c$.
+\end{theorem}
+
+\begin{proof}
+Since $V$ is increasing (Theorem 6.9), the one-sided limits $V(c^+)$ and $V(c^-)$ exist. We show $V(c^+) = V(c) = V(c^-)$.
+
+\textbf{Right-continuity at $c$ (assuming $c < b$):} We need to show $\lim_{h \to 0^+} V_f(c, c+h) = 0$.
+
+Let $\eps > 0$. Since $f \in BV[c, b]$, there exists a partition $Q = \{c = t_0, t_1, \ldots, t_m = b\}$ of $[c,b]$ such that
+\[
+    V(Q, f) > V_f(c, b) - \eps.
+\]
+Let $\delta = t_1 - c > 0$. Since $f$ is continuous at $c$, we may also choose $\delta$ small enough that $|f(x) - f(c)| < \eps$ for $|x - c| < \delta$.
+
+For $0 < h < \delta$, the points $\{c+h, t_1, t_2, \ldots, t_m\}$ form a partition of $[c+h, b]$, giving:
+\[
+    V_f(c+h, b) \geq |f(t_1) - f(c+h)| + \sum_{k=2}^m |f(t_k) - f(t_{k-1})|.
+\]
+Now $V(Q, f) = |f(t_1) - f(c)| + \sum_{k=2}^m |f(t_k) - f(t_{k-1})|$, so:
+\[
+    V_f(c+h, b) \geq V(Q, f) - |f(t_1) - f(c)| + |f(t_1) - f(c+h)|.
+\]
+By the reverse triangle inequality: $|f(t_1) - f(c+h)| \geq |f(t_1) - f(c)| - |f(c) - f(c+h)|$. Therefore:
+\[
+    V_f(c+h, b) \geq V(Q, f) - |f(c+h) - f(c)| > V_f(c,b) - \eps - \eps = V_f(c,b) - 2\eps.
+\]
+By additivity: $V_f(c, c+h) = V_f(c,b) - V_f(c+h, b) < 2\eps$.
+
+Since $\eps > 0$ was arbitrary, $V_f(c, c+h) \to 0$ as $h \to 0^+$, i.e., $V(c^+) = V(c)$.
+
+\medskip
+\textbf{Left-continuity at $c$ (assuming $c > a$):} We show $V_f(c-h, c) \to 0$ as $h \to 0^+$.
+
+Let $\eps > 0$. Choose a partition $Q = \{a = t_0, \ldots, t_m = c\}$ of $[a,c]$ with $V(Q, f) > V_f(a,c) - \eps$. Let $\delta = c - t_{m-1}$, also chosen so that $|f(x) - f(c)| < \eps$ for $|x-c| < \delta$.
+
+For $0 < h < \delta$, the partition $\{t_0, \ldots, t_{m-1}, c-h\}$ of $[a, c-h]$ gives:
+\[
+    V_f(a, c-h) \geq \sum_{k=1}^{m-1}|f(t_k)-f(t_{k-1})| + |f(c-h) - f(t_{m-1})|.
+\]
+Since $|f(c-h) - f(t_{m-1})| \geq |f(c) - f(t_{m-1})| - |f(c) - f(c-h)|$:
+\[
+    V_f(a, c-h) \geq V(Q, f) - |f(c) - f(c-h)| > V_f(a,c) - \eps - \eps.
+\]
+Therefore $V_f(c-h, c) = V_f(a,c) - V_f(a, c-h) < 2\eps$. Hence $V(c^-) = V(c)$.
+\end{proof}
+
+\newpage
+%=============================================================================
+% SECTION C
+%=============================================================================
+\section{Section C: Riemann-Stieltjes Integral and Sequences of Functions}
+
+%-----------------------------------------------------------------------------
+\subsection{Definitions}
+%-----------------------------------------------------------------------------
+
+\begin{definition}[Riemann-Stieltjes Sum]
+Let $f$ and $\alpha$ be defined on $[a,b]$, and let $P = \{x_0, x_1, \ldots, x_n\}$ be a partition of $[a,b]$. For each subinterval $[x_{k-1}, x_k]$, choose a point $t_k \in [x_{k-1}, x_k]$. The \textbf{Riemann-Stieltjes sum} of $f$ with respect to $\alpha$ corresponding to $P$ and the choice of points $\{t_k\}$ is
+\[
+    S(P, f, \alpha) := \sum_{k=1}^n f(t_k)\,[\alpha(x_k) - \alpha(x_{k-1})] = \sum_{k=1}^n f(t_k)\,\Delta\alpha_k.
+\]
+We say $f$ is \textbf{Riemann-Stieltjes integrable} with respect to $\alpha$ on $[a,b]$, written $f \in \mathcal{R}(\alpha)$ on $[a,b]$, if there exists $A \in \R$ such that for every $\eps > 0$ there exists a partition $P_\eps$ with
+\[
+    |S(P, f, \alpha) - A| < \eps
+\]
+for every refinement $P$ of $P_\eps$ and every choice of $t_k$. We write $A = \int_a^b f\,d\alpha$.
+\end{definition}
+
+\begin{definition}[Step Function]
+A function $\alpha: [a,b] \to \R$ is called a \textbf{step function} if there exists a partition $P = \{x_0, x_1, \ldots, x_n\}$ of $[a,b]$ such that $\alpha$ is constant on each open subinterval $(x_{k-1}, x_k)$ for $k = 1, 2, \ldots, n$.
+\end{definition}
+
+\begin{definition}[Sequences of Functions]
+A \textbf{sequence of functions} on a set $S$ is a sequence $\{f_n\}_{n=1}^\infty$ where each $f_n: S \to \R$ (or $\R^k$) is a function defined on $S$.
+\end{definition}
+
+\begin{definition}[Pointwise Convergence]
+A sequence of functions $\{f_n\}$ defined on $S$ converges \textbf{pointwise} to a function $f$ on $S$ if for each $x \in S$,
+\[
+    \lim_{n \to \infty} f_n(x) = f(x).
+\]
+That is, for each $x \in S$ and each $\eps > 0$, there exists $N = N(x, \eps) \in \N$ such that $|f_n(x) - f(x)| < \eps$ for all $n \geq N$.
+\end{definition}
+
+\begin{definition}[Uniform Convergence of a Sequence of Functions]
+A sequence of functions $\{f_n\}$ defined on $S$ converges \textbf{uniformly} to $f$ on $S$ if for every $\eps > 0$ there exists $N = N(\eps) \in \N$ (independent of $x$) such that
+\[
+    |f_n(x) - f(x)| < \eps \quad \text{for all } n \geq N \text{ and all } x \in S.
+\]
+Equivalently, $\sup_{x \in S} |f_n(x) - f(x)| \to 0$ as $n \to \infty$.
+\end{definition}
+
+\begin{definition}[Uniform Convergence of a Series of Functions]
+A series of functions $\sum_{n=1}^\infty g_n$ converges \textbf{uniformly} to $f$ on $S$ if the sequence of partial sums $s_k(x) = \sum_{n=1}^k g_n(x)$ converges uniformly to $f$ on $S$. That is, for every $\eps > 0$ there exists $N$ such that
+\[
+    \left|f(x) - \sum_{n=1}^k g_n(x)\right| < \eps \quad \text{for all } k \geq N \text{ and all } x \in S.
+\]
+\end{definition}
+
+%-----------------------------------------------------------------------------
+\subsection{Theorems}
+%-----------------------------------------------------------------------------
+
+% --- Theorem 7.2 ---
+\begin{theorem}[Theorem 7.2 -- Riemann's Condition for Integrability]
+Let $\alpha$ be increasing on $[a,b]$. Define the upper and lower Darboux-Stieltjes sums:
+\[
+    U(P, f, \alpha) = \sum_{k=1}^n M_k \,\Delta\alpha_k, \quad L(P, f, \alpha) = \sum_{k=1}^n m_k \,\Delta\alpha_k,
+\]
+where $M_k = \sup_{[x_{k-1}, x_k]} f$ and $m_k = \inf_{[x_{k-1}, x_k]} f$.
+
+Then $f \in \mathcal{R}(\alpha)$ on $[a,b]$ if and only if for every $\eps > 0$ there exists a partition $P$ of $[a,b]$ such that
+\[
+    U(P, f, \alpha) - L(P, f, \alpha) < \eps.
+\]
+\end{theorem}
+
+\begin{proof}
+Define $\overline{\int_a^b} f\,d\alpha = \inf_P U(P,f,\alpha)$ and $\underline{\int_a^b} f\,d\alpha = \sup_P L(P,f,\alpha)$.
+
+We always have $L(P_1,f,\alpha) \leq U(P_2,f,\alpha)$ for any two partitions $P_1, P_2$ (by considering their common refinement). Hence $\underline{\int} f\,d\alpha \leq \overline{\int} f\,d\alpha$.
+
+\medskip
+($\Leftarrow$): Suppose for every $\eps > 0$ there exists $P$ with $U(P,f,\alpha) - L(P,f,\alpha) < \eps$. Then:
+\[
+    0 \leq \overline{\int_a^b} f\,d\alpha - \underline{\int_a^b} f\,d\alpha \leq U(P,f,\alpha) - L(P,f,\alpha) < \eps.
+\]
+Since $\eps$ is arbitrary, $\overline{\int} f\,d\alpha = \underline{\int} f\,d\alpha$. Denote this common value by $A$.
+
+For any refinement $P^*$ of $P$ and any Riemann-Stieltjes sum $S(P^*, f, \alpha)$:
+\[
+    L(P^*, f, \alpha) \leq S(P^*, f, \alpha) \leq U(P^*, f, \alpha).
+\]
+Since $P^*$ refines $P$: $U(P^*,f,\alpha) \leq U(P,f,\alpha)$ and $L(P^*,f,\alpha) \geq L(P,f,\alpha)$. Also $L(P,f,\alpha) \leq A \leq U(P,f,\alpha)$. Therefore:
+\[
+    |S(P^*,f,\alpha) - A| \leq U(P,f,\alpha) - L(P,f,\alpha) < \eps.
+\]
+Hence $f \in \mathcal{R}(\alpha)$ with $\int_a^b f\,d\alpha = A$.
+
+\medskip
+($\Rightarrow$): Suppose $f \in \mathcal{R}(\alpha)$ with integral $A$. Let $\eps > 0$. There exists a partition $P$ such that $|S(P,f,\alpha) - A| < \eps/3$ for all choices of $t_k$.
+
+In particular, choosing $t_k$ to make $f(t_k)$ close to $M_k$ gives $S$ close to $U$, and choosing $t_k$ close to $m_k$ gives $S$ close to $L$. Precisely: for any $\eta > 0$, we can choose $t_k$ with $f(t_k) > M_k - \eta$, yielding $S(P,f,\alpha) > U(P,f,\alpha) - \eta(\alpha(b)-\alpha(a))$. Letting $\eta \to 0$:
+\[
+    U(P,f,\alpha) \leq A + \eps/3 \quad \text{and} \quad L(P,f,\alpha) \geq A - \eps/3.
+\]
+Therefore $U(P,f,\alpha) - L(P,f,\alpha) < 2\eps/3 < \eps$.
+\end{proof}
+
+% --- Theorem 7.3 ---
+\begin{theorem}[Theorem 7.3 -- Continuous Functions are Riemann-Stieltjes Integrable]
+If $f$ is continuous on $[a,b]$ and $\alpha$ is increasing on $[a,b]$, then $f \in \mathcal{R}(\alpha)$ on $[a,b]$.
+\end{theorem}
+
+\begin{proof}
+If $\alpha(a) = \alpha(b)$, then $\Delta\alpha_k = 0$ for all $k$ in any partition, so $U = L = 0$ and $f \in \mathcal{R}(\alpha)$ trivially.
+
+Assume $\alpha(a) < \alpha(b)$. Since $f$ is continuous on the compact set $[a,b]$, $f$ is uniformly continuous: for every $\eps > 0$ there exists $\delta > 0$ such that
+\[
+    |f(x) - f(y)| < \frac{\eps}{\alpha(b) - \alpha(a)} \quad \text{whenever } |x - y| < \delta.
+\]
+
+Choose a partition $P = \{x_0, \ldots, x_n\}$ with mesh $\|P\| := \max_k(x_k - x_{k-1}) < \delta$. On each $[x_{k-1}, x_k]$, since $f$ is continuous on a compact interval, $f$ attains its sup $M_k$ and inf $m_k$. Since the interval has length $< \delta$:
+\[
+    M_k - m_k < \frac{\eps}{\alpha(b) - \alpha(a)}.
+\]
+Therefore:
+\[
+    U(P,f,\alpha) - L(P,f,\alpha) = \sum_{k=1}^n (M_k - m_k)\,\Delta\alpha_k < \frac{\eps}{\alpha(b)-\alpha(a)} \sum_{k=1}^n \Delta\alpha_k = \eps.
+\]
+By Theorem 7.2, $f \in \mathcal{R}(\alpha)$.
+\end{proof}
+
+% --- Theorem 9.2 ---
+\begin{theorem}[Theorem 9.2 -- Cauchy Criterion for Uniform Convergence]
+A sequence of functions $\{f_n\}$ defined on $S$ converges uniformly on $S$ if and only if for every $\eps > 0$ there exists $N \in \N$ such that
+\[
+    |f_m(x) - f_n(x)| < \eps \quad \text{for all } m, n \geq N \text{ and all } x \in S.
+\]
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$): Suppose $f_n \to f$ uniformly on $S$. Let $\eps > 0$. There exists $N$ with $|f_n(x) - f(x)| < \eps/2$ for all $n \geq N$ and $x \in S$. For $m, n \geq N$:
+\[
+    |f_m(x) - f_n(x)| \leq |f_m(x) - f(x)| + |f(x) - f_n(x)| < \frac{\eps}{2} + \frac{\eps}{2} = \eps.
+\]
+
+($\Leftarrow$): Suppose the Cauchy condition holds. For each fixed $x \in S$, $\{f_n(x)\}$ is a Cauchy sequence in $\R$, hence converges. Define $f(x) = \lim_{n\to\infty} f_n(x)$.
+
+We show $f_n \to f$ uniformly. Let $\eps > 0$. By hypothesis, there exists $N$ with $|f_m(x) - f_n(x)| < \eps/2$ for all $m, n \geq N$ and $x \in S$.
+
+Fix $n \geq N$ and $x \in S$. Letting $m \to \infty$:
+\[
+    |f(x) - f_n(x)| = \lim_{m \to \infty} |f_m(x) - f_n(x)| \leq \frac{\eps}{2} < \eps.
+\]
+Since this holds for all $x \in S$ and $n \geq N$, the convergence is uniform.
+\end{proof}
+
+% --- Theorem 9.3 ---
+\begin{theorem}[Theorem 9.3 -- Uniform Limit of Continuous Functions is Continuous]
+Let $\{f_n\}$ be a sequence of functions continuous on a metric space $S$. If $f_n \to f$ uniformly on $S$, then $f$ is continuous on $S$.
+\end{theorem}
+
+\begin{proof}
+Let $p \in S$ and $\eps > 0$. Since $f_n \to f$ uniformly, there exists $N$ such that
+\[
+    |f_n(x) - f(x)| < \frac{\eps}{3} \quad \text{for all } n \geq N \text{ and all } x \in S.
+\]
+
+Fix $n = N$. Since $f_N$ is continuous at $p$, there exists $\delta > 0$ such that
+\[
+    |f_N(x) - f_N(p)| < \frac{\eps}{3} \quad \text{whenever } d(x, p) < \delta.
+\]
+
+For $d(x, p) < \delta$:
+\begin{align*}
+    |f(x) - f(p)| &\leq |f(x) - f_N(x)| + |f_N(x) - f_N(p)| + |f_N(p) - f(p)| \\
+    &< \frac{\eps}{3} + \frac{\eps}{3} + \frac{\eps}{3} = \eps.
+\end{align*}
+Hence $f$ is continuous at $p$. Since $p$ was arbitrary, $f$ is continuous on $S$.
+\end{proof}
+
+% --- Theorem 9.5 ---
+\begin{theorem}[Theorem 9.5 -- Interchange of Limit and Integral]
+Let $\alpha$ be of bounded variation on $[a,b]$. Suppose $\{f_n\}$ is a sequence of functions with $f_n \in \mathcal{R}(\alpha)$ on $[a,b]$ for each $n$, and suppose $f_n \to f$ uniformly on $[a,b]$. Then $f \in \mathcal{R}(\alpha)$ on $[a,b]$ and
+\[
+    \int_a^b f\,d\alpha = \lim_{n \to \infty} \int_a^b f_n\,d\alpha.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $V = V_\alpha(a,b)$ be the total variation of $\alpha$ on $[a,b]$.
+
+\textbf{Step 1: $f \in \mathcal{R}(\alpha)$.}
+
+Let $\eps > 0$. Since $f_n \to f$ uniformly, there exists $N$ with $|f_n(x) - f(x)| < \eps/(3V + 3)$ for all $n \geq N$ and $x \in [a,b]$.
+
+Fix $n = N$. Since $f_N \in \mathcal{R}(\alpha)$, by Theorem 7.2, there exists a partition $P$ such that $U(P, f_N, \alpha) - L(P, f_N, \alpha) < \eps/3$.
+
+Let $\eta = \eps/(3V+3)$. For each subinterval $[x_{k-1}, x_k]$:
+\[
+    \sup_{[x_{k-1},x_k]} f \leq \sup_{[x_{k-1},x_k]} f_N + \eta, \quad \inf_{[x_{k-1},x_k]} f \geq \inf_{[x_{k-1},x_k]} f_N - \eta.
+\]
+So $M_k(f) - m_k(f) \leq (M_k(f_N) - m_k(f_N)) + 2\eta$. Therefore:
+\begin{align*}
+    U(P,f,\alpha) - L(P,f,\alpha) &\leq (U(P,f_N,\alpha) - L(P,f_N,\alpha)) + 2\eta \sum |\Delta\alpha_k| \\
+    &< \frac{\eps}{3} + 2\eta V \leq \frac{\eps}{3} + \frac{2\eps}{3} = \eps.
+\end{align*}
+(Here we used $\sum |\Delta\alpha_k| \leq V$.) By Theorem 7.2, $f \in \mathcal{R}(\alpha)$.
+
+\textbf{Step 2: Interchange of limit and integral.}
+
+For $n \geq N$ (with $|f_n(x) - f(x)| < \eps/(V+1)$ for all $x$):
+\begin{align*}
+    \left|\int_a^b f_n\,d\alpha - \int_a^b f\,d\alpha\right| &= \left|\int_a^b (f_n - f)\,d\alpha\right| \\
+    &\leq \sup_{x \in [a,b]} |f_n(x) - f(x)| \cdot V_\alpha(a,b) \\
+    &< \frac{\eps}{V+1} \cdot V < \eps.
+\end{align*}
+Hence $\int_a^b f_n\,d\alpha \to \int_a^b f\,d\alpha$.
+\end{proof}
+
+\newpage
+%=============================================================================
+% SECTION D
+%=============================================================================
+\section{Section D: Measure Theory}
+
+%-----------------------------------------------------------------------------
+\subsection{Definitions}
+%-----------------------------------------------------------------------------
+
+\begin{definition}[Sets of Measure Zero]
+A set $E \subseteq \R$ has \textbf{(Lebesgue) measure zero} if for every $\eps > 0$ there exists a countable collection of open intervals $\{I_n\}_{n=1}^\infty$ such that
+\[
+    E \subseteq \bigcup_{n=1}^\infty I_n \quad \text{and} \quad \sum_{n=1}^\infty \ell(I_n) < \eps,
+\]
+where $\ell(I_n)$ denotes the length of interval $I_n$.
+\end{definition}
+
+\begin{remark}
+Properties of sets of measure zero:
+\begin{enumerate}[label=(\roman*)]
+    \item Every countable set has measure zero.
+    \item A subset of a set of measure zero has measure zero.
+    \item A countable union of sets of measure zero has measure zero.
+\end{enumerate}
+\end{remark}
+
+\begin{definition}[Lebesgue Outer Measure]
+For any set $E \subseteq \R$, the \textbf{Lebesgue outer measure} of $E$ is defined by
+\[
+    m^*(E) := \inf\left\{\sum_{n=1}^\infty \ell(I_n) : E \subseteq \bigcup_{n=1}^\infty I_n, \text{ each } I_n \text{ is an open interval}\right\}.
+\]
+\end{definition}
+
+\begin{definition}[Measurable Set (Lebesgue Measurable)]
+A set $E \subseteq \R$ is called \textbf{(Lebesgue) measurable} if for every set $A \subseteq \R$:
+\[
+    m^*(A) = m^*(A \cap E) + m^*(A \cap E^c),
+\]
+where $E^c = \R \setminus E$. This is known as the \textbf{Carath\'eodory criterion}.
+
+Equivalently, $E$ is measurable if it ``splits'' every test set $A$ additively with respect to outer measure. The collection of all measurable sets forms a $\sigma$-algebra.
+\end{definition}
+
+\begin{definition}[Borel Sets]
+The \textbf{Borel $\sigma$-algebra} $\mathcal{B}(\R)$ is the smallest $\sigma$-algebra containing all open sets in $\R$ (equivalently, the smallest $\sigma$-algebra containing all open intervals). The elements of $\mathcal{B}(\R)$ are called \textbf{Borel sets}.
+
+The Borel $\sigma$-algebra can be generated by any of the following:
+\begin{itemize}
+    \item All open sets.
+    \item All closed sets.
+    \item All open intervals $(a,b)$.
+    \item All half-open intervals $(-\infty, a]$, $a \in \R$.
+\end{itemize}
+
+Every Borel set is Lebesgue measurable, but not every Lebesgue measurable set is a Borel set.
+\end{definition}
+
+\begin{definition}[Measurable Function]
+Let $E$ be a measurable subset of $\R$. A function $f: E \to \R \cup \{-\infty, +\infty\}$ is called \textbf{(Lebesgue) measurable} if for every $\alpha \in \R$, the set
+\[
+    \{x \in E : f(x) > \alpha\}
+\]
+is a measurable set.
+
+Equivalently, any of the following conditions may replace the one above:
+\begin{itemize}
+    \item $\{x \in E : f(x) \geq \alpha\}$ is measurable for all $\alpha \in \R$.
+    \item $\{x \in E : f(x) < \alpha\}$ is measurable for all $\alpha \in \R$.
+    \item $\{x \in E : f(x) \leq \alpha\}$ is measurable for all $\alpha \in \R$.
+    \item $f^{-1}(G)$ is measurable for every open set $G \subseteq \R$.
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+Key properties of measurable functions:
+\begin{enumerate}[label=(\roman*)]
+    \item Every continuous function is measurable.
+    \item Every monotone function on an interval is measurable.
+    \item If $f$ and $g$ are measurable, then $f + g$, $fg$, $|f|$, $\max(f,g)$, $\min(f,g)$ are measurable.
+    \item If $\{f_n\}$ is a sequence of measurable functions, then $\sup_n f_n$, $\inf_n f_n$, $\limsup f_n$, $\liminf f_n$ are all measurable.
+    \item The pointwise limit of a sequence of measurable functions (when it exists) is measurable.
+\end{enumerate}
+\end{remark}
+
+\end{document}
